@@ -7,6 +7,7 @@ import FavoriteToggle from "@/components/FavoriteToggle";
 export const HoverEffect = ({
     items,
     className,
+    hoverColor,
 }: {
     items: {
         title: string;
@@ -16,8 +17,10 @@ export const HoverEffect = ({
         icon?: any;
         footerText?: string;
         iconSize?: number;
+        color?: string;
     }[];
     className?: string;
+    hoverColor?: string;
 }) => {
     let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -57,8 +60,12 @@ export const HoverEffect = ({
                         <div className="relative z-10">
                             <div className="flex items-start justify-between mb-4 min-h-[28px]">
                                 {item.icon ? (
-                                    <div className="text-white">
-                                        <item.icon size={item.iconSize || 28} />
+                                    <div className={cn(
+                                        "w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110",
+                                        hoverColor || "bg-blue-500/10 border-blue-500/20 text-blue-400 group-hover:bg-blue-500/20 group-hover:border-blue-500/30",
+                                        item.color
+                                    )}>
+                                        <item.icon size={item.iconSize || 24} />
                                     </div>
                                 ) : <div />}
                                 {item.id && (

@@ -222,10 +222,12 @@ export default function LandingPage() {
                                                 >
                                                     <div className="flex items-center gap-4">
                                                         <div className={cn(
-                                                            "transition-colors",
-                                                            selectedIndex === idx ? "text-primary" : "text-white"
+                                                            "w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300",
+                                                            selectedIndex === idx
+                                                                ? "bg-blue-500/20 border border-blue-500/30 text-primary shadow-[0_0_15px_rgba(59,130,246,0.15)]"
+                                                                : "bg-white/5 border border-white/10 text-white group-hover/tool:bg-blue-500/10 group-hover/tool:border-blue-500/20 group-hover/tool:text-primary"
                                                         )}>
-                                                            <tool.icon size={20} />
+                                                            <tool.icon size={18} />
                                                         </div>
                                                         <div>
                                                             <div className="font-bold text-sm text-white">{tool.name}</div>
@@ -317,7 +319,11 @@ export default function LandingPage() {
                                     spotlightColor="rgba(59, 130, 246, 0.15)"
                                 >
                                     <div className="relative z-10">
-                                        <div className="text-white mb-6">
+                                        <div className={cn(
+                                            "w-16 h-16 rounded-3xl flex items-center justify-center mb-8 transition-all duration-500 group-hover:scale-110",
+                                            "bg-blue-500/10 border border-blue-500/20 text-blue-400",
+                                            "group-hover:bg-blue-500/20 group-hover:border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.1)]"
+                                        )}>
                                             <cat.icon className="w-8 h-8" />
                                         </div>
 

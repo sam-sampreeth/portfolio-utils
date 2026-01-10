@@ -103,14 +103,14 @@ export default function ToolPage() {
                         <Component />
                     ) : (
                         <div className="p-20 rounded-3xl border border-dashed border-white/10 bg-white/[0.02] flex flex-col items-center justify-center text-center">
-                            <div className="w-20 h-20 rounded-3xl bg-white/5 flex items-center justify-center text-white/20 mb-6 font-black text-2xl">
+                            <div className="w-20 h-20 rounded-[2rem] bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-8 font-black text-3xl shadow-[0_0_30px_rgba(59,130,246,0.1)]">
                                 ?
                             </div>
                             <h2 className="text-2xl font-bold mb-2">Coming Soon</h2>
                             <p className="text-muted-foreground max-w-sm">
                                 We're working hard to bring {tool.name} to you. Check back shortly!
                             </p>
-                            <Link to={`/category/${categoryId}`} className="mt-8 text-primary hover:underline font-bold">
+                            <Link to={`/category/${categoryId}`} className="mt-8 text-primary hover:underline font-bold text-xs uppercase tracking-wider cursor-pointer">
                                 See other {category.title} tools
                             </Link>
                         </div>

@@ -22,6 +22,7 @@ import {
     ShieldCheck,
     Sparkles,
     RefreshCw,
+    Timer,
     Pipette,
     Layers,
     Box,
@@ -38,12 +39,14 @@ import {
     PenTool
 } from "lucide-react";
 
+
 export interface Tool {
     id: string;
     name: string;
     desc: string;
     path: string;
     icon?: any;
+    iconSize?: number;
 }
 
 export interface Category {
@@ -64,10 +67,8 @@ export const toolsConfig: Category[] = [
         color: "from-blue-500 to-cyan-500",
         tools: [
             { id: "clock", name: "Digital Clock", desc: "A clean digital clock with full-screen mode that syncs once and verifies system time accuracy locally.", path: "/time/clock", icon: Clock },
-            // { id: "fullscreen-clock", name: "Fullscreen Clock", desc: "Rolling seconds with focus mode", path: "/time/fullscreen", icon: Maximize },
-            // { id: "world-clock", name: "World Clock", desc: "Multiple timezones", path: "/time/world", icon: Clock },
-            { id: "stopwatch", name: "Stopwatch", desc: "Precision lap timing", path: "/time/stopwatch", icon: Clock },
-            { id: "timer", name: "Timer", desc: "Presets and quick timers", path: "/time/timer", icon: Clock },
+            { id: "stopwatch", name: "Stopwatch", desc: "A precise stopwatch with start, pause, stop, lap tracking, and reset controls for accurate time measurement.", path: "/time/stopwatch", icon: Timer },
+            { id: "timer", name: "Timer", desc: "Presets and quick timers", path: "/time/timer", icon: Timer },
             { id: "timezone-converter", name: "Timezone Converter", desc: "Convert between zones", path: "/time/converter", icon: RefreshCw },
             { id: "date-calculator", name: "Date & Time Calculator", desc: "Add or subtract time", path: "/time/calculator", icon: Edit3 },
         ]

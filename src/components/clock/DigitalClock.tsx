@@ -165,7 +165,7 @@ export function DigitalClock() {
             className={cn(
                 "p-8 relative overflow-hidden transition-all duration-500",
                 isFullscreen
-                    ? "fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center p-20"
+                    ? "fixed inset-0 z-9999 bg-black flex flex-col items-center justify-center p-20"
                     : "rounded-3xl bg-white/[0.02] border border-white/10 h-full"
             )}
         >
@@ -189,7 +189,7 @@ export function DigitalClock() {
                             {!isFullscreen && (
                                 <div className="flex items-center gap-2">
                                     <div className={cn(
-                                        "text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider",
+                                        "text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider",
                                         syncStatus === "synced" ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" :
                                             syncStatus === "syncing" ? "bg-white/5 text-white/40 animate-pulse" :
                                                 "bg-red-500/10 text-red-400 border border-red-500/20"
@@ -200,12 +200,12 @@ export function DigitalClock() {
                                         onClick={() => syncTime()}
                                         disabled={syncStatus === "syncing"}
                                         className={cn(
-                                            "p-1 rounded-md hover:bg-white/5 text-white/20 hover:text-white transition-all text-[12px]",
+                                            "p-1.5 rounded-md hover:bg-white/10 text-white/20 hover:text-white transition-all text-xs cursor-pointer",
                                             syncStatus === "syncing" && "animate-spin cursor-not-allowed"
                                         )}
                                         title="Re-sync with network"
                                     >
-                                        <RefreshCw size={10} />
+                                        <RefreshCw size={12} />
                                     </button>
                                     {syncStatus === "synced" && (
                                         <span className="text-[12px] text-white/30 font-medium whitespace-nowrap">

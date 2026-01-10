@@ -58,6 +58,7 @@ export default function CategoryPage() {
 
                 {/* Tools Grid */}
                 <HoverEffect
+                    hoverColor={category.id === 'time' ? "bg-blue-500/10 border-blue-500/20 text-blue-400 group-hover:bg-blue-500/20 group-hover:border-blue-500/30" : undefined}
                     items={category.tools.map(tool => ({
                         id: tool.id,
                         title: tool.name,
