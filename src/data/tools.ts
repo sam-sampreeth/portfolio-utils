@@ -63,7 +63,7 @@ export const toolsConfig: Category[] = [
         icon: Clock,
         color: "from-blue-500 to-cyan-500",
         tools: [
-            { id: "clock", name: "Digital Clock", desc: "Time tracking with fullscreen and time zone options", path: "/time/clock", icon: Clock },
+            { id: "clock", name: "Digital Clock", desc: "A clean digital clock with full-screen mode that syncs once and verifies system time accuracy locally.", path: "/time/clock", icon: Clock },
             // { id: "fullscreen-clock", name: "Fullscreen Clock", desc: "Rolling seconds with focus mode", path: "/time/fullscreen", icon: Maximize },
             // { id: "world-clock", name: "World Clock", desc: "Multiple timezones", path: "/time/world", icon: Clock },
             { id: "stopwatch", name: "Stopwatch", desc: "Precision lap timing", path: "/time/stopwatch", icon: Clock },
