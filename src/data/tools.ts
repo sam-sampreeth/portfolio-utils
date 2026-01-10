@@ -1,0 +1,183 @@
+import {
+    Clock,
+    Monitor,
+    Wifi,
+    FileText,
+    Palette,
+    Wrench,
+    Type,
+    Smile,
+    Edit3,
+    MousePointer2,
+    Gamepad2,
+    Speaker,
+    Mic,
+    Webcam,
+    Square,
+    Zap,
+    Files,
+    Scissors,
+    FileDown,
+    Image as ImageIcon,
+    ShieldCheck,
+    Sparkles,
+    RefreshCw,
+    Pipette,
+    Layers,
+    Box,
+    FileCode,
+    Terminal,
+    Fingerprint,
+    Hash,
+    Binary,
+    Coins,
+    BookOpen,
+    Eraser,
+    SortAsc,
+    Replace,
+    PenTool
+} from "lucide-react";
+
+export interface Tool {
+    id: string;
+    name: string;
+    desc: string;
+    path: string;
+    icon?: any;
+}
+
+export interface Category {
+    id: string;
+    title: string;
+    description: string;
+    icon: any;
+    color: string;
+    tools: Tool[];
+}
+
+export const toolsConfig: Category[] = [
+    {
+        id: "time",
+        title: "Time & Date",
+        description: "Global clocks, stopwatch, and precision timers.",
+        icon: Clock,
+        color: "from-blue-500 to-cyan-500",
+        tools: [
+            { id: "clock", name: "Digital Clock", desc: "Time tracking with fullscreen and time zone options", path: "/time/clock", icon: Clock },
+            // { id: "fullscreen-clock", name: "Fullscreen Clock", desc: "Rolling seconds with focus mode", path: "/time/fullscreen", icon: Maximize },
+            // { id: "world-clock", name: "World Clock", desc: "Multiple timezones", path: "/time/world", icon: Clock },
+            { id: "stopwatch", name: "Stopwatch", desc: "Precision lap timing", path: "/time/stopwatch", icon: Clock },
+            { id: "timer", name: "Timer", desc: "Presets and quick timers", path: "/time/timer", icon: Clock },
+            { id: "timezone-converter", name: "Timezone Converter", desc: "Convert between zones", path: "/time/converter", icon: RefreshCw },
+            { id: "date-calculator", name: "Date & Time Calculator", desc: "Add or subtract time", path: "/time/calculator", icon: Edit3 },
+        ]
+    },
+    {
+        id: "hardware",
+        title: "Hardware & Device",
+        description: "Verify your peripherals and display health.",
+        icon: Monitor,
+        color: "from-slate-500 to-slate-700",
+        tools: [
+            { id: "keyboard", name: "Keyboard Tester", desc: "Ghosting & key check", path: "/hardware/keyboard", icon: Type },
+            { id: "mouse", name: "Mouse Tester", desc: "Buttons & scroll speed", path: "/hardware/mouse", icon: MousePointer2 },
+            { id: "controller", name: "Controller Tester", desc: "Gamepad input check", path: "/hardware/controller", icon: Gamepad2 },
+            { id: "speaker", name: "Speaker Tester", desc: "Frequency & stereo check", path: "/hardware/speaker", icon: Speaker },
+            { id: "mic", name: "Microphone Tester", desc: "Audio input check", path: "/hardware/mic", icon: Mic },
+            { id: "webcam", name: "Webcam Tester", desc: "Live feed check", path: "/hardware/webcam", icon: Webcam },
+            { id: "pixels", name: "Dead Pixel Checker", desc: "Display health test", path: "/hardware/pixels", icon: Square },
+        ]
+    },
+    {
+        id: "network",
+        title: "Network Diagnostics",
+        description: "Speed, latency, and connectivity tests.",
+        icon: Wifi,
+        color: "from-indigo-500 to-blue-600",
+        tools: [
+            { id: "speedtest", name: "Network Speed Test", desc: "Download, Upload, Ping", path: "/network/speedtest", icon: Zap },
+        ]
+    },
+    {
+        id: "files",
+        title: "File Tools",
+        description: "Complete suite for PDF, Image, and Document manipulation.",
+        icon: FileText,
+        color: "from-emerald-500 to-teal-500",
+        tools: [
+            { id: "pdf-merge", name: "PDF Merge", desc: "Combine multiple PDFs", path: "/files/pdf-merge", icon: Files },
+            { id: "pdf-split", name: "PDF Split", desc: "Extract PDF pages", path: "/files/pdf-split", icon: Scissors },
+            { id: "pdf-compress", name: "PDF Compress", desc: "Reduce file size", path: "/files/pdf-compress", icon: FileDown },
+            { id: "img-compress", name: "Image Compress", desc: "Optimize PNG/JPG/WEBP", path: "/files/img-compress", icon: ImageIcon },
+            { id: "redact", name: "Redact Content", desc: "Sensitive info removal", path: "/files/redact", icon: ShieldCheck },
+            { id: "converter", name: "Format Converter", desc: "Convert between popular types", path: "/files/converter", icon: RefreshCw },
+        ]
+    },
+    {
+        id: "frontend",
+        title: "Frontend Helpers",
+        description: "Design tools and CSS utilities.",
+        icon: Palette,
+        color: "from-orange-500 to-yellow-500",
+        tools: [
+            { id: "color", name: "Color Format Converter", desc: "Hex, RGB, HSL", path: "/frontend/color", icon: Pipette },
+            { id: "gradient", name: "Gradient Generator", desc: "Visual CSS gradients", path: "/frontend/gradient", icon: Layers },
+            { id: "shadow", name: "Box Shadow Gen", desc: "Neumorphic & glass shadows", path: "/frontend/shadow", icon: Box },
+            { id: "units", name: "CSS Units Converter", desc: "PX, REM, EM, VW", path: "/frontend/units", icon: RefreshCw },
+            { id: "svg", name: "SVG Viewer", desc: "Preview and optimize SVGs", path: "/frontend/svg", icon: ImageIcon },
+            { id: "homepage", name: "OS-style Homepage", desc: "Custom tool dashboard", path: "/frontend/homepage", icon: Monitor },
+        ]
+    },
+    {
+        id: "dev",
+        title: "Developer Tools",
+        description: "Formatting, encoding, and data generation.",
+        icon: Wrench,
+        color: "from-purple-500 to-pink-500",
+        tools: [
+            { id: "json", name: "JSON Formatter", desc: "Validate and beautify", path: "/dev/json", icon: FileCode },
+            { id: "beautifier", name: "Code Beautifier", desc: "Format JS/TS/CSS/HTML", path: "/dev/beautifier", icon: Sparkles },
+            { id: "regex", name: "Regex Tester", desc: "Test expressions live", path: "/dev/regex", icon: Terminal },
+            { id: "uuid", name: "UUID Generator", desc: "Bulk v4/v6 IDs", path: "/dev/uuid", icon: Fingerprint },
+            { id: "hash", name: "Hash Generator", desc: "SHA, MD5, etc.", path: "/dev/hash", icon: Hash },
+            { id: "base64", name: "Base64 Encoder", desc: "Convert binary data", path: "/dev/base64", icon: Binary },
+            { id: "jwt", name: "JWT Decoder", desc: "Inspect tokens locally", path: "/dev/jwt", icon: Coins },
+        ]
+    },
+    {
+        id: "text",
+        title: "Text Tools",
+        description: "Content analysis and manipulation.",
+        icon: Type,
+        color: "from-rose-500 to-orange-500",
+        tools: [
+            { id: "counter", name: "Character Counter", desc: "Words, Lines, Paragraphs", path: "/text/counter", icon: Type },
+            { id: "converter", name: "Case Converter", desc: "UPPER, lower, Title Case", path: "/text/converter", icon: Type },
+            { id: "spaces", name: "Remove Extra Spaces", desc: "Clean up text", path: "/text/spaces", icon: Eraser },
+            { id: "sorter", name: "Text Sorter", desc: "Alphabetical ordering", path: "/text/sorter", icon: SortAsc },
+            { id: "replace", name: "Find & Replace", desc: "Bulk text updates", path: "/text/replace", icon: Replace },
+        ]
+    },
+    {
+        id: "emoji",
+        title: "Emoji & Symbols",
+        description: "Quick access to icons and special characters.",
+        icon: Smile,
+        color: "from-yellow-400 to-orange-500",
+        tools: [
+            { id: "picker", name: "Emoji Picker", desc: "Find emojis quickly", path: "/emoji/picker", icon: Smile },
+            { id: "unicodes", name: "Unicode Symbols", desc: "Special characters", path: "/emoji/symbols", icon: Type },
+        ]
+    },
+    {
+        id: "notes",
+        title: "Notes & Canvas",
+        description: "Quick ideas and sketching tools.",
+        icon: Edit3,
+        color: "from-teal-400 to-emerald-600",
+        tools: [
+            { id: "notepad", name: "Quick Notepad", desc: "Persisted local notes", path: "/notes/notepad", icon: BookOpen },
+            { id: "whiteboard", name: "Quick Whiteboard", desc: "Freehand sketching", path: "/notes/whiteboard", icon: PenTool },
+        ]
+    }
+];
