@@ -69,8 +69,8 @@ export const toolsConfig: Category[] = [
             { id: "clock", name: "Digital Clock", desc: "A clean digital clock with full-screen mode that syncs once and verifies system time accuracy locally.", path: "/time/clock", icon: Clock },
             { id: "stopwatch", name: "Stopwatch", desc: "A precise stopwatch with start, pause, stop, lap tracking, and reset controls for accurate time measurement.", path: "/time/stopwatch", icon: Timer },
             { id: "timer", name: "Timer", desc: "Presets and quick timers", path: "/time/timer", icon: Timer },
-            { id: "timezone-converter", name: "Timezone Converter", desc: "Convert between zones", path: "/time/converter", icon: RefreshCw },
-            { id: "date-calculator", name: "Date & Time Calculator", desc: "Add or subtract time", path: "/time/calculator", icon: Edit3 },
+            { id: "converter", name: "Timezone Converter", desc: "Convert between zones", path: "/time/converter", icon: RefreshCw },
+            { id: "calculator", name: "Date & Time Calculator", desc: "Add or subtract time", path: "/time/calculator", icon: Edit3 },
         ]
     },
     {
