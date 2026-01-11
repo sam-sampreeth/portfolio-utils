@@ -77,7 +77,7 @@ export const HoverEffect = ({
                             <CardTitle>{item.title}</CardTitle>
                             <CardDescription>{item.description}</CardDescription>
                             {item.footerText && (
-                                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-white/20 mt-6">
+                                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-white/20 mt-6 group-hover:text-blue-400 transition-colors duration-500">
                                     {item.footerText}
                                 </div>
                             )}
