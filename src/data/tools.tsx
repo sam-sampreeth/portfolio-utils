@@ -68,9 +68,9 @@ export const toolsConfig: Category[] = [
         tools: [
             { id: "clock", name: "Digital Clock", desc: "A clean digital clock with full-screen mode that syncs once and verifies system time accuracy locally.", path: "/time/clock", icon: Clock },
             { id: "stopwatch", name: "Stopwatch", desc: "A precise stopwatch with start, pause, stop, lap tracking, and reset controls for accurate time measurement.", path: "/time/stopwatch", icon: Timer },
-            { id: "timer", name: "Timer", desc: "Presets and quick timers", path: "/time/timer", icon: Timer },
-            { id: "converter", name: "Timezone Converter", desc: "Convert between zones", path: "/time/converter", icon: RefreshCw },
-            { id: "calculator", name: "Date & Time Calculator", desc: "Add or subtract time", path: "/time/calculator", icon: Edit3 },
+            { id: "timer", name: "Timer", desc: "A flexible countdown timer with quick presets, custom durations, editable presets, and completion notifications.", path: "/time/timer", icon: Timer },
+            { id: "converter", name: "Timezone Converter", desc: "Convert times across timezones in live or manual mode, including UTC/GMT event times, with clear offsets.", path: "/time/converter", icon: RefreshCw },
+            { id: "calculator", name: "Date & Time Calculator", desc: "Add, subtract, or compare dates and times with clear duration breakdowns and precise calculations.", path: "/time/calculator", icon: Edit3 },
         ]
     },
     {
@@ -80,7 +80,7 @@ export const toolsConfig: Category[] = [
         icon: Monitor,
         color: "from-slate-500 to-slate-700",
         tools: [
-            { id: "keyboard", name: "Keyboard Tester", desc: "Ghosting & key check", path: "/hardware/keyboard", icon: Type },
+            { id: "keyboard", name: "Keyboard Tester", desc: "Test your keyboard in real time to detect stuck keys, key rollover, and ghosting across Windows and Mac layouts", path: "/hardware/keyboard", icon: Type },
             { id: "mouse", name: "Mouse Tester", desc: "Buttons & scroll speed", path: "/hardware/mouse", icon: MousePointer2 },
             { id: "controller", name: "Controller Tester", desc: "Gamepad input check", path: "/hardware/controller", icon: Gamepad2 },
             { id: "speaker", name: "Speaker Tester", desc: "Frequency & stereo check", path: "/hardware/speaker", icon: Speaker },

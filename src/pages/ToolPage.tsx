@@ -18,6 +18,8 @@ import { ColorPicker } from "@/components/frontend/ColorPicker";
 import { GradientGen } from "@/components/frontend/GradientGen";
 import { ShadowGen } from "@/components/frontend/ShadowGen";
 import { TypeTest } from "@/components/frontend/TypeTest";
+import { KeyboardTester } from "@/components/hardware/KeyboardTester";
+import { MouseTester } from "@/components/hardware/MouseTester";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     // Time tools
@@ -26,6 +28,10 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "stopwatch": Stopwatch,
     "converter": TimezoneConverter,
     "calculator": DateCalculator,
+
+    // Hardware tools
+    "keyboard": KeyboardTester,
+    "mouse": MouseTester,
 
     // Dev tools
     "hash": HashGen,
