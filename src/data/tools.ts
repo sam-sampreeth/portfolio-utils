@@ -35,7 +35,8 @@ import {
     Eraser,
     SortAsc,
     Replace,
-    PenTool
+    PenTool,
+    Timer,
 } from "lucide-react";
 
 export interface Tool {
@@ -68,6 +69,7 @@ export const toolsConfig: Category[] = [
             // { id: "world-clock", name: "World Clock", desc: "Multiple timezones", path: "/time/world", icon: Clock },
             { id: "stopwatch", name: "Stopwatch", desc: "Precision lap timing", path: "/time/stopwatch", icon: Clock },
             { id: "timer", name: "Timer", desc: "Presets and quick timers", path: "/time/timer", icon: Clock },
+            { id: "pomodoro", name: "Pomodoro Timer", desc: "Focus sessions with breaks", path: "/time/pomodoro", icon: Timer },
             { id: "timezone-converter", name: "Timezone Converter", desc: "Convert between zones", path: "/time/converter", icon: RefreshCw },
             { id: "date-calculator", name: "Date & Time Calculator", desc: "Add or subtract time", path: "/time/calculator", icon: Edit3 },
         ]

@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { DigitalClock } from "@/components/clock/DigitalClock";
 import { Timers } from "@/components/clock/Timers";
 import { Stopwatch } from "@/components/clock/Stopwatch";
+import { Pomodoro } from "@/components/clock/Pomodoro";
 import { HashGen } from "@/components/dev/HashGen";
 import { Base64Tool } from "@/components/dev/Base64Tool";
 import { JwtDecoder } from "@/components/dev/JwtDecoder";
@@ -22,6 +23,7 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "clock": DigitalClock,
     "timer": Timers,
     "stopwatch": Stopwatch,
+    "pomodoro": Pomodoro,
 
     // Dev tools
     "hash": HashGen,
