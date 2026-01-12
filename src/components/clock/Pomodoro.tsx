@@ -205,18 +205,32 @@ export function Pomodoro() {
             <div className="relative z-10 flex flex-col h-full">
 
                 {/* Header */}
-                <div className="flex items-center justify-between p-8">
-                    <div className="flex items-center gap-4">
-                        <span className="text-xl font-['Bebas_Neue'] tracking-wider text-white/80 uppercase">
+                <div className="flex items-center justify-between p-8 z-20 relative">
+                    <div className="flex items-center gap-6">
+                        <span className="text-xl font-['Bebas_Neue'] tracking-wider text-white/80 uppercase hidden md:inline-block">
                             Utils / Pomodoro
                         </span>
-                        <div className={cn(
-                            "px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase border border-white/10 backdrop-blur-md",
-                            sessionType === 'work' ? "bg-rose-500/10 text-rose-200" :
-                                sessionType === 'shortBreak' ? "bg-teal-500/10 text-teal-200" :
-                                    "bg-indigo-500/10 text-indigo-200"
-                        )}>
-                            {sessionType === 'work' ? 'Deep Focus' : sessionType === 'shortBreak' ? 'Short Refuel' : 'Long Restore'}
+
+                        {/* Session Toggles - Innovative Glass Chips */}
+                        <div className="flex items-center p-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
+                            {(['work', 'shortBreak', 'longBreak'] as SessionType[]).map((t) => (
+                                <button
+                                    key={t}
+                                    onClick={() => {
+                                        setSessionType(t);
+                                        setTimeLeft(getDuration(t));
+                                        setIsRunning(false);
+                                    }}
+                                    className={cn(
+                                        "px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-500",
+                                        sessionType === t
+                                            ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)] scale-105"
+                                            : "text-white/40 hover:text-white hover:bg-white/5"
+                                    )}
+                                >
+                                    {t === 'work' ? 'Pomodoro' : t === 'shortBreak' ? 'Short' : 'Long'}
+                                </button>
+                            ))}
                         </div>
                     </div>
 
