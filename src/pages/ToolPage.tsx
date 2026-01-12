@@ -20,6 +20,8 @@ import { ShadowGen } from "@/components/frontend/ShadowGen";
 import { TypeTest } from "@/components/frontend/TypeTest";
 import { KeyboardTester } from "@/components/hardware/KeyboardTester";
 import { MouseTester } from "@/components/hardware/MouseTester";
+import { ControllerTester } from "@/components/hardware/ControllerTester";
+import { SpeakerTester } from "@/components/hardware/SpeakerTester";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     // Time tools
@@ -32,6 +34,8 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     // Hardware tools
     "keyboard": KeyboardTester,
     "mouse": MouseTester,
+    "controller": ControllerTester,
+    "speaker": SpeakerTester,
 
     // Dev tools
     "hash": HashGen,
