@@ -252,7 +252,7 @@ export function Pomodoro() {
                                         key={timeLeft}
                                         className={cn(
                                             "font-['Bebas_Neue'] leading-none text-white text-center tabular-nums tracking-wide drop-shadow-2xl transition-all duration-300",
-                                            isMaximized ? "text-[25vw]" : "text-[12rem] md:text-[14rem]"
+                                            isMaximized ? "text-[min(25vw,30vh)]" : "text-[8rem] sm:text-[10rem] md:text-[12rem] lg:text-[14rem]"
                                         )}
                                         initial={{ y: 20 }}
                                         animate={{ y: 0 }}
@@ -270,7 +270,7 @@ export function Pomodoro() {
                                 </div>
 
                                 {/* Minimal Controls */}
-                                <div className="flex items-center gap-12 mt-12 md:mt-16">
+                                <div className={cn("flex items-center gap-12", isMaximized ? "mt-8" : "mt-12 md:mt-16")}>
                                     <button onClick={resetSession} className="group p-4 rounded-full bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all active:scale-90">
                                         <RotateCcw size={24} className="text-white/40 group-hover:text-white transition-colors" />
                                     </button>
