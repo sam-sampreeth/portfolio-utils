@@ -84,7 +84,7 @@ export const toolsConfig: Category[] = [
             { id: "mouse", name: "Mouse Tester", desc: "Buttons & scroll speed", path: "/hardware/mouse", icon: MousePointer2 },
             { id: "controller", name: "Controller Tester", desc: "Gamepad input check", path: "/hardware/controller", icon: Gamepad2 },
             { id: "speaker", name: "Speaker Tester", desc: "Precision Audio Lab with 3D spatial panning, frequency sweeps, and acoustic samples.", path: "/hardware/speaker", icon: Speaker },
-            { id: "mic", name: "Microphone Tester", desc: "Audio input check", path: "/hardware/mic", icon: Mic },
+            { id: "mic", name: "Microphone Tester", desc: "Professional Voice Studio with real-time spectral analysis, noise floor detection, and pro-level metering.", path: "/hardware/mic", icon: Mic },
             { id: "webcam", name: "Webcam Tester", desc: "Live feed check", path: "/hardware/webcam", icon: Webcam },
             { id: "pixels", name: "Dead Pixel Checker", desc: "Display health test", path: "/hardware/pixels", icon: Square },
         ]
