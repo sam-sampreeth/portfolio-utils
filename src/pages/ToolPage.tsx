@@ -24,6 +24,7 @@ import { ControllerTester } from "@/components/hardware/ControllerTester";
 import { SpeakerTester } from "@/components/hardware/SpeakerTester";
 import { MicTester } from "@/components/hardware/MicTester";
 import { WebcamTester } from "@/components/hardware/WebcamTester";
+import { DeadPixelTester } from "@/components/hardware/DeadPixelTester";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     // Time tools
@@ -40,6 +41,7 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "speaker": SpeakerTester,
     "mic": MicTester,
     "webcam": WebcamTester,
+    "pixels": DeadPixelTester,
 
     // Dev tools
     "hash": HashGen,
