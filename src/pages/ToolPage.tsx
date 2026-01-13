@@ -9,6 +9,7 @@ import { Timers } from "@/components/clock/Timers";
 import { Stopwatch } from "@/components/clock/Stopwatch";
 import { TimezoneConverter } from "@/components/clock/TimezoneConverter";
 import { DateCalculator } from "@/components/clock/DateCalculator";
+import { Pomodoro } from "@/components/clock/Pomodoro";
 import { HashGen } from "@/components/dev/HashGen";
 import { Base64Tool } from "@/components/dev/Base64Tool";
 import { JwtDecoder } from "@/components/dev/JwtDecoder";
@@ -33,6 +34,7 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "stopwatch": Stopwatch,
     "converter": TimezoneConverter,
     "calculator": DateCalculator,
+    "pomodoro": Pomodoro,
 
     // Hardware tools
     "keyboard": KeyboardTester,

@@ -36,7 +36,7 @@ import {
     Eraser,
     SortAsc,
     Replace,
-    PenTool
+    PenTool,
 } from "lucide-react";
 
 
@@ -69,6 +69,7 @@ export const toolsConfig: Category[] = [
             { id: "clock", name: "Digital Clock", desc: "A clean digital clock with full-screen mode that syncs once and verifies system time accuracy locally.", path: "/time/clock", icon: Clock },
             { id: "stopwatch", name: "Stopwatch", desc: "A precise stopwatch with start, pause, stop, lap tracking, and reset controls for accurate time measurement.", path: "/time/stopwatch", icon: Timer },
             { id: "timer", name: "Timer", desc: "A flexible countdown timer with quick presets, custom durations, editable presets, and completion notifications.", path: "/time/timer", icon: Timer },
+            { id: "pomodoro", name: "Pomodoro Timer", desc: "Focus sessions with customizable work and break intervals, distraction-free mode, and cycle tracking.", path: "/time/pomodoro", icon: Timer },
             { id: "converter", name: "Timezone Converter", desc: "Convert times across timezones in live or manual mode, including UTC/GMT event times, with clear offsets.", path: "/time/converter", icon: RefreshCw },
             { id: "calculator", name: "Date & Time Calculator", desc: "Add, subtract, or compare dates and times with clear duration breakdowns and precise calculations.", path: "/time/calculator", icon: Edit3 },
         ]
