@@ -1,7 +1,6 @@
 import {
     Clock,
     Monitor,
-    Wifi,
     FileText,
     Palette,
     Wrench,
@@ -37,6 +36,7 @@ import {
     SortAsc,
     Replace,
     PenTool,
+    MoreHorizontal,
 } from "lucide-react";
 
 
@@ -91,16 +91,6 @@ export const toolsConfig: Category[] = [
         ]
     },
     {
-        id: "network",
-        title: "Network Diagnostics",
-        description: "Speed, latency, and connectivity tests.",
-        icon: Wifi,
-        color: "from-indigo-500 to-blue-600",
-        tools: [
-            { id: "speedtest", name: "Network Speed Test", desc: "Download, Upload, Ping", path: "/network/speedtest", icon: Zap },
-        ]
-    },
-    {
         id: "files",
         title: "File Tools",
         description: "Complete suite for PDF, Image, and Document manipulation.",
@@ -127,7 +117,6 @@ export const toolsConfig: Category[] = [
             { id: "shadow", name: "Box Shadow Gen", desc: "Neumorphic & glass shadows", path: "/frontend/shadow", icon: Box },
             { id: "units", name: "CSS Units Converter", desc: "PX, REM, EM, VW", path: "/frontend/units", icon: RefreshCw },
             { id: "svg", name: "SVG Viewer", desc: "Preview and optimize SVGs", path: "/frontend/svg", icon: ImageIcon },
-            { id: "homepage", name: "OS-style Homepage", desc: "Custom tool dashboard", path: "/frontend/homepage", icon: Monitor },
         ]
     },
     {
@@ -180,6 +169,17 @@ export const toolsConfig: Category[] = [
         tools: [
             { id: "notepad", name: "Quick Notepad", desc: "Persisted local notes", path: "/notes/notepad", icon: BookOpen },
             { id: "whiteboard", name: "Quick Whiteboard", desc: "Freehand sketching", path: "/notes/whiteboard", icon: PenTool },
+        ]
+    },
+    {
+        id: "others",
+        title: "Other Utilities",
+        description: "Miscellaneous tools and helpers.",
+        icon: MoreHorizontal,
+        color: "from-gray-500 to-slate-500",
+        tools: [
+            { id: "homepage", name: "OS-style Homepage", desc: "Custom tool dashboard", path: "/others/homepage", icon: Monitor },
+            { id: "speedtest", name: "Network Speed Test", desc: "Download, Upload, Ping", path: "/others/speedtest", icon: Zap },
         ]
     }
 ];
