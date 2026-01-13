@@ -26,6 +26,7 @@ import { SpeakerTester } from "@/components/hardware/SpeakerTester";
 import { MicTester } from "@/components/hardware/MicTester";
 import { WebcamTester } from "@/components/hardware/WebcamTester";
 import { DeadPixelTester } from "@/components/hardware/DeadPixelTester";
+import { SpeedTest } from "@/components/network/SpeedTest";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     // Time tools
@@ -57,6 +58,9 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "gradient": GradientGen,
     "shadow": ShadowGen,
     "counter": TypeTest, // Mapping counter to typography test for now since it has word counts
+
+    // Network tools
+    "speedtest": SpeedTest,
 
     // Notes
     "notepad": QuickNotepad,
