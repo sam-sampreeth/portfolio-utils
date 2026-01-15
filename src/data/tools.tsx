@@ -116,6 +116,7 @@ export const toolsConfig: Category[] = [
             { id: "gradient", name: "Gradient Generator", desc: "Visual CSS gradients", path: "/frontend/gradient", icon: Layers },
             { id: "shadow", name: "Box Shadow Gen", desc: "Neumorphic & glass shadows", path: "/frontend/shadow", icon: Box },
             { id: "units", name: "CSS Units Converter", desc: "PX, REM, EM, VW", path: "/frontend/units", icon: RefreshCw },
+            { id: "image-picker", name: "Image Color Picker", desc: "Extract pixel colors", path: "/frontend/image-picker", icon: ImageIcon },
             { id: "svg", name: "SVG Viewer", desc: "Preview and optimize SVGs", path: "/frontend/svg", icon: ImageIcon },
         ]
     },

@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { toolsConfig } from "@/data/tools";
 import { ChevronLeft, Home } from "lucide-react";
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils";
 import { useHomepageState } from "@/hooks/useHomepageState";
 
 // Import all tool components
@@ -29,6 +29,10 @@ import { WebcamTester } from "@/components/hardware/WebcamTester";
 import { DeadPixelTester } from "@/components/hardware/DeadPixelTester";
 import { SpeedTest } from "@/components/network/SpeedTest";
 import { OsHomepage } from "@/components/frontend/homepage/OsHomepage";
+
+import { CssUnitsConverter } from "@/components/frontend/CssUnitsConverter";
+import { ImageColorPicker } from "@/components/frontend/ImageColorPicker";
+import { SvgViewer } from "@/components/frontend/SvgViewer";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     // Time tools
@@ -59,6 +63,9 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "color": ColorPicker,
     "gradient": GradientGen,
     "shadow": ShadowGen,
+    "units": CssUnitsConverter,
+    "image-picker": ImageColorPicker,
+    "svg": SvgViewer,
     "counter": TypeTest, // Mapping counter to typography test for now since it has word counts
     "homepage": OsHomepage,
 
@@ -94,7 +101,7 @@ export default function ToolPage() {
     };
 
     const currentTheme = (state.settings?.theme as 'light' | 'dark') || 'dark';
-    const theme = themeConfigs[currentTheme];
+    // const theme = themeConfigs[currentTheme];
 
     if (!category || !tool) {
         return (
