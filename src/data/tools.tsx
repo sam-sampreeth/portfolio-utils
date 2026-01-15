@@ -144,7 +144,7 @@ export const toolsConfig: Category[] = [
         color: "from-rose-500 to-orange-500",
         tools: [
             { id: "counter", name: "Character Counter", desc: "Words, Lines, Paragraphs", path: "/text/counter", icon: Type },
-            { id: "converter", name: "Case Converter", desc: "UPPER, lower, Title Case", path: "/text/converter", icon: Type },
+            { id: "transformer", name: "Text Transformer", desc: "Case conversion & Styling", path: "/text/transformer", icon: Type },
             { id: "spaces", name: "Remove Extra Spaces", desc: "Clean up text", path: "/text/spaces", icon: Eraser },
             { id: "sorter", name: "Text Sorter", desc: "Alphabetical ordering", path: "/text/sorter", icon: SortAsc },
             { id: "replace", name: "Find & Replace", desc: "Bulk text updates", path: "/text/replace", icon: Replace },

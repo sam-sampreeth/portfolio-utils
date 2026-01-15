@@ -33,6 +33,7 @@ import { CssUnitsConverter } from "@/components/frontend/CssUnitsConverter";
 import { SvgViewer } from "@/components/frontend/SvgViewer";
 import { ImageColorPicker } from "@/components/frontend/ImageColorPicker";
 import { TextCounter } from "@/components/frontend/TextCounter";
+import { TextTransformer } from "@/components/frontend/TextTransformer";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     // Time tools
@@ -67,6 +68,7 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "image-picker": ImageColorPicker,
     "svg": SvgViewer,
     "counter": TextCounter,
+    "transformer": TextTransformer,
     "homepage": OsHomepage,
 
     // Network tools
