@@ -34,6 +34,8 @@ import { SvgViewer } from "@/components/frontend/SvgViewer";
 import { ImageColorPicker } from "@/components/frontend/ImageColorPicker";
 import { TextCounter } from "@/components/frontend/TextCounter";
 import { TextTransformer } from "@/components/frontend/TextTransformer";
+import { RemoveSpaces } from "@/components/text/RemoveSpaces";
+import { FindReplace } from "@/components/text/FindReplace";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     // Time tools
@@ -76,6 +78,8 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
 
     // Notes
     "notepad": QuickNotepad,
+    "spaces": RemoveSpaces,
+    "replace": FindReplace,
 };
 
 export default function ToolPage() {
