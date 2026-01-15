@@ -19,7 +19,6 @@ import { QuickNotepad } from "@/components/dev/QuickNotepad";
 import { ColorPicker } from "@/components/frontend/ColorPicker";
 import { GradientGen } from "@/components/frontend/GradientGen";
 import { ShadowGen } from "@/components/frontend/ShadowGen";
-import { TypeTest } from "@/components/frontend/TypeTest";
 import { KeyboardTester } from "@/components/hardware/KeyboardTester";
 import { MouseTester } from "@/components/hardware/MouseTester";
 import { ControllerTester } from "@/components/hardware/ControllerTester";
@@ -31,8 +30,9 @@ import { SpeedTest } from "@/components/network/SpeedTest";
 import { OsHomepage } from "@/components/frontend/homepage/OsHomepage";
 
 import { CssUnitsConverter } from "@/components/frontend/CssUnitsConverter";
-import { ImageColorPicker } from "@/components/frontend/ImageColorPicker";
 import { SvgViewer } from "@/components/frontend/SvgViewer";
+import { ImageColorPicker } from "@/components/frontend/ImageColorPicker";
+import { TextCounter } from "@/components/frontend/TextCounter";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     // Time tools
@@ -66,7 +66,7 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "units": CssUnitsConverter,
     "image-picker": ImageColorPicker,
     "svg": SvgViewer,
-    "counter": TypeTest, // Mapping counter to typography test for now since it has word counts
+    "counter": TextCounter,
     "homepage": OsHomepage,
 
     // Network tools
