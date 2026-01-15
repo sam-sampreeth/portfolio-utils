@@ -34,6 +34,7 @@ import { SvgViewer } from "@/components/frontend/SvgViewer";
 import { ImageColorPicker } from "@/components/frontend/ImageColorPicker";
 import { TextCounter } from "@/components/frontend/TextCounter";
 import { TextTransformer } from "@/components/frontend/TextTransformer";
+import { QuickWhiteboard } from "@/components/notes/QuickWhiteboard";
 import { RemoveSpaces } from "@/components/text/RemoveSpaces";
 import { FindReplace } from "@/components/text/FindReplace";
 import { LoremGenerator } from "@/components/text/LoremGenerator";
@@ -79,6 +80,7 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
 
     // Notes
     "notepad": QuickNotepad,
+    "whiteboard": QuickWhiteboard,
     "spaces": RemoveSpaces,
     "replace": FindReplace,
     "lorem-ipsum": LoremGenerator,
@@ -93,22 +95,6 @@ export default function ToolPage() {
 
     const Component = toolId ? TOOL_COMPONENTS[toolId] : null;
 
-    const themeConfigs = {
-        dark: {
-            bgBase: "bg-[#020202]",
-            bgGlowPrimary: "bg-blue-600/[0.05]",
-            bgGlowSecondary: "bg-blue-400/10",
-            bgGradient: "from-blue-500/10 via-transparent to-transparent",
-        },
-        light: {
-            bgBase: "bg-[#f3f4f6]",
-            bgGlowPrimary: "bg-blue-400/[0.04]",
-            bgGlowSecondary: "bg-indigo-400/[0.03]",
-            bgGradient: "from-blue-200/40 via-transparent to-transparent",
-        }
-    };
-
-    const currentTheme = (state.settings?.theme as 'light' | 'dark') || 'dark';
     // const theme = themeConfigs[currentTheme];
 
     if (!category || !tool) {
