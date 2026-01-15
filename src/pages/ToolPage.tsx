@@ -36,6 +36,7 @@ import { TextCounter } from "@/components/frontend/TextCounter";
 import { TextTransformer } from "@/components/frontend/TextTransformer";
 import { RemoveSpaces } from "@/components/text/RemoveSpaces";
 import { FindReplace } from "@/components/text/FindReplace";
+import { LoremGenerator } from "@/components/text/LoremGenerator";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     // Time tools
@@ -80,6 +81,7 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "notepad": QuickNotepad,
     "spaces": RemoveSpaces,
     "replace": FindReplace,
+    "lorem-ipsum": LoremGenerator,
 };
 
 export default function ToolPage() {

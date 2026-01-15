@@ -146,6 +146,7 @@ export const toolsConfig: Category[] = [
             { id: "transformer", name: "Text Transformer", desc: "Case conversion & Styling", path: "/text/transformer", icon: Type },
             { id: "spaces", name: "Remove Extra Spaces", desc: "Clean up text", path: "/text/spaces", icon: Eraser },
             { id: "replace", name: "Find & Replace", desc: "Bulk text updates", path: "/text/replace", icon: Replace },
+            { id: "lorem-ipsum", name: "Lorem Ipsum", desc: "Generate placeholder text", path: "/text/lorem-ipsum", icon: FileText },
         ]
     },
     {
