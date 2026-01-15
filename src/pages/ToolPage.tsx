@@ -15,7 +15,7 @@ import { HashGen } from "@/components/dev/HashGen";
 import { Base64Tool } from "@/components/dev/Base64Tool";
 import { JwtDecoder } from "@/components/dev/JwtDecoder";
 import { CodeBeautifier } from "@/components/dev/CodeBeautifier";
-import { QuickNotepad } from "@/components/dev/QuickNotepad";
+import { QuickNotepad } from "@/components/notes/QuickNotepad";
 import { ColorPicker } from "@/components/frontend/ColorPicker";
 import { GradientGen } from "@/components/frontend/GradientGen";
 import { ShadowGen } from "@/components/frontend/ShadowGen";
