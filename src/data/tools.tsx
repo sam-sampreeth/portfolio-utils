@@ -33,7 +33,6 @@ import {
     Coins,
     BookOpen,
     Eraser,
-    SortAsc,
     Replace,
     PenTool,
     MoreHorizontal,
@@ -146,7 +145,6 @@ export const toolsConfig: Category[] = [
             { id: "counter", name: "Character Counter", desc: "Words, Lines, Paragraphs", path: "/text/counter", icon: Type },
             { id: "transformer", name: "Text Transformer", desc: "Case conversion & Styling", path: "/text/transformer", icon: Type },
             { id: "spaces", name: "Remove Extra Spaces", desc: "Clean up text", path: "/text/spaces", icon: Eraser },
-            { id: "sorter", name: "Text Sorter", desc: "Alphabetical ordering", path: "/text/sorter", icon: SortAsc },
             { id: "replace", name: "Find & Replace", desc: "Bulk text updates", path: "/text/replace", icon: Replace },
         ]
     },
