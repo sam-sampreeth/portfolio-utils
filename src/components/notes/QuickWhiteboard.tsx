@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+
 import {
     MousePointer2, Square, Circle, Type, Pencil, Image as ImageIcon,
     Eraser, Undo2, Redo2, Download, Lock, Unlock,
@@ -88,6 +89,7 @@ export const QuickWhiteboard = () => {
     const [exportFormat, setExportFormat] = useState<'png' | 'jpeg' | 'svg'>('png');
 
     // Refs
+    const containerRef = useRef<HTMLDivElement>(null);
     const svgRef = useRef<SVGSVGElement>(null);
     const startPosRef = useRef<{ x: number, y: number } | null>(null);
     const isDraggingRef = useRef(false);
@@ -137,6 +139,22 @@ export const QuickWhiteboard = () => {
             setSelectedId(null);
         }
     };
+
+    const toggleFullscreen = () => {
+        if (!document.fullscreenElement) {
+            containerRef.current?.requestFullscreen().catch(err => console.error(err));
+        } else {
+            document.exitFullscreen();
+        }
+    };
+
+    useEffect(() => {
+        const handleFullscreenChange = () => {
+            setIsFullscreen(!!document.fullscreenElement);
+        };
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    }, []);
 
     // --- Zoom Ops ---
     const handleZoomIn = () => setZoom(prev => Math.min(prev + 0.1, 3));
@@ -653,26 +671,28 @@ export const QuickWhiteboard = () => {
     );
 
     return (
-        <>
-            <div className={`space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700 flex flex-col ${isFullscreen ? 'fixed inset-0 z-50 bg-[#020202] p-6 h-screen' : 'h-[calc(100vh-12rem)]'}`}>
+        <div ref={containerRef} className={`flex flex-col relative transition-all duration-300 ${isFullscreen ? 'fixed inset-0 z-[9999] bg-[#020202] w-full h-full overflow-hidden' : 'h-[calc(100vh-12rem)] space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700'}`}>
+            <div className={`flex flex-col h-full ${isFullscreen ? '' : ''}`}>
 
                 {/* Header */}
-                <div className="flex items-center justify-between shrink-0">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-[1rem] bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
-                            <Pencil size={24} />
+                <div className={`flex items-center ${isFullscreen ? 'absolute top-6 right-6 z-50 gap-2' : 'justify-between shrink-0'}`}>
+                    {!isFullscreen && (
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-[1rem] bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
+                                <Pencil size={24} />
+                            </div>
+                            <div>
+                                <h2 className={`text-2xl font-black tracking-tight ${bgConfig.dark ? 'text-white' : 'text-black'}`}>Quick Whiteboard</h2>
+                                <p className={`${bgConfig.dark ? 'text-white/50' : 'text-black/50'} font-medium text-sm flex items-center gap-2`}>
+                                    <span>Infinite Canvas</span>
+                                    <span className="w-1 h-1 rounded-full bg-white/20" />
+                                    <span>Zoom: {Math.round(zoom * 100)}%</span>
+                                </p>
+                            </div>
                         </div>
-                        <div>
-                            <h2 className={`text-2xl font-black tracking-tight ${bgConfig.dark ? 'text-white' : 'text-black'}`}>Quick Whiteboard</h2>
-                            <p className={`${bgConfig.dark ? 'text-white/50' : 'text-black/50'} font-medium text-sm flex items-center gap-2`}>
-                                <span>Infinite Canvas</span>
-                                <span className="w-1 h-1 rounded-full bg-white/20" />
-                                <span>Zoom: {Math.round(zoom * 100)}%</span>
-                            </p>
-                        </div>
-                    </div>
+                    )}
 
-                    <div className="flex items-center gap-2">
+                    <div className={`flex items-center gap-2 ${isFullscreen ? 'bg-black/50 backdrop-blur-md p-2 rounded-xl border border-white/10' : ''}`}>
                         {/* Backgrounds */}
                         <div className={`flex items-center gap-1 rounded-lg border p-1 ${bgConfig.dark ? 'border-white/10 bg-white/5' : 'border-black/10 bg-black/5'}`}>
                             <button onClick={() => setBackground('grid-dark')} className={`p-1.5 rounded ${background === 'grid-dark' ? 'bg-blue-600 text-white' : 'text-gray-400'}`} title="Dark Grid"><Grid size={16} /></button>
@@ -710,9 +730,9 @@ export const QuickWhiteboard = () => {
                         <div className={`w-px h-6 mx-2 ${bgConfig.dark ? 'bg-white/10' : 'bg-black/10'}`} />
 
                         <button
-                            onClick={() => setIsFullscreen(!isFullscreen)}
+                            onClick={toggleFullscreen}
                             className={`p-2 transition-colors ${bgConfig.dark ? 'text-white/60 hover:text-white' : 'text-black/60 hover:text-black'}`}
-                            title="Toggle Fullscreen"
+                            title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
                         >
                             {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
                         </button>
@@ -938,6 +958,6 @@ export const QuickWhiteboard = () => {
                     <div className="fixed inset-0 z-[90]" onClick={() => setShowColorPicker(false)} />
                 </>
             )}
-        </>
+        </div>
     );
 };
