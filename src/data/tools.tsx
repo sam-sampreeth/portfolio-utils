@@ -28,7 +28,6 @@ import {
     FileCode,
     Terminal,
     Fingerprint,
-    Hash,
     Binary,
     Coins,
     BookOpen,
@@ -131,7 +130,7 @@ export const toolsConfig: Category[] = [
             { id: "regex", name: "Regex Tester", desc: "Test expressions live", path: "/dev/regex", icon: Terminal },
             { id: "generators", name: "Generators", desc: "UUID, NanoID, Hash, Random", path: "/dev/generators", icon: Fingerprint },
             { id: "base64", name: "Base64 Encoder", desc: "Convert binary data", path: "/dev/base64", icon: Binary },
-            { id: "jwt", name: "JWT Decoder", desc: "Inspect tokens locally", path: "/dev/jwt", icon: Coins },
+            { id: "jwt", name: "JWT Encoder / Decoder", desc: "Sign and inspect tokens", path: "/dev/jwt", icon: Coins },
         ]
     },
     {

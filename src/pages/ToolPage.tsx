@@ -13,7 +13,7 @@ import { DateCalculator } from "@/components/clock/DateCalculator";
 import { Pomodoro } from "@/components/clock/Pomodoro";
 import { Generators } from "@/components/dev/Generators";
 import { Base64Tool } from "@/components/dev/Base64Tool";
-import { JwtDecoder } from "@/components/dev/JwtDecoder";
+import { JwtTool } from "@/components/dev/JwtTool";
 import { CodeBeautifier } from "@/components/dev/CodeBeautifier";
 import { JsonFormatter } from "@/components/dev/JsonFormatter";
 import { RegexTester } from "@/components/dev/RegexTester";
@@ -68,7 +68,7 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     // Dev tools
     "generators": Generators,
     "base64": Base64Tool,
-    "jwt": JwtDecoder,
+    "jwt": JwtTool,
     "beautifier": CodeBeautifier,
     "json": JsonFormatter,
     "regex": RegexTester,
