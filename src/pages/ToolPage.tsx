@@ -11,7 +11,7 @@ import { Stopwatch } from "@/components/clock/Stopwatch";
 import { TimezoneConverter } from "@/components/clock/TimezoneConverter";
 import { DateCalculator } from "@/components/clock/DateCalculator";
 import { Pomodoro } from "@/components/clock/Pomodoro";
-import { HashGen } from "@/components/dev/HashGen";
+import { Generators } from "@/components/dev/Generators";
 import { Base64Tool } from "@/components/dev/Base64Tool";
 import { JwtDecoder } from "@/components/dev/JwtDecoder";
 import { CodeBeautifier } from "@/components/dev/CodeBeautifier";
@@ -65,7 +65,8 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "pixels": DeadPixelTester,
 
     // Dev tools
-    "hash": HashGen,
+    // Dev tools
+    "generators": Generators,
     "base64": Base64Tool,
     "jwt": JwtDecoder,
     "beautifier": CodeBeautifier,

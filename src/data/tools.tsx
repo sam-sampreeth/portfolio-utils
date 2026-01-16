@@ -129,8 +129,7 @@ export const toolsConfig: Category[] = [
             { id: "json", name: "JSON Formatter", desc: "Validate and beautify", path: "/dev/json", icon: FileCode },
             { id: "beautifier", name: "Code Beautifier", desc: "Format JS/TS/CSS/HTML", path: "/dev/beautifier", icon: Sparkles },
             { id: "regex", name: "Regex Tester", desc: "Test expressions live", path: "/dev/regex", icon: Terminal },
-            { id: "uuid", name: "UUID Generator", desc: "Bulk v4/v6 IDs", path: "/dev/uuid", icon: Fingerprint },
-            { id: "hash", name: "Hash Generator", desc: "SHA, MD5, etc.", path: "/dev/hash", icon: Hash },
+            { id: "generators", name: "Generators", desc: "UUID, NanoID, Hash, Random", path: "/dev/generators", icon: Fingerprint },
             { id: "base64", name: "Base64 Encoder", desc: "Convert binary data", path: "/dev/base64", icon: Binary },
             { id: "jwt", name: "JWT Decoder", desc: "Inspect tokens locally", path: "/dev/jwt", icon: Coins },
         ]
