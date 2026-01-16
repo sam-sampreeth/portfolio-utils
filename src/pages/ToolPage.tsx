@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { toolsConfig } from "@/data/tools";
 import { ChevronLeft, Home } from "lucide-react";
 // import { cn } from "@/lib/utils";
-import { useHomepageState } from "@/hooks/useHomepageState";
+// import { useHomepageState } from "@/hooks/useHomepageState";
 
 // Import all tool components
 import { DigitalClock } from "@/components/clock/DigitalClock";
@@ -38,6 +38,9 @@ import { QuickWhiteboard } from "@/components/notes/QuickWhiteboard";
 import { RemoveSpaces } from "@/components/text/RemoveSpaces";
 import { FindReplace } from "@/components/text/FindReplace";
 import { LoremGenerator } from "@/components/text/LoremGenerator";
+
+import { EmojiPicker } from "@/components/emoji/EmojiPicker";
+import { UnicodeSymbols } from "@/components/emoji/UnicodeSymbols";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     // Time tools
@@ -84,11 +87,15 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "spaces": RemoveSpaces,
     "replace": FindReplace,
     "lorem-ipsum": LoremGenerator,
+
+    // Emoji & Symbols
+    "picker": EmojiPicker,
+    "unicodes": UnicodeSymbols,
 };
 
 export default function ToolPage() {
     const { categoryId, toolId } = useParams<{ categoryId: string; toolId: string }>();
-    const { state } = useHomepageState();
+    // const { state } = useHomepageState();
 
     const category = toolsConfig.find(c => c.id === categoryId);
     const tool = category?.tools.find(t => t.id === toolId);

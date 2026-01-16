@@ -157,7 +157,7 @@ export const toolsConfig: Category[] = [
         color: "from-yellow-400 to-orange-500",
         tools: [
             { id: "picker", name: "Emoji Picker", desc: "Find emojis quickly", path: "/emoji/picker", icon: Smile },
-            { id: "unicodes", name: "Unicode Symbols", desc: "Special characters", path: "/emoji/symbols", icon: Type },
+            { id: "unicodes", name: "Unicode Symbols", desc: "Special characters", path: "/emoji/unicodes", icon: Type },
         ]
     },
     {
