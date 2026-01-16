@@ -15,7 +15,11 @@ import { HashGen } from "@/components/dev/HashGen";
 import { Base64Tool } from "@/components/dev/Base64Tool";
 import { JwtDecoder } from "@/components/dev/JwtDecoder";
 import { CodeBeautifier } from "@/components/dev/CodeBeautifier";
+import { JsonFormatter } from "@/components/dev/JsonFormatter";
+import { RegexTester } from "@/components/dev/RegexTester";
 import { QuickNotepad } from "@/components/notes/QuickNotepad";
+
+
 import { ColorPicker } from "@/components/frontend/ColorPicker";
 import { GradientGen } from "@/components/frontend/GradientGen";
 import { ShadowGen } from "@/components/frontend/ShadowGen";
@@ -65,7 +69,8 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "base64": Base64Tool,
     "jwt": JwtDecoder,
     "beautifier": CodeBeautifier,
-    "json": CodeBeautifier, // Reusing for now
+    "json": JsonFormatter,
+    "regex": RegexTester,
 
     // Frontend tools
     "color": ColorPicker,
