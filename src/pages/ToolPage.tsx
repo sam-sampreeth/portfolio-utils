@@ -17,6 +17,8 @@ import { JwtTool } from "@/components/dev/JwtTool";
 import { CodeBeautifier } from "@/components/dev/CodeBeautifier";
 import { JsonFormatter } from "@/components/dev/JsonFormatter";
 import { RegexTester } from "@/components/dev/RegexTester";
+import ScientificCalculator from "@/components/others/ScientificCalculator";
+import TemperatureConverter from "@/components/others/TemperatureConverter";
 import { QuickNotepad } from "@/components/notes/QuickNotepad";
 
 
@@ -97,12 +99,16 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "pixels": DeadPixelTester,
 
     // Dev tools
+    "scientific-calculator": ScientificCalculator,
+    "temperature-converter": TemperatureConverter,
     "generators": Generators,
     "base64": Base64Tool,
     "jwt": JwtTool,
     "beautifier": CodeBeautifier,
     "json": JsonFormatter,
     "regex": RegexTester,
+
+
 
     // Frontend tools
     "color": ColorPicker,

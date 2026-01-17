@@ -39,6 +39,8 @@ import {
     Presentation,
     Table,
     FileType2,
+    Calculator as CalculatorIcon,
+    Thermometer,
 } from "lucide-react";
 
 
@@ -211,6 +213,8 @@ export const toolsConfig: Category[] = [
         tools: [
             { id: "homepage", name: "OS-style Homepage", desc: "Custom tool dashboard", path: "/others/homepage", icon: Monitor },
             { id: "speedtest", name: "Network Speed Test", desc: "Download, Upload, Ping", path: "/others/speedtest", icon: Zap },
+            { id: "scientific-calculator", name: "Scientific Calculator", desc: "Advanced math with scientific functions", path: "/others/scientific-calculator", icon: CalculatorIcon },
+            { id: "temperature-converter", name: "Temperature Converter", desc: "Celsius, Fahrenheit, Kelvin", path: "/others/temperature-converter", icon: Thermometer },
         ]
     }
 ];
