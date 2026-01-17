@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 
 const FAVORITES_KEY = "utils-page-favorites";
 const DEFAULT_FAVORITES = ["homepage"];

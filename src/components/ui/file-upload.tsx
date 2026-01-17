@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "motion/react";
-import { IconUpload } from "@tabler/icons-react";
+import { IconUpload, IconTrash } from "@tabler/icons-react";
 import { useDropzone } from "react-dropzone";
 
 const mainVariant = {
@@ -27,10 +27,18 @@ const secondaryVariant = {
 
 export const FileUpload = ({
   onChange,
+  onRemove,
+  hideMetadata,
   accept,
+  multiple = false,
+  label,
 }: {
   onChange?: (files: File[]) => void;
+  onRemove?: (file: File) => void;
+  hideMetadata?: boolean;
   accept?: Record<string, string[]>;
+  multiple?: boolean;
+  label?: string;
 }) => {
   const [files, setFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -45,7 +53,7 @@ export const FileUpload = ({
   };
 
   const { getRootProps, isDragActive } = useDropzone({
-    multiple: false,
+    multiple,
     noClick: true,
     accept,
     onDrop: handleFileChange,
@@ -65,6 +73,7 @@ export const FileUpload = ({
           ref={fileInputRef}
           id="file-upload-handle"
           type="file"
+          multiple={multiple}
           accept={accept ? Object.keys(accept).join(',') : undefined}
           onChange={(e) => handleFileChange(Array.from(e.target.files || []))}
           className="hidden"
@@ -74,7 +83,7 @@ export const FileUpload = ({
         </div>
         <div className="flex flex-col items-center justify-center">
           <p className="relative z-20 font-sans font-bold text-neutral-700 dark:text-neutral-300 text-base">
-            Upload file
+            {label || "Upload file"}
           </p>
           <p className="relative z-20 font-sans font-normal text-neutral-400 dark:text-neutral-400 text-base mt-2">
             Drag or drop your files here or click to upload
@@ -99,26 +108,31 @@ export const FileUpload = ({
                     >
                       {file.name}
                     </motion.p>
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      layout
-                      className="rounded-lg px-2 py-1 w-fit shrink-0 text-sm text-neutral-600 dark:bg-neutral-800 dark:text-white shadow-input"
-                    >
-                      {(file.size / (1024 * 1024)).toFixed(2)} MB
-                    </motion.p>
+                    {!hideMetadata && (
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        layout
+                        className="rounded-lg px-2 py-1 w-fit shrink-0 text-sm text-neutral-600 dark:bg-neutral-800 dark:text-white shadow-input"
+                      >
+                        {(file.size / (1024 * 1024)).toFixed(2)} MB
+                      </motion.p>
+                    )}
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setFiles(files.filter((_, i) => i !== idx));
+                          onRemove && onRemove(file);
+                        }}
+                        className="p-1 rounded-full hover:bg-red-500/10 text-neutral-400 hover:text-red-500 transition-colors"
+                      >
+                        <IconTrash className="h-4 w-4" />
+                      </button>
+                    </div>
                   </div>
 
                   <div className="flex text-sm md:flex-row flex-col items-start md:items-center w-full mt-2 justify-between text-neutral-600 dark:text-neutral-400">
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      layout
-                      className="px-1 py-0.5 rounded-md bg-gray-100 dark:bg-neutral-800 "
-                    >
-                      {file.type}
-                    </motion.p>
-
                     <motion.p
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -127,6 +141,17 @@ export const FileUpload = ({
                       modified{" "}
                       {new Date(file.lastModified).toLocaleDateString()}
                     </motion.p>
+
+                    {!hideMetadata ? (
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        layout
+                        className="px-1 py-0.5 rounded-md bg-gray-100 dark:bg-neutral-800 "
+                      >
+                        {file.type}
+                      </motion.p>
+                    ) : <div />}
                   </div>
                 </motion.div>
               ))}

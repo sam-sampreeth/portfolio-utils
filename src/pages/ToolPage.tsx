@@ -46,6 +46,38 @@ import { LoremGenerator } from "@/components/text/LoremGenerator";
 import { EmojiPicker } from "@/components/emoji/EmojiPicker";
 import { UnicodeSymbols } from "@/components/emoji/UnicodeSymbols";
 
+import { FileConverter } from "@/components/file/FileConverter";
+import { ImageCompress } from "@/components/image/ImageCompress";
+import { ImageResize } from "@/components/image/ImageResize";
+import { ImageRotate } from "@/components/image/ImageRotate";
+import { ImageConverter } from "@/components/image/ImageConverter";
+import { ZipManager } from "@/components/file/ZipManager";
+import { FileHash } from "@/components/file/FileHash";
+import { FileMetadata } from "@/components/file/FileMetadata";
+import { FileCheck } from "@/components/file/FileCheck";
+import { TextExtract } from "@/components/file/TextExtract";
+import { ImageCrop } from "@/components/image/ImageCrop";
+import { PdfMerge } from "@/components/file/PdfMerge";
+import { PdfSplit } from "@/components/file/PdfSplit";
+import { PdfOrganize } from "@/components/file/PdfOrganize";
+import { PdfPassword } from "@/components/file/PdfPassword";
+
+import { PdfCompress } from "@/components/file/PdfCompress";
+import { PdfExtractImages } from "@/components/file/PdfExtractImages";
+
+import { PdfToWord } from "@/components/file/PdfToWord";
+import { PdfToPpt } from "@/components/file/PdfToPpt";
+import { PdfToExcel } from "@/components/file/PdfToExcel";
+
+import { WordToPdf } from "@/components/file/WordToPdf";
+import { WordCompress } from "@/components/file/WordCompress";
+import { WordExtract } from "@/components/file/WordExtract";
+import { WordMerge } from "@/components/file/WordMerge";
+import { PptToPdf } from "@/components/file/PptToPdf";
+import { PptCompress } from "@/components/file/PptCompress";
+import { PptMerge } from "@/components/file/PptMerge";
+import { PptExportImages } from "@/components/file/PptExportImages";
+
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     // Time tools
     "clock": DigitalClock,
@@ -64,7 +96,6 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "webcam": WebcamTester,
     "pixels": DeadPixelTester,
 
-    // Dev tools
     // Dev tools
     "generators": Generators,
     "base64": Base64Tool,
@@ -93,6 +124,38 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     "spaces": RemoveSpaces,
     "replace": FindReplace,
     "lorem-ipsum": LoremGenerator,
+
+    // Files
+    "file-converter": FileConverter,
+    "img-compress": ImageCompress,
+    "img-resize": ImageResize,
+    "img-rotate": ImageRotate,
+    "img-crop": ImageCrop,
+    "img-converter": ImageConverter,
+    "zip-manager": ZipManager,
+    "file-hash": FileHash,
+    "file-metadata": FileMetadata,
+    "file-check": FileCheck,
+    "text-extract": TextExtract,
+    "pdf-merge": PdfMerge,
+    "pdf-split": PdfSplit,
+    "pdf-organize": PdfOrganize,
+    "pdf-password": PdfPassword,
+    "pdf-compress": PdfCompress,
+    "pdf-extract-images": PdfExtractImages,
+    "pdf-to-word": PdfToWord,
+    "pdf-to-ppt": PdfToPpt,
+    "pdf-to-excel": PdfToExcel,
+
+    // Word Tools
+    "word-to-pdf": WordToPdf,
+    "word-compress": WordCompress,
+    "word-extract": WordExtract,
+    'word-merge': WordMerge,
+    'ppt-to-pdf': PptToPdf,
+    'ppt-compress': PptCompress,
+    'ppt-merge': PptMerge,
+    'ppt-export': PptExportImages,
 
     // Emoji & Symbols
     "picker": EmojiPicker,

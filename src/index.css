@@ -47,3 +47,12 @@
     color: var(--foreground);
   }
 }
+
+/* User Prescribed Global Overrides for PPT Capture */
+.pptx-slide-page-print * {
+  visibility: visible !important;
+}
+
+.pptx-slide-page-print svg {
+  overflow: visible !important;
+}

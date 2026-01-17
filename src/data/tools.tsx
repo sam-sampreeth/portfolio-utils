@@ -15,6 +15,7 @@ import {
     Square,
     Zap,
     Files,
+    FileArchive,
     Scissors,
     FileDown,
     Image as ImageIcon,
@@ -35,6 +36,9 @@ import {
     Replace,
     PenTool,
     MoreHorizontal,
+    Presentation,
+    Table,
+    FileType2,
 } from "lucide-react";
 
 
@@ -95,12 +99,41 @@ export const toolsConfig: Category[] = [
         icon: FileText,
         color: "from-emerald-500 to-teal-500",
         tools: [
+            { id: "pdf-to-word", name: "PDF to Word", desc: "Convert PDF to DOCX", path: "/files/pdf-to-word", icon: FileText },
+            { id: "pdf-to-ppt", name: "PDF to PPT", desc: "Convert PDF to PowerPoint", path: "/files/pdf-to-ppt", icon: Presentation },
+            { id: "pdf-to-excel", name: "PDF to Excel", desc: "Convert PDF to Spreadsheet", path: "/files/pdf-to-excel", icon: Table },
             { id: "pdf-merge", name: "PDF Merge", desc: "Combine multiple PDFs", path: "/files/pdf-merge", icon: Files },
             { id: "pdf-split", name: "PDF Split", desc: "Extract PDF pages", path: "/files/pdf-split", icon: Scissors },
+            { id: "pdf-password", name: "Lock / Unlock PDF", desc: "Remove passwords or encrypt PDF", path: "/files/pdf-password", icon: ShieldCheck },
+            { id: "pdf-organize", name: "Organize PDF", desc: "Reorder and delete pages", path: "/files/pdf-organize", icon: Layers },
             { id: "pdf-compress", name: "PDF Compress", desc: "Reduce file size", path: "/files/pdf-compress", icon: FileDown },
+            { id: "pdf-extract-images", name: "PDF to Images", desc: "Convert pages to images", path: "/files/pdf-extract-images", icon: ImageIcon },
             { id: "img-compress", name: "Image Compress", desc: "Optimize PNG/JPG/WEBP", path: "/files/img-compress", icon: ImageIcon },
+            { id: "img-resize", name: "Resize Image", desc: "Change dimensions & scale", path: "/files/img-resize", icon: ImageIcon },
+            { id: "img-crop", name: "Crop Image", desc: "Trim and focus area", path: "/files/img-crop", icon: Scissors },
+            { id: "img-rotate", name: "Rotate Image", desc: "Turn 90° or flip", path: "/files/img-rotate", icon: RefreshCw },
+            { id: "img-converter", name: "Image Converter", desc: "Convert between all supported formats", path: "/files/img-converter", icon: RefreshCw },
             { id: "redact", name: "Redact Content", desc: "Sensitive info removal", path: "/files/redact", icon: ShieldCheck },
-            { id: "converter", name: "Format Converter", desc: "Convert between popular types", path: "/files/converter", icon: RefreshCw },
+            { id: "file-converter", name: "Format Converter", desc: "Convert between popular types", path: "/files/file-converter", icon: RefreshCw },
+
+            // WORD Tools
+            { id: "word-to-pdf", name: "Word to PDF", desc: "Convert DOCX to PDF", path: "/files/word-to-pdf", icon: FileText },
+            { id: "word-compress", name: "Word Compress", desc: "Reduce DOCX size", path: "/files/word-compress", icon: FileDown },
+            { id: "word-extract", name: "Extract Images", desc: "Get images from DOCX", path: "/files/word-extract", icon: ImageIcon },
+            { id: "word-merge", name: "Word Merge", desc: "Combine multiple DOCX", path: "/files/word-merge", icon: Files },
+
+            // PPT Tools
+            { id: "ppt-to-pdf", name: "PPT to PDF", desc: "Convert PowerPoint to PDF", path: "/files/ppt-to-pdf", icon: Presentation },
+            { id: "ppt-compress", name: "PPT Compress", desc: "Reduce PPTX size", path: "/files/ppt-compress", icon: FileDown },
+            { id: "ppt-merge", name: "PPT Merge", desc: "Combine presentations", path: "/files/ppt-merge", icon: Files },
+            { id: "ppt-export", name: "Export as Images", desc: "Slides to JPG/PNG", path: "/files/ppt-export", icon: ImageIcon },
+
+            // OTHER File Utilities
+            { id: "file-metadata", name: "View/Strip Metadata", desc: "Hash, info, encoding", path: "/files/file-metadata", icon: FileType2 },
+            { id: "file-hash", name: "File Hash", desc: "Generate MD5, SHA checksums", path: "/files/file-hash", icon: Fingerprint },
+            { id: "file-check", name: "Corrupt File Check", desc: "Verify file integrity", path: "/files/file-check", icon: ShieldCheck },
+            { id: "zip-manager", name: "ZIP Manager", desc: "Create & extract ZIP files", path: "/files/zip-manager", icon: FileArchive },
+            { id: "text-extract", name: "Extract Text", desc: "From PDF, Word, PPT", path: "/files/text-extract", icon: FileText },
         ]
     },
     {
