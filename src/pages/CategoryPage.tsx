@@ -83,7 +83,7 @@ export default function CategoryPage() {
             <div className="min-h-screen flex items-center justify-center pt-20">
                 <div className="text-center">
                     <h2 className="text-2xl font-bold mb-4">Category not found</h2>
-                    <Link to="/" className="text-primary hover:underline">Return to Home</Link>
+                    <Link to="/#tools" className="text-primary hover:underline">Return to Categories</Link>
                 </div>
             </div>
         );
@@ -153,7 +153,7 @@ export default function CategoryPage() {
                     animate={{ opacity: 1, x: 0 }}
                     className="mb-12"
                 >
-                    <Link to="/" className="inline-flex items-center gap-2 text-sm font-bold text-white/40 hover:text-white transition-colors group">
+                    <Link to="/#tools" className="inline-flex items-center gap-2 text-sm font-bold text-white/40 hover:text-white transition-colors group">
                         <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
                         BACK TO CATEGORIES
                     </Link>
