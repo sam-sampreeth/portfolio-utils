@@ -22,6 +22,8 @@ import SpotlightCard from "@/components/ui/SpotlightCard";
 import { HoverEffect } from "@/components/ui/CardHoverEffect";
 import FavoriteToggle from "@/components/FavoriteToggle";
 import { useFavorites } from "@/hooks/useFavorites.tsx";
+import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
+import { Hero3DVisual } from "@/components/ui/Hero3DVisual";
 
 export default function LandingPage() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -108,31 +110,41 @@ export default function LandingPage() {
     return (
         <div ref={containerRef} className="min-h-screen pt-32 pb-20 overflow-hidden selection:bg-primary/20">
             {/* Background decoration */}
+            <BackgroundBeams />
+
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] pointer-events-none opacity-20">
                 <div className="absolute inset-0 bg-primary/30 blur-[120px] rounded-full" />
             </div>
 
             <div className="container mx-auto px-4 relative z-10">
                 {/* --- Hero Section --- */}
-                <div className="max-w-4xl mb-12">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-primary text-xs font-bold mb-6">
-                            <Sparkles className="w-3 h-3 fill-primary" />
-                            <span>THE ALL-IN-ONE UTILITIES HUB</span>
-                        </div>
-                        <h1 className="text-5xl md:text-8xl font-black mb-8 tracking-tighter leading-[0.9]">
-                            TOOLS FOR <br />
-                            <span className="text-primary italic">MODERN MINDS.</span>
-                        </h1>
-                        <p className="text-xl md:text-2xl text-muted-foreground/80 leading-relaxed max-w-2xl font-medium">
-                            A premium suite of web utilities designed to simplify your workflow.
-                            No ads, no tracking, just pure utility.
-                        </p>
-                    </motion.div>
+                <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-0 mb-24">
+                    {/* Text Column */}
+                    <div className="flex-1 max-w-4xl text-left relative z-20">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                        >
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-primary text-xs font-bold mb-6">
+                                <Sparkles className="w-3 h-3 fill-primary" />
+                                <span>THE ALL-IN-ONE UTILITIES HUB</span>
+                            </div>
+                            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-none">
+                                TOOLS FOR <br />
+                                <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 animate-pulse italic pr-2 pb-2">MODERN MINDS.</span>
+                            </h1>
+                            <p className="text-xl md:text-2xl text-muted-foreground/80 leading-relaxed max-w-2xl font-medium">
+                                A premium suite of web utilities designed to simplify your workflow.
+                                No ads, no tracking, just pure utility.
+                            </p>
+                        </motion.div>
+                    </div>
+
+                    {/* Right Component: 3D Visual */}
+                    <div className="w-full lg:w-1/2 h-[400px] relative z-10 scale-75 lg:scale-100 opacity-80 hover:opacity-100 transition-opacity duration-500">
+                        <Hero3DVisual />
+                    </div>
                 </div>
 
                 {/* --- Modal Trigger Search Bar --- */}
@@ -360,26 +372,102 @@ export default function LandingPage() {
                 </div>
 
                 {/* --- Security & Privacy Feature Block --- */}
-                <div id="security" className="mb-40 p-12 md:p-20 rounded-[3rem] bg-gradient-to-br from-blue-500/10 via-primary/5 to-transparent border border-white/10 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-12 opacity-10 pointer-events-none">
-                        <Shield size={300} strokeWidth={0.5} />
+                {/* --- Security & Privacy Feature Block --- */}
+                <div id="security" className="mb-40">
+                    <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-center">
+                        {/* Left: Main Copy */}
+                        <div className="flex-1">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold mb-6">
+                                <Shield className="w-3 h-3 fill-blue-400" />
+                                <span>PRIVACY FIRST ARCHITECTURE</span>
+                            </div>
+                            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight leading-tight">
+                                Your data stays <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">on your device.</span>
+                            </h2>
+                            <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
+                                Unlike other utility websites, we never upload your content to a server.
+                                Whether you're decoding a JWT, formatting JSON, or generating UUIDs,
+                                <strong> everything happens locally in your browser.</strong>
+                            </p>
+
+                            <div className="flex items-center gap-4 text-sm font-bold opacity-60">
+                                <span className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> Fully Encrypted </span>
+                                <span className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> Zero Latency</span>
+                            </div>
+                        </div>
+
+                        {/* Right: Feature Grid */}
+                        <div className="flex-1 w-full">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {[
+                                    { icon: Zap, title: "Blazing Fast", desc: "Instant results with zero server latency." },
+                                    { icon: CommandIcon, title: "Open Source", desc: "Audit the code yourself on GitHub." },
+                                    { icon: Cpu, title: "Client-Side", desc: "Your data never leaves your browser." },
+                                    { icon: Layout, title: "No Tracking", desc: "No analytics, no cookies, just tools." }
+                                ].map((feature, i) => (
+                                    <motion.div
+                                        key={feature.title}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.1 }}
+                                        className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] transition-colors group"
+                                    >
+                                        <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform text-white">
+                                            <feature.icon size={24} />
+                                        </div>
+                                        <h3 className="font-bold text-lg mb-2 text-white">{feature.title}</h3>
+                                        <p className="text-sm text-white/50 leading-relaxed font-medium">{feature.desc}</p>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* --- Workflow Features --- */}
+                <div id="benefits" className="mb-40">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-5xl font-bold mb-6">Designed for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Flow State.</span></h2>
+                        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                            Every interaction is crafted to keep you in the zone.
+                            Zero friction, maximum efficiency.
+                        </p>
                     </div>
 
-                    <div className="max-w-2xl relative z-10">
-                        <div className="text-white mb-8 animate-pulse">
-                            <Shield size={48} />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {/* Feature 1 */}
+                        <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-white/20 transition-colors group">
+                            <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:bg-blue-500/20 transition-colors">
+                                <CommandIcon className="w-6 h-6 text-blue-400" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-3">Command Palette</h3>
+                            <p className="text-muted-foreground leading-relaxed">
+                                Jump to any tool instantly. Just hit <kbd className="px-2 py-0.5 rounded bg-white/10 text-xs font-mono border border-white/10">Cmd + K</kbd> to search, navigate, or run commands.
+                            </p>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight">Your data belongs to you. Period.</h2>
-                        <p className="text-lg text-muted-foreground/80 leading-relaxed mb-10">
-                            Unlike other utility websites, we never upload your content to a server.
-                            Whether you're decoding a JWT, formatting JSON, or generating UUIDs,
-                            <strong> everything happens locally in your browser.</strong>
-                        </p>
-                        <div className="grid grid-cols-2 gap-8 text-sm font-bold uppercase tracking-widest text-white/40">
-                            <div className="flex items-center gap-3"><Zap size={16} className="text-white" /> Offline Ready</div>
-                            <div className="flex items-center gap-3"><CommandIcon size={16} className="text-white" /> Open Source</div>
-                            <div className="flex items-center gap-3"><Cpu size={16} className="text-white" /> Client-Side</div>
-                            <div className="flex items-center gap-3"><Layout size={16} className="text-white" /> No Tracking</div>
+
+                        {/* Feature 2 */}
+                        <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-white/20 transition-colors group">
+                            <div className="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6 group-hover:bg-purple-500/20 transition-colors">
+                                <Monitor className="w-6 h-6 text-purple-400" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-3">Distraction Free</h3>
+                            <p className="text-muted-foreground leading-relaxed">
+                                Clean, minimalist interfaces that let you focus on the task. No sidebars, no ads, no popups.
+                            </p>
+                        </div>
+
+                        {/* Feature 3 */}
+                        <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-white/20 transition-colors group">
+                            <div className="w-12 h-12 rounded-2xl bg-pink-500/10 flex items-center justify-center mb-6 group-hover:bg-pink-500/20 transition-colors">
+                                <Zap className="w-6 h-6 text-pink-400" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-3">Keyboard First</h3>
+                            <p className="text-muted-foreground leading-relaxed">
+                                Optimized for power users. Navigate forms, toggle options, and execute actions without touching the mouse.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -395,7 +483,7 @@ export default function LandingPage() {
                             Keep it simple, keep it secure.
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-white">
-                            <Link to="/dev" className="px-10 py-4 rounded-full bg-primary text-white font-bold hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transition-all">
+                            <Link to="/category/dev" className="px-10 py-4 rounded-full bg-primary text-white font-bold hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transition-all">
                                 Get Started
                             </Link>
                             <a

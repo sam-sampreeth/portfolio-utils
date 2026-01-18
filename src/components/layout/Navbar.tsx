@@ -25,48 +25,33 @@ export function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Intersection Observer for Scroll Spy
+    // Scroll Spy Logic
     useEffect(() => {
-        if (location.pathname !== "/") {
-            setActiveSection("");
-            return;
-        }
+        const handleScrollSpy = () => {
+            const sections = ["tools", "security", "benefits"];
+            const scrollY = window.scrollY;
+            // Trigger point: Middle of the viewport
+            const triggerPoint = scrollY + (window.innerHeight / 2);
 
-        const observerOptions = {
-            root: null,
-            rootMargin: "-40% 0px -40% 0px", // Trigger when section is in middle of viewport
-            threshold: 0
-        };
+            // Default to home
+            let currentSection = "home";
 
-        const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    setActiveSection(entry.target.id);
+            for (const section of sections) {
+                const element = document.getElementById(section);
+                if (element) {
+                    if (element.offsetTop <= triggerPoint) {
+                        currentSection = section;
+                    }
                 }
-            });
-        };
-
-        const observer = new IntersectionObserver(handleIntersection, observerOptions);
-
-        // Sections to observe
-        const sections = ["features", "security", "benefits"];
-        sections.forEach((id) => {
-            const el = document.getElementById(id);
-            if (el) observer.observe(el);
-        });
-
-        // Special case for home (top of page)
-        const handleHomeTracking = () => {
-            if (window.scrollY < 300) {
-                setActiveSection("home");
             }
-        };
-        window.addEventListener("scroll", handleHomeTracking);
 
-        return () => {
-            observer.disconnect();
-            window.removeEventListener("scroll", handleHomeTracking);
+            setActiveSection(currentSection);
         };
+
+        window.addEventListener("scroll", handleScrollSpy);
+        handleScrollSpy(); // Initial check
+
+        return () => window.removeEventListener("scroll", handleScrollSpy);
     }, [location.pathname]);
 
     const isActive = (item: typeof navItems[0]) => {

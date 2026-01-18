@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/layout/Navbar";
+import { Footer } from "./components/layout/Footer";
 import LandingPage from "./pages/LandingPage";
 import CategoryPage from "./pages/CategoryPage";
 import ToolPage from "./pages/ToolPage";
@@ -22,20 +23,7 @@ function App() {
             </Routes>
           </main>
 
-          <footer className="border-t border-border py-12 bg-black/20">
-            <div className="container mx-auto px-4 text-center">
-              <p className="text-muted-foreground text-sm flex items-center justify-center gap-2">
-                Made with ❤️ by <a href="https://sampreeth.in" className="text-primary hover:underline font-bold">Sampreeth</a>
-              </p>
-              <div className="mt-4 flex justify-center gap-6 text-xs text-white/30 uppercase tracking-[0.2em] font-bold">
-                <span>Security First</span>
-                <span>•</span>
-                <span>Client-Side Only</span>
-                <span>•</span>
-                <span>Privacy Focused</span>
-              </div>
-            </div>
-          </footer>
+          <Footer />
 
           <Toaster
             position="bottom-right"
