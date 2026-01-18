@@ -43,7 +43,7 @@ export function SpeakerTester() {
     const [frequency, setFrequency] = useState(440);
     const [panning, setPanning] = useState(0);
     const [volume, setVolume] = useState(0.5);
-    const [channel, setChannel] = useState<Channel>("both");
+    const [channel] = useState<Channel>("both");
 
     const oscRef = useRef<OscillatorNode | null>(null);
     const noiseRef = useRef<ScriptProcessorNode | null>(null);
@@ -52,7 +52,7 @@ export function SpeakerTester() {
     const analyserRef = useRef<AnalyserNode | null>(null);
     const filterRef = useRef<BiquadFilterNode | null>(null);
     const compressorRef = useRef<DynamicsCompressorNode | null>(null);
-    const animationRef = useRef<number>();
+    const animationRef = useRef<number>(0);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     // Initialize Audio Context

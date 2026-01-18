@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Image as ImageIcon, Download, Loader2, ShieldCheck, AlertTriangle, Settings2, Presentation, ArrowRight } from "lucide-react";
+import { Image as ImageIcon, Download, Loader2, ShieldCheck, AlertTriangle, Settings2, Presentation } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { FileUpload } from "@/components/ui/file-upload";
 import { Button } from "@/components/ui/button";

@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import { Check, AlertCircle, Key, FileJson, ShieldCheck, Copy, Clock, AlertTriangle } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { format } from "date-fns";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"; // Assuming Tabs components exist or I use Radix directly
+
 import * as CryptoJS from 'crypto-js';
 
 // If Tabs components don't exist in local UI folder, I'll use Radix primitives directly or simple state.

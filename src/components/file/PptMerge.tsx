@@ -105,7 +105,7 @@ export function PptMerge() {
             }
 
             // Generate Blob
-            const blob = await pres.write("blob");
+            const blob = await pres.write({ outputType: "blob" });
             setMergedBlob(blob as Blob);
 
             toast.dismiss(toastId);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FileDown, Loader2, ShieldCheck, Plus, Settings2, Zap, Image as ImageIcon, FileText, ArrowRight, Download } from "lucide-react";
+import { FileDown, Loader2, ShieldCheck, Settings2, Zap, Image as ImageIcon, FileText, Download } from "lucide-react";
 import { saveAs } from "file-saver";
 import { toast } from "react-hot-toast";
 import { FileUpload } from "@/components/ui/file-upload";

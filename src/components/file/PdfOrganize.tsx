@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Layers, Loader2, ShieldCheck, MousePointer2, GripVertical, FileText, Plus, X, Maximize2, ArrowRight } from "lucide-react";
+import { Layers, Loader2, ShieldCheck, GripVertical, FileText, X, Maximize2, ArrowRight } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import * as pdfjsLib from "pdfjs-dist";
 import pdfWorker from "pdfjs-dist/build/pdf.worker.mjs?url";
@@ -96,7 +96,7 @@ export function PdfOrganize() {
             copiedPages.forEach(page => newDoc.addPage(page));
 
             const pdfBytes = await newDoc.save();
-            const blob = new Blob([pdfBytes], { type: "application/pdf" });
+            const blob = new Blob([pdfBytes as any], { type: "application/pdf" });
             saveAs(blob, `${filename}.pdf`);
 
             toast.success("PDF organized successfully!");

@@ -161,10 +161,8 @@ export function Pomodoro() {
     };
 
 
-    const duration = getDuration(sessionType);
-    const progress = 1 - (timeLeft / duration);
-    const radius = 120;
-    const circumference = 2 * Math.PI * radius;
+
+
 
     return (
         <motion.div

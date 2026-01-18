@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileText, Loader2, ShieldCheck, Plus, FileType, CheckCircle, ArrowRight } from "lucide-react";
+import { FileText, Loader2, ShieldCheck, FileType, CheckCircle, ArrowRight } from "lucide-react";
 import { saveAs } from "file-saver";
 import { toast } from "react-hot-toast";
 import { FileUpload } from "@/components/ui/file-upload";

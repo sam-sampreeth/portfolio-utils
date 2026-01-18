@@ -118,7 +118,7 @@ export function SpeedTest() {
 
         const uploadTask = async () => {
             while (completed < iterations) {
-                const index = completed++;
+                completed++;
                 try {
                     await fetch("https://httpbin.org/post", {
                         method: "POST",

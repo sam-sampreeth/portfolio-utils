@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Table, Loader2, ShieldCheck, Plus, Database, CheckCircle, ArrowRight } from "lucide-react";
+import { Table, Loader2, ShieldCheck, Database, CheckCircle, ArrowRight } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { FileUpload } from "@/components/ui/file-upload";
 import { Button } from "@/components/ui/button";

@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Crop as CropIcon, Download, Trash, Sparkles, Settings2, Loader2, ArrowRight } from "lucide-react";
+import { Crop as CropIcon, Sparkles, Settings2, Loader2, ArrowRight } from "lucide-react";
 import { toast } from "react-hot-toast";
 import ReactCrop, { centerCrop, makeAspectCrop, type Crop, type PixelCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";

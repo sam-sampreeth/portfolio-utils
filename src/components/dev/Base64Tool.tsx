@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Binary, Copy, Download, Trash } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { FileUpload } from "@/components/ui/file-upload";
@@ -22,7 +22,7 @@ export function Base64Tool() {
                 if (action === "encode") {
                     // Handling UTF-8: encodeURIComponent -> unescape (deprecated but standard hack) -> btoa
                     const utf8Bytes = encodeURIComponent(input).replace(/%([0-9A-F]{2})/g,
-                        function (match, p1) {
+                        function (_, p1) {
                             return String.fromCharCode(parseInt(p1, 16))
                         });
                     setOutput(btoa(utf8Bytes));

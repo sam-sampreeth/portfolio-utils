@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Scissors, FileText, Loader2, ShieldCheck, Download, CheckCircle2, AlertCircle, Trash2, Plus, ArrowRight } from "lucide-react";
+import { Scissors, FileText, Loader2, ShieldCheck, CheckCircle2, AlertCircle, ArrowRight } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { toast } from "react-hot-toast";
@@ -78,7 +78,7 @@ export function PdfSplit() {
             copiedPages.forEach(page => newDoc.addPage(page));
 
             const pdfBytes = await newDoc.save();
-            const blob = new Blob([pdfBytes], { type: "application/pdf" });
+            const blob = new Blob([pdfBytes as any], { type: "application/pdf" });
             saveAs(blob, `${filename}.pdf`);
 
             toast.success("PDF split successfully!");

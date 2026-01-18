@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Maximize2, Download, Trash, Sparkles, Link as LinkIcon, Unlink, Settings2, Loader2, ArrowRight } from "lucide-react";
+import { Maximize2, Sparkles, Link as LinkIcon, Unlink, Settings2, Loader2 } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { FileUpload } from "@/components/ui/file-upload";
 import { Button } from "@/components/ui/button";

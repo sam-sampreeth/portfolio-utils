@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ImageIcon, Download, Loader2, ShieldCheck, Plus, Image as IconImage, Settings2, Grid, Layers, ArrowRight } from "lucide-react";
+import { ImageIcon, Download, Loader2, ShieldCheck, Image as IconImage, Settings2, Grid } from "lucide-react";
 import { saveAs } from "file-saver";
 import { toast } from "react-hot-toast";
 import { FileUpload } from "@/components/ui/file-upload";

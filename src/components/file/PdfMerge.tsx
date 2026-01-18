@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Loader2, ShieldCheck, Combine, FileText, Search, X, GripVertical, Trash2, ArrowRight } from "lucide-react";
+import { Loader2, ShieldCheck, Combine, FileText, Search, GripVertical, Trash2, ArrowRight } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { FileUpload } from "@/components/ui/file-upload";
 import { Button } from "@/components/ui/button";
@@ -49,7 +49,7 @@ export function PdfMerge() {
             }
 
             const mergedPdfBytes = await mergedPdf.save();
-            const blob = new Blob([mergedPdfBytes], { type: "application/pdf" });
+            const blob = new Blob([mergedPdfBytes as any], { type: "application/pdf" });
 
             // Download logic
             const link = document.createElement("a");

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileDown, Loader2, FileText, Plus, ShieldCheck, CheckCircle, ArrowRight, Settings2 } from "lucide-react";
+import { FileDown, Loader2, FileText, ShieldCheck, CheckCircle, ArrowRight, Settings2 } from "lucide-react";
 import { saveAs } from "file-saver";
 import { toast } from "react-hot-toast";
 import { FileUpload } from "@/components/ui/file-upload";

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Sparkles, FileArchive, Image as ImageIcon, FileText, FileType2, MoreHorizontal, Search, X, ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowLeft, Sparkles, Image as ImageIcon, FileText, FileType2, MoreHorizontal, Search, X, ArrowRight, ChevronDown } from "lucide-react";
 import { toolsConfig } from "@/data/tools";
 import { HoverEffect } from "@/components/ui/CardHoverEffect";
 import { FileConverter } from "@/components/file/FileConverter";

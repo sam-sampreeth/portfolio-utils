@@ -1,16 +1,13 @@
 import { useState } from "react";
 import {
     FileArchive,
-    Upload,
     Download,
     File as FileIcon,
     Search,
     Trash,
     FolderOpen,
-    Sparkles,
     Archive,
     FolderArchive,
-    ArrowRight,
     ShieldCheck
 } from "lucide-react";
 import JSZip from "jszip";
@@ -22,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { DownloadConfirmDialog } from "@/components/common/DownloadConfirmDialog";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface ZipFileItem {
     name: string;

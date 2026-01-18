@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ShieldCheck, Lock, Unlock, Loader2, FileText, Plus, Eye, EyeOff, KeyRound, AlertTriangle } from "lucide-react";
+import { ShieldCheck, Lock, Unlock, Loader2, FileText, Eye, EyeOff, KeyRound, AlertTriangle } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { toast } from "react-hot-toast";
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AnimatePresence, motion } from "framer-motion";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DownloadConfirmDialog } from "@/components/common/DownloadConfirmDialog";
 
 export function PdfPassword() {
@@ -103,7 +103,7 @@ export function PdfPassword() {
                     const { encryptPDF } = await import("@pdfsmaller/pdf-encrypt-lite");
                     const encryptedBytes = await encryptPDF(pdfBytes, password, password);
 
-                    const blob = new Blob([encryptedBytes], { type: "application/pdf" });
+                    const blob = new Blob([encryptedBytes as any], { type: "application/pdf" });
                     saveAs(blob, `${filename}.pdf`);
                     toast.success("PDF locked successfully!");
                     setShowDownloadDialog(false);

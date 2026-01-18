@@ -10,7 +10,7 @@ import {
     Camera,
     MapPin,
     Smartphone,
-    Download
+
 } from "lucide-react";
 import ExifReader from "exifreader";
 import { saveAs } from "file-saver";

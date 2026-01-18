@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ImageIcon, Download, Trash, Sparkles, Loader2, Settings2, BarChart3, CheckCircle2, ArrowRight } from "lucide-react";
+import { ImageIcon, Sparkles, Loader2, Settings2, ArrowRight } from "lucide-react";
 import { toast } from "react-hot-toast";
 import imageCompression from "browser-image-compression";
 import { FileUpload } from "@/components/ui/file-upload";
