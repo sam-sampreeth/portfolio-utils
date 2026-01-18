@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "default": "utils-page",
+    "utilities": "utils-page"
+  },
+  "targets": {
+    "utils-page": {
+      "hosting": {
+        "utils": [
+          "utils-page"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
