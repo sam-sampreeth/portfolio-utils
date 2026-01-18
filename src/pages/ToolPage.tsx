@@ -23,6 +23,7 @@ import { QuickNotepad } from "@/components/notes/QuickNotepad";
 
 
 import { ColorPicker } from "@/components/frontend/ColorPicker";
+import { UIVisualizer } from "@/components/frontend/UIVisualizer";
 import { GradientGen } from "@/components/frontend/GradientGen";
 import { ShadowGen } from "@/components/frontend/ShadowGen";
 import { KeyboardTester } from "@/components/hardware/KeyboardTester";
@@ -111,6 +112,7 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
 
 
     // Frontend tools
+    "ui-visualizer": UIVisualizer,
     "color": ColorPicker,
     "gradient": GradientGen,
     "shadow": ShadowGen,

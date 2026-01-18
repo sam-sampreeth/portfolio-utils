@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Sparkles, FileArchive, Image as ImageIcon, FileText, ChevronDown, FileType2, MoreHorizontal, Search, X, ArrowRight, Presentation } from "lucide-react";
+import { ArrowLeft, Sparkles, FileArchive, Image as ImageIcon, FileText, FileType2, MoreHorizontal, Search, X, ArrowRight, ChevronDown } from "lucide-react";
 import { toolsConfig } from "@/data/tools";
 import { HoverEffect } from "@/components/ui/CardHoverEffect";
 import { FileConverter } from "@/components/file/FileConverter";
@@ -29,7 +29,7 @@ const FILE_GROUPS = [
         description: "Convert, resize, and optimize images",
         tools: [
             "img-compress", "img-resize", "img-crop",
-            "img-rotate", "img-converter"
+            "img-rotate", "img-converter", "file-metadata"
         ]
     },
     {
@@ -48,7 +48,7 @@ const FILE_GROUPS = [
         icon: MoreHorizontal,
         description: "Miscellaneous file operations",
         tools: [
-            "file-metadata", "file-hash", "file-check",
+            "file-hash", "file-check",
             "zip-manager", "text-extract", "redact"
         ]
     }
@@ -57,7 +57,7 @@ const FILE_GROUPS = [
 export default function CategoryPage() {
     const { id } = useParams<{ id: string }>();
     const category = toolsConfig.find(cat => cat.id === id);
-    const [expandedGroup, setExpandedGroup] = useState<string | null>("pdf"); // Default open PDF
+    const [expandedGroup, setExpandedGroup] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
     const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -244,36 +244,19 @@ export default function CategoryPage() {
                                         <Sparkles className="w-5 h-5 text-yellow-500" />
                                         Fan Favorites
                                     </h3>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                                        <Link to="/files/pdf-merge" className="p-6 rounded-xl bg-gradient-to-br from-white/5 to-transparent border border-white/5 hover:border-indigo-500/30 hover:from-indigo-500/5 transition-all group">
-                                            <div className="mb-4 w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 group-hover:scale-110 transition-transform">
-                                                <FileText className="w-5 h-5" />
-                                            </div>
-                                            <h4 className="font-bold text-white group-hover:text-indigo-200">PDF Merge</h4>
-                                            <p className="text-sm text-white/40 mt-1">Combine multiple documents</p>
-                                        </Link>
-                                        <Link to="/files/pdf-split" className="p-6 rounded-xl bg-gradient-to-br from-white/5 to-transparent border border-white/5 hover:border-pink-500/30 hover:from-pink-500/5 transition-all group">
-                                            <div className="mb-4 w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400 group-hover:scale-110 transition-transform">
-                                                <MoreHorizontal className="w-5 h-5" />
-                                            </div>
-                                            <h4 className="font-bold text-white group-hover:text-pink-200">PDF Split</h4>
-                                            <p className="text-sm text-white/40 mt-1">Extract specific pages</p>
-                                        </Link>
-                                        <Link to="/files/img-compress" className="p-6 rounded-xl bg-gradient-to-br from-white/5 to-transparent border border-white/5 hover:border-cyan-500/30 hover:from-cyan-500/5 transition-all group">
-                                            <div className="mb-4 w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
-                                                <ImageIcon className="w-5 h-5" />
-                                            </div>
-                                            <h4 className="font-bold text-white group-hover:text-cyan-200">Image Compress</h4>
-                                            <p className="text-sm text-white/40 mt-1">Optimize PNG & JPG</p>
-                                        </Link>
-                                        <Link to="/files/pdf-compress" className="p-6 rounded-xl bg-gradient-to-br from-white/5 to-transparent border border-white/5 hover:border-blue-500/30 hover:from-blue-500/5 transition-all group">
-                                            <div className="mb-4 w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
-                                                <FileArchive className="w-5 h-5" />
-                                            </div>
-                                            <h4 className="font-bold text-white group-hover:text-blue-200">PDF Compress</h4>
-                                            <p className="text-sm text-white/40 mt-1">Reduce file size efficiently</p>
-                                        </Link>
-                                    </div>
+                                    <HoverEffect
+                                        hoverColor="bg-blue-500/10 border-blue-500/20 text-blue-400 group-hover:bg-blue-500/20 group-hover:border-blue-500/30"
+                                        items={category.tools
+                                            .filter(t => ["pdf-merge", "pdf-split", "img-compress", "pdf-compress"].includes(t.id))
+                                            .map(tool => ({
+                                                id: tool.id,
+                                                title: tool.name,
+                                                description: tool.desc,
+                                                link: tool.path,
+                                                icon: tool.icon,
+                                                footerText: "Launch Utility"
+                                            }))}
+                                    />
                                 </section>
 
                                 {/* Divider */}
@@ -332,63 +315,19 @@ export default function CategoryPage() {
                                                             transition={{ duration: 0.3, ease: "easeInOut" }}
                                                         >
                                                             <div className="p-6 pt-0 border-t border-white/5 bg-black/20">
-                                                                {groupTools.length > 0 ? (
-                                                                    <div className="pt-6">
-                                                                        {group.id === 'word' ? (
-                                                                            <div className="space-y-8">
-                                                                                <div>
-                                                                                    <h4 className="text-xs font-bold text-white/40 uppercase tracking-widest mb-4 flex items-center gap-2">
-                                                                                        <FileText className="w-4 h-4" /> Word Documents
-                                                                                    </h4>
-                                                                                    <HoverEffect
-                                                                                        hoverColor="bg-blue-500/10 border-blue-500/20 text-blue-400 group-hover:bg-blue-500/20 group-hover:border-blue-500/30"
-                                                                                        items={groupTools.filter(t => t.id.startsWith('word')).map(tool => ({
-                                                                                            id: tool.id,
-                                                                                            title: tool.name,
-                                                                                            description: tool.desc,
-                                                                                            link: tool.path,
-                                                                                            icon: tool.icon,
-                                                                                            footerText: "Launch Utility"
-                                                                                        }))}
-                                                                                    />
-                                                                                </div>
-                                                                                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-                                                                                <div>
-                                                                                    <h4 className="text-xs font-bold text-white/40 uppercase tracking-widest mb-4 flex items-center gap-2">
-                                                                                        <Presentation className="w-4 h-4" /> PowerPoint Presentations
-                                                                                    </h4>
-                                                                                    <HoverEffect
-                                                                                        hoverColor="bg-blue-500/10 border-blue-500/20 text-blue-400 group-hover:bg-blue-500/20 group-hover:border-blue-500/30"
-                                                                                        items={groupTools.filter(t => t.id.startsWith('ppt')).map(tool => ({
-                                                                                            id: tool.id,
-                                                                                            title: tool.name,
-                                                                                            description: tool.desc,
-                                                                                            link: tool.path,
-                                                                                            icon: tool.icon,
-                                                                                            footerText: "Launch Utility"
-                                                                                        }))}
-                                                                                    />
-                                                                                </div>
-                                                                            </div>
-                                                                        ) : (
-                                                                            <HoverEffect
-                                                                                hoverColor="bg-blue-500/10 border-blue-500/20 text-blue-400 group-hover:bg-blue-500/20 group-hover:border-blue-500/30"
-                                                                                items={groupTools.map(tool => ({
-                                                                                    id: tool.id,
-                                                                                    title: tool.name,
-                                                                                    description: tool.desc,
-                                                                                    link: tool.path,
-                                                                                    icon: tool.icon,
-                                                                                    footerText: "Launch Utility"
-                                                                                }))}
-                                                                            />
-                                                                        )}
-                                                                    </div>
-                                                                ) : (
-                                                                    <div className="pt-6 text-center py-8 text-white/20 italic">
-                                                                        Coming soon...
-                                                                    </div>
-                                                                )}
+                                                                <div className="pt-6">
+                                                                    <HoverEffect
+                                                                        hoverColor="bg-blue-500/10 border-blue-500/20 text-blue-400 group-hover:bg-blue-500/20 group-hover:border-blue-500/30"
+                                                                        items={groupTools.map(tool => ({
+                                                                            id: tool.id,
+                                                                            title: tool.name,
+                                                                            description: tool.desc,
+                                                                            link: tool.path,
+                                                                            icon: tool.icon,
+                                                                            footerText: "Launch Utility"
+                                                                        }))}
+                                                                    />
+                                                                </div>
                                                             </div>
                                                         </motion.div>
                                                     )}

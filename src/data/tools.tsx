@@ -26,6 +26,7 @@ import {
     Pipette,
     Layers,
     Box,
+    Layout,
     FileCode,
     Terminal,
     Fingerprint,
@@ -115,6 +116,7 @@ export const toolsConfig: Category[] = [
             { id: "img-crop", name: "Crop Image", desc: "Trim and focus area", path: "/files/img-crop", icon: Scissors },
             { id: "img-rotate", name: "Rotate Image", desc: "Turn 90° or flip", path: "/files/img-rotate", icon: RefreshCw },
             { id: "img-converter", name: "Image Converter", desc: "Convert between all supported formats", path: "/files/img-converter", icon: RefreshCw },
+            { id: "file-metadata", name: "View/Strip Image Metadata", desc: "Hash, info, encoding", path: "/files/file-metadata", icon: FileType2 },
             { id: "redact", name: "Redact Content", desc: "Sensitive info removal", path: "/files/redact", icon: ShieldCheck },
             { id: "file-converter", name: "Format Converter", desc: "Convert between popular types", path: "/files/file-converter", icon: RefreshCw },
 
@@ -131,7 +133,7 @@ export const toolsConfig: Category[] = [
             { id: "ppt-export", name: "Export as Images", desc: "Slides to JPG/PNG", path: "/files/ppt-export", icon: ImageIcon },
 
             // OTHER File Utilities
-            { id: "file-metadata", name: "View/Strip Metadata", desc: "Hash, info, encoding", path: "/files/file-metadata", icon: FileType2 },
+
             { id: "file-hash", name: "File Hash", desc: "Generate MD5, SHA checksums", path: "/files/file-hash", icon: Fingerprint },
             { id: "file-check", name: "Corrupt File Check", desc: "Verify file integrity", path: "/files/file-check", icon: ShieldCheck },
             { id: "zip-manager", name: "ZIP Manager", desc: "Create & extract ZIP files", path: "/files/zip-manager", icon: FileArchive },
@@ -145,9 +147,10 @@ export const toolsConfig: Category[] = [
         icon: Palette,
         color: "from-orange-500 to-yellow-500",
         tools: [
+            { id: "ui-visualizer", name: "UI Visualizer", desc: "Test font and color combinations on a live mock website", path: "/frontend/ui-visualizer", icon: Layout },
             { id: "color", name: "Color Format Converter", desc: "Hex, RGB, HSL", path: "/frontend/color", icon: Pipette },
             { id: "gradient", name: "Gradient Generator", desc: "Visual CSS gradients", path: "/frontend/gradient", icon: Layers },
-            { id: "shadow", name: "Box Shadow Gen", desc: "Neumorphic & glass shadows", path: "/frontend/shadow", icon: Box },
+            { id: "shadow", name: "Box Shadow Generator", desc: "Neumorphic & glass shadows", path: "/frontend/shadow", icon: Box },
             { id: "units", name: "CSS Units Converter", desc: "PX, REM, EM, VW", path: "/frontend/units", icon: RefreshCw },
             { id: "image-picker", name: "Image Color Picker", desc: "Extract pixel colors", path: "/frontend/image-picker", icon: ImageIcon },
             { id: "svg", name: "SVG Viewer", desc: "Preview and optimize SVGs", path: "/frontend/svg", icon: ImageIcon },
@@ -163,7 +166,7 @@ export const toolsConfig: Category[] = [
             { id: "json", name: "JSON Formatter", desc: "Validate and beautify", path: "/dev/json", icon: FileCode },
             { id: "beautifier", name: "Code Beautifier", desc: "Format JS/TS/CSS/HTML", path: "/dev/beautifier", icon: Sparkles },
             { id: "regex", name: "Regex Tester", desc: "Test expressions live", path: "/dev/regex", icon: Terminal },
-            { id: "generators", name: "Generators", desc: "UUID, NanoID, Hash, Random", path: "/dev/generators", icon: Fingerprint },
+            { id: "generators", name: "ID Generators (UUID, NanoID, Hash, Random)", desc: "UUID, NanoID, Hash, Random", path: "/dev/generators", icon: Fingerprint },
             { id: "base64", name: "Base64 Encoder", desc: "Convert binary data", path: "/dev/base64", icon: Binary },
             { id: "jwt", name: "JWT Encoder / Decoder", desc: "Sign and inspect tokens", path: "/dev/jwt", icon: Coins },
         ]
@@ -179,7 +182,7 @@ export const toolsConfig: Category[] = [
             { id: "transformer", name: "Text Transformer", desc: "Case conversion & Styling", path: "/text/transformer", icon: Type },
             { id: "spaces", name: "Remove Extra Spaces", desc: "Clean up text", path: "/text/spaces", icon: Eraser },
             { id: "replace", name: "Find & Replace", desc: "Bulk text updates", path: "/text/replace", icon: Replace },
-            { id: "lorem-ipsum", name: "Lorem Ipsum", desc: "Generate placeholder text", path: "/text/lorem-ipsum", icon: FileText },
+            { id: "lorem-ipsum", name: "Lorem Ipsum Generator", desc: "Generate placeholder text", path: "/text/lorem-ipsum", icon: FileText },
         ]
     },
     {
