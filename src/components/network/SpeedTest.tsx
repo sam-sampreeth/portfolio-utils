@@ -1,7 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 import {
     Wifi,
-    Zap,
     ArrowDown,
     ArrowUp,
     Activity,

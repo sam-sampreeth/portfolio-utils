@@ -1,15 +1,16 @@
+
 import { useState, useEffect, useRef, useCallback } from "react";
 import {
     Webcam,
     VideoOff,
-    Camera,
-    Maximize,
+
     Trash2,
     RefreshCcw,
     Grid,
     ShieldCheck,
     AlertCircle,
-    Download
+    Download,
+    Camera
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -321,7 +322,7 @@ export function WebcamTester() {
                                 <div className="flex flex-col">
                                     <span className="text-[10px] font-black tracking-widest uppercase mb-1">Resolution</span>
                                     <span className="text-xl font-black font-mono text-blue-400">
-                                        {stats ? `${stats.width}x${stats.height}` : "Detecting..."}
+                                        {stats ? `${stats.width}x${stats.height} ` : "Detecting..."}
                                     </span>
                                 </div>
                             </div>

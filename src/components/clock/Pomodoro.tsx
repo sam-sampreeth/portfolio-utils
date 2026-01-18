@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, Pause, RotateCcw, SkipForward, Settings2, Volume2, VolumeX, X, Maximize2, Minimize2, Expand, Clock as ClockIcon, ClockFading } from "lucide-react";
+import { Play, Pause, RotateCcw, SkipForward, Settings2, Volume2, VolumeX, X, Maximize2, Minimize2, Expand } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type SessionType = "work" | "shortBreak" | "longBreak";

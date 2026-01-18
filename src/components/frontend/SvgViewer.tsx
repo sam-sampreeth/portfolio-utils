@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Copy, Download, ZoomIn, ZoomOut, RotateCcw, FileCode, Sun, Moon, Trash2, Code2 } from "lucide-react";
+import { Copy, Download, ZoomIn, ZoomOut, RotateCcw, Sun, Moon, Trash2, Code2 } from "lucide-react";
 import { FileUpload } from "@/components/ui/file-upload";
 import toast from "react-hot-toast";
 
