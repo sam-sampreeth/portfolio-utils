@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Palette, Copy, Hash } from "lucide-react";
+import { Shuffle as Palette, Copy, Hash } from "lucide-react";
 import toast from "react-hot-toast";
 
 // --- Color Conversion Helpers ---
@@ -121,7 +121,7 @@ export function ColorPicker() {
             <div className="grid grid-cols-1 lg:grid-cols-11 gap-8">
                 {/* Sidebar: Configuration & Input */}
                 <div className="lg:col-span-4 space-y-6 lg:order-1">
-                    <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-600 to-blue-800 border border-white/10 shadow-2xl relative overflow-hidden group">
+                    <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 border border-white/20 shadow-2xl relative overflow-hidden group">
                         <div className="absolute top-0 right-0 p-8 opacity-10 -rotate-12 transform group-hover:rotate-0 transition-transform duration-700">
                             <Palette size={140} />
                         </div>
@@ -141,7 +141,7 @@ export function ColorPicker() {
                                                 type="text"
                                                 value={hex.replace("#", "")}
                                                 onChange={(e) => handleHexChange(e.target.value)}
-                                                className="w-full h-12 bg-black/20 border border-white/20 rounded-2xl pl-10 pr-4 text-white font-black text-lg focus:outline-none focus:ring-1 focus:ring-white/50 uppercase placeholder-white/20"
+                                                className="w-full h-12 bg-white/5 border border-white/20 rounded-2xl pl-10 pr-4 text-white font-black text-lg focus:outline-none focus:ring-1 focus:ring-blue-500/50 uppercase placeholder-white/20 transition-all focus:bg-white/10"
                                                 maxLength={6}
                                             />
                                         </div>
@@ -150,14 +150,21 @@ export function ColorPicker() {
                                     {/* Picker */}
                                     <div className="space-y-2">
                                         <label className="text-[10px] font-black uppercase tracking-widest text-white/60">Color Picker</label>
-                                        <div className="flex gap-4 items-center p-2 bg-black/20 border border-white/20 rounded-2xl">
-                                            <input
-                                                type="color"
-                                                value={hex}
-                                                onChange={(e) => setHex(e.target.value)}
-                                                className="w-12 h-12 rounded-xl bg-transparent border-none cursor-pointer p-0 overflow-hidden shrink-0"
-                                            />
-                                            <span className="text-white/60 text-xs font-bold">Click circle to pick</span>
+                                        <div className="flex gap-4 items-center p-2 bg-white/5 border border-white/20 rounded-2xl hover:bg-white/10 transition-colors group/picker cursor-pointer" onClick={() => document.getElementById('color-input')?.click()}>
+                                            <div className="relative">
+                                                <input
+                                                    id="color-input"
+                                                    type="color"
+                                                    value={hex}
+                                                    onChange={(e) => setHex(e.target.value)}
+                                                    className="w-10 h-10 rounded-xl bg-transparent border-none cursor-pointer p-0 overflow-hidden shrink-0 opacity-0 absolute inset-0 z-10"
+                                                />
+                                                <div
+                                                    className="w-10 h-10 rounded-xl border border-white/20 shadow-inner"
+                                                    style={{ backgroundColor: hex }}
+                                                />
+                                            </div>
+                                            <span className="text-white/40 text-[10px] font-black uppercase tracking-widest group-hover/picker:text-white/60 transition-colors">Click to pick color</span>
                                         </div>
                                     </div>
 
@@ -166,13 +173,13 @@ export function ColorPicker() {
                                         <label className="text-[10px] font-black uppercase tracking-widest text-white/60">RGB Values</label>
                                         <div className="grid grid-cols-3 gap-2">
                                             {['r', 'g', 'b'].map((k) => (
-                                                <div key={k} className="relative">
-                                                    <label className="absolute top-1 left-2 text-[8px] font-bold text-white/40 uppercase">{k}</label>
+                                                <div key={k} className="relative group/input">
+                                                    <label className="absolute top-2 left-3 text-[8px] font-black text-white/30 uppercase group-focus-within/input:text-blue-400 transition-colors">{k}</label>
                                                     <input
                                                         type="number"
                                                         value={rgb[k as keyof typeof rgb]}
                                                         onChange={(e) => handleRgbChange(k as any, e.target.value)}
-                                                        className="w-full h-10 bg-black/20 border border-white/20 rounded-xl px-2 pt-3 text-white font-bold text-sm focus:outline-none focus:ring-1 focus:ring-white/50 text-center"
+                                                        className="w-full h-14 bg-white/5 border border-white/20 rounded-2xl px-3 pt-4 text-white font-black text-lg focus:outline-none focus:ring-1 focus:ring-blue-500/50 text-center transition-all focus:bg-white/10"
                                                         min={0} max={255}
                                                     />
                                                 </div>

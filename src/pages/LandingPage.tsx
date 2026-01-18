@@ -329,6 +329,7 @@ export default function LandingPage() {
                                 <SpotlightCard
                                     className="h-full border-white/10 bg-white/[0.02] hover:bg-white/[0.04] p-8 cursor-pointer"
                                     spotlightColor="rgba(59, 130, 246, 0.15)"
+                                    onClick={() => navigate(`/category/${cat.id}`)}
                                 >
                                     <div className="relative z-10">
                                         <div className={cn(
@@ -357,13 +358,12 @@ export default function LandingPage() {
                                             )}
                                         </div>
 
-                                        <Link
-                                            to={`/category/${cat.id}`}
+                                        <div
                                             className="inline-flex items-center gap-2 font-bold text-xs uppercase tracking-[0.2em] group/btn text-primary hover:text-white transition-colors"
                                         >
                                             Explore Category
                                             <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                                        </Link>
+                                        </div>
                                     </div>
                                 </SpotlightCard>
                             </motion.div>

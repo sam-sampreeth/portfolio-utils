@@ -513,12 +513,16 @@ export function OsHomepage() {
                                         </div>
                                     ) : (
                                         state.todos?.map(todo => (
-                                            <div key={todo.id} className={cn("group flex items-center justify-between py-2 px-3 rounded-xl border transition-all", theme.btn)}>
+                                            <div key={todo.id} className={cn("group flex items-center justify-between py-2 px-3 rounded-xl border transition-all",
+                                                currentTheme === 'dark'
+                                                    ? "bg-white/[0.02] border-white/5 hover:bg-white/10 hover:border-white/20"
+                                                    : "bg-white border-black/[0.05] hover:bg-black/5 hover:border-black/10 text-gray-950"
+                                            )}>
                                                 <div className="flex items-center gap-3 w-[85%]">
-                                                    <button onClick={() => toggleTodo(todo.id)} className={cn("shrink-0 transition-all active:scale-90", theme.muted, "hover:text-current")}>
+                                                    <button onClick={() => toggleTodo(todo.id)} className={cn("shrink-0 transition-all active:scale-90", theme.muted, "hover:text-emerald-500")}>
                                                         {todo.completed ? <CheckCircle2 size={14} className="text-emerald-500/60" /> : <Circle size={14} />}
                                                     </button>
-                                                    <span className={cn("text-[11px] font-semibold tracking-wide truncate transition-all w-full", todo.completed ? cn(theme.muted, "line-through") : cn(theme.textMain, "group-hover:text-current"))}>{todo.text}</span>
+                                                    <span className={cn("text-[11px] font-semibold tracking-wide truncate transition-all w-full", todo.completed ? cn(theme.muted, "line-through") : theme.textMain)}>{todo.text}</span>
                                                 </div>
                                                 <button onClick={() => removeTodo(todo.id)} className="opacity-0 group-hover:opacity-100 text-rose-500/30 hover:text-rose-500 transition-all"><X size={12} /></button>
                                             </div>

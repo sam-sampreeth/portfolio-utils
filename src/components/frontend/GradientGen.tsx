@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Wand2, Copy, Plus, Trash2, Shuffle } from "lucide-react";
+import { Blend as Wand2, Copy, Plus, Trash2, Shuffle } from "lucide-react";
 import toast from "react-hot-toast";
 
 type GradientType = "linear" | "radial";
@@ -130,16 +130,16 @@ export function GradientGen() {
                 {/* Controls Sidebar */}
                 <div className="w-full lg:col-span-5 space-y-8">
                     {/* Main Controls */}
-                    <div className="p-6 rounded-[2rem] bg-black/40 border border-white/10 space-y-6">
+                    <div className="p-6 rounded-[2rem] bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 border border-white/20 space-y-6">
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-3">
-                                <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Type</label>
-                                <div className="flex bg-black/40 p-1 rounded-xl border border-white/5">
+                                <label className="text-[10px] font-black uppercase tracking-widest text-white/60">Type</label>
+                                <div className="flex bg-black/40 p-1 rounded-xl border border-white/10">
                                     {(["linear", "radial"] as const).map((t) => (
                                         <button
                                             key={t}
                                             onClick={() => setType(t)}
-                                            className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase transition-all ${type === t ? "bg-white/10 text-white shadow-sm" : "text-white/30 hover:text-white/60"
+                                            className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase transition-all ${type === t ? "bg-blue-500/20 text-blue-400 shadow-sm border border-blue-500/20" : "text-white/30 hover:text-white/60"
                                                 }`}
                                         >
                                             {t}
@@ -150,7 +150,7 @@ export function GradientGen() {
 
                             {type === "linear" && (
                                 <div className="space-y-3">
-                                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Angle ({angle}°)</label>
+                                    <label className="text-[10px] font-black uppercase tracking-widest text-white/60">Angle ({angle}°)</label>
                                     <div className="flex items-center h-[42px] px-2">
                                         <input
                                             type="range"
@@ -168,7 +168,7 @@ export function GradientGen() {
                         {/* Color Stops */}
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">
-                                <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Color Stops</label>
+                                <label className="text-[10px] font-black uppercase tracking-widest text-white/60">Color Stops</label>
                                 <button
                                     onClick={addStop}
                                     className="text-[10px] font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 flex items-center gap-1 bg-blue-500/10 px-2 py-1 rounded-lg hover:bg-blue-500/20 transition-colors"
@@ -179,7 +179,7 @@ export function GradientGen() {
 
                             <div className="space-y-3 max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
                                 {stops.map((stop) => (
-                                    <div key={stop.id} className="flex items-center gap-3 p-3 bg-white/5 rounded-xl group border border-transparent hover:border-white/10 transition-colors">
+                                    <div key={stop.id} className="flex items-center gap-3 p-3 bg-white/5 rounded-xl group border border-white/5 hover:border-white/20 transition-colors">
                                         <div className="relative w-10 h-10 rounded-full overflow-hidden shadow-sm border border-white/10 shrink-0">
                                             <input
                                                 type="color"
@@ -189,7 +189,7 @@ export function GradientGen() {
                                             />
                                         </div>
                                         <div className="flex-1 space-y-1">
-                                            <div className="flex justify-between text-xs text-white/50 font-medium">
+                                            <div className="flex justify-between text-xs text-white/70 font-medium">
                                                 <span>{stop.color.toUpperCase()}</span>
                                                 <span>{stop.position}%</span>
                                             </div>
@@ -199,7 +199,7 @@ export function GradientGen() {
                                                 max="100"
                                                 value={stop.position}
                                                 onChange={(e) => updateStop(stop.id, { position: Number(e.target.value) })}
-                                                className="w-full accent-white h-1 bg-white/10 rounded-full appearance-none cursor-pointer"
+                                                className="w-full accent-blue-400 h-1 bg-white/10 rounded-full appearance-none cursor-pointer"
                                             />
                                         </div>
                                         {stops.length > 2 && (
@@ -218,7 +218,7 @@ export function GradientGen() {
 
                     {/* Popular Gradients */}
                     <div className="space-y-4">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-white/40 px-1">Popular Presets</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-white/60 px-1">Popular Presets</label>
                         <div className="grid grid-cols-4 gap-3">
                             {POPULAR_GRADIENTS.map((preset) => (
                                 <button
@@ -232,7 +232,7 @@ export function GradientGen() {
                                             background: generateCSS(preset.type as GradientType, preset.angle, preset.stops)
                                         }}
                                     />
-                                    <p className="text-[10px] font-medium text-center text-white/40 group-hover:text-white transition-colors truncate">
+                                    <p className="text-[10px] font-medium text-center text-white/60 group-hover:text-white transition-colors truncate">
                                         {preset.name}
                                     </p>
                                 </button>

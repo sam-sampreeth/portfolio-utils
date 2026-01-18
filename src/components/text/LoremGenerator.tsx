@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FileText, Copy, RefreshCw, AlignLeft } from "lucide-react";
+import { Copy, RefreshCw, AlignLeft } from "lucide-react";
 import toast from "react-hot-toast";
 
 const SAMPLE_WORDS = [
@@ -19,8 +19,8 @@ export const LoremGenerator = () => {
     const [generatedText, setGeneratedText] = useState("");
 
     // Static classes for Black & Blue Premium UI
-    const staticBgClass = "bg-[#0a0a0a]";
-    const staticBorderClass = "border-white/10";
+    const staticBgClass = "bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20";
+    const staticBorderClass = "border-white/20";
     const staticTextMain = "text-white";
     const staticTextMuted = "text-white/50";
 
@@ -104,7 +104,7 @@ export const LoremGenerator = () => {
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                     <div className="w-14 h-14 rounded-[1.25rem] bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
-                        <FileText size={28} />
+                        <AlignLeft size={28} />
                     </div>
                     <div>
                         <h2 className={`text-3xl font-black tracking-tight ${staticTextMain}`}>Lorem Ipsum Generator</h2>
@@ -118,9 +118,9 @@ export const LoremGenerator = () => {
                 <div className="lg:col-span-2 space-y-4">
                     <div className="relative group min-h-[500px] h-full">
                         <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-[2rem] blur opacity-20 group-hover:opacity-30 transition duration-500"></div>
-                        <div className={`relative bg-[#0a0a0a] border-white/10 rounded-[1.8rem] border p-1 h-full flex flex-col transition-colors duration-300`}>
+                        <div className={`relative bg-[#0a0a0a] border-white/20 rounded-[1.8rem] border p-1 h-full flex flex-col transition-colors duration-300 shadow-2xl`}>
                             {/* Toolbar */}
-                            <div className={`flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#0a0a0a] rounded-t-[1.5rem] z-10 sticky top-0`}>
+                            <div className={`flex items-center justify-between px-6 py-4 border-b border-white/10 bg-black/20 rounded-t-[1.5rem] z-10 sticky top-0`}>
                                 <div className="text-sm font-medium opacity-50 flex items-center gap-4">
                                     <span>{generatedText.length} chars</span>
                                 </div>
@@ -145,7 +145,7 @@ export const LoremGenerator = () => {
                             <textarea
                                 value={generatedText}
                                 readOnly
-                                className="flex-1 w-full bg-transparent p-6 resize-none focus:outline-none text-lg leading-relaxed text-white/90 font-serif whitespace-pre-wrap cursor-text"
+                                className="flex-1 w-full bg-transparent p-6 resize-none focus:outline-none text-lg leading-relaxed text-white/90 font-sans whitespace-pre-wrap cursor-text"
                             />
                         </div>
                     </div>
@@ -183,13 +183,13 @@ export const LoremGenerator = () => {
                                             onClick={() => setUnit('sentences')}
                                             className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all ${unit === 'sentences' ? 'bg-blue-600 text-white shadow-lg' : 'text-white/50 hover:text-white'}`}
                                         >
-                                            sentences
+                                            Sentences
                                         </button>
                                         <button
                                             onClick={() => setUnit('words')}
                                             className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all ${unit === 'words' ? 'bg-blue-600 text-white shadow-lg' : 'text-white/50 hover:text-white'}`}
                                         >
-                                            words
+                                            Words
                                         </button>
                                     </div>
                                 </div>
@@ -224,7 +224,7 @@ export const LoremGenerator = () => {
                     <div className="bg-blue-500/10 rounded-[1.5rem] border border-blue-500/20 p-6">
                         <div className="flex gap-3">
                             <div className="p-2 bg-blue-500/20 rounded-lg h-fit text-blue-400">
-                                <FileText size={20} />
+                                <AlignLeft size={20} />
                             </div>
                             <div className="space-y-1">
                                 <h4 className="font-bold text-blue-100">Did you know?</h4>

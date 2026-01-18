@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Terminal, AlertTriangle, CheckCircle2, Flag } from "lucide-react";
+import { Regex, AlertTriangle, CheckCircle2, Flag } from "lucide-react";
 import Editor, { type OnMount } from "@monaco-editor/react";
 import * as monaco from "monaco-editor";
 
@@ -112,10 +112,10 @@ export function RegexTester() {
             <div className="lg:col-span-2 space-y-6">
                 {/* Header & Controls */}
                 {/* Header & Controls */}
-                <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-6">
+                <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 border border-white/20 space-y-6 shadow-xl">
                     <div className="flex items-center gap-3 mb-6">
                         <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400">
-                            <Terminal className="w-5 h-5" />
+                            <Regex className="w-5 h-5" />
                         </div>
                         <div>
                             <h3 className="font-bold text-lg">Regex Tester</h3>
@@ -129,7 +129,7 @@ export function RegexTester() {
                             <Input
                                 value={regexPattern}
                                 onChange={(e) => setRegexPattern(e.target.value)}
-                                className={`pl-8 pr-16 font-mono text-lg h-14 bg-black/20 border-white/10 rounded-xl ${error ? 'border-red-500/50 focus-visible:ring-red-500/50' : 'focus-visible:ring-blue-500/50'}`}
+                                className={`pl-8 pr-16 font-mono text-lg h-14 bg-black/40 border-white/10 rounded-xl ${error ? 'border-red-500/50 focus-visible:ring-red-500/50' : 'focus-visible:ring-blue-500/50'}`}
                                 placeholder="pattern"
                             />
                             <div className="absolute right-4 text-white/40 font-mono text-lg select-none">/{regexFlags}</div>
@@ -178,7 +178,7 @@ export function RegexTester() {
                 </div>
 
                 {/* Editor Area */}
-                <div className="h-[500px] border border-white/10 rounded-3xl overflow-hidden bg-[#1e1e1e]">
+                <div className="h-[500px] border border-white/20 rounded-3xl overflow-hidden bg-[#1e1e1e] shadow-xl">
                     <Editor
                         height="100%"
                         defaultLanguage="plaintext"
@@ -203,7 +203,7 @@ export function RegexTester() {
 
             {/* Sidebar Stats */}
             <div className="space-y-6">
-                <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/10 h-full">
+                <div className="p-6 rounded-3xl bg-black/40 border border-white/10 h-full">
                     <h4 className="font-bold mb-6 flex items-center gap-2">
                         <CheckCircle2 size={18} className="text-blue-400" />
                         Matches found: <span className="text-white">{matches.length}</span>

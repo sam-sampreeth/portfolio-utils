@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Timer as TimerIcon, Play, Pause, RotateCcw, Plus, Trash2 } from "lucide-react";
+import { Hourglass as TimerIcon, Play, Pause, RotateCcw, Plus, Trash2 } from "lucide-react";
 import confetti from "canvas-confetti";
 
 interface Preset {
@@ -16,6 +16,9 @@ const DEFAULT_PRESETS: Preset[] = [
 
 function ScrollPicker({ max, value, onChange, label }: { max: number, value: number, onChange: (v: number) => void, label: string }) {
     const scrollRef = useRef<HTMLDivElement>(null);
+    const isDragging = useRef(false);
+    const startY = useRef(0);
+    const startScrollTop = useRef(0);
     const itemHeight = 40;
     const items = Array.from({ length: max + 1 }, (_, i) => i);
 
@@ -26,16 +29,76 @@ function ScrollPicker({ max, value, onChange, label }: { max: number, value: num
     }, []);
 
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-        const index = Math.round(e.currentTarget.scrollTop / itemHeight);
-        if (index !== value && index >= 0 && index <= max) {
+        if (!isDragging.current) {
+            const index = Math.round(e.currentTarget.scrollTop / itemHeight);
+            if (index !== value && index >= 0 && index <= max) {
+                onChange(index);
+            }
+        }
+    };
+
+    // Custom Wheel Handler to prevent skipping
+    const handleWheel = (e: React.WheelEvent) => {
+        // e.preventDefault(); // React synthetic events might not support this easily for passive
+        if (scrollRef.current) {
+            // Dampen the scroll speed: 1 delta unit = 0.5 pixels
+            const delta = e.deltaY * 0.2;
+            scrollRef.current.scrollTop += delta;
+
+            // Update value immediately
+            const index = Math.round(scrollRef.current.scrollTop / itemHeight);
+            if (index !== value && index >= 0 && index <= max) {
+                onChange(index);
+            }
+        }
+    };
+
+    // Drag Handlers
+    const handleMouseDown = (e: React.MouseEvent) => {
+        isDragging.current = true;
+        startY.current = e.clientY;
+        if (scrollRef.current) {
+            startScrollTop.current = scrollRef.current.scrollTop;
+            scrollRef.current.style.scrollSnapType = 'none'; // Disable snap while dragging
+            document.body.style.cursor = 'grabbing';
+        }
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+        if (!isDragging.current || !scrollRef.current) return;
+        const dy = e.clientY - startY.current;
+        scrollRef.current.scrollTop = startScrollTop.current - dy;
+
+        const index = Math.round(scrollRef.current.scrollTop / itemHeight);
+        if (index >= 0 && index <= max) {
             onChange(index);
         }
+    };
+
+    const handleMouseUp = () => {
+        isDragging.current = false;
+        if (scrollRef.current) {
+            scrollRef.current.style.scrollSnapType = ''; // Restore snap
+            // Smooth snap to nearest
+            const finalIndex = Math.round(scrollRef.current.scrollTop / itemHeight);
+            scrollRef.current.scrollTo({ top: finalIndex * itemHeight, behavior: 'smooth' });
+            onChange(finalIndex);
+            document.body.style.cursor = '';
+        }
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
     };
 
     return (
         <div className="flex flex-col items-center flex-1 min-w-[60px]">
             <span className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-2">{label}</span>
-            <div className="relative h-[120px] w-full overflow-hidden">
+            <div
+                className="relative h-[120px] w-full overflow-hidden cursor-grab active:cursor-grabbing"
+                onMouseDown={handleMouseDown}
+                onWheel={handleWheel}
+            >
                 {/* Overlay masks for gradient effect */}
                 <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent z-10 pointer-events-none" />
                 <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/60 to-transparent z-10 pointer-events-none" />
@@ -46,14 +109,14 @@ function ScrollPicker({ max, value, onChange, label }: { max: number, value: num
                 <div
                     ref={scrollRef}
                     onScroll={handleScroll}
-                    className="h-full overflow-y-auto snap-y snap-mandatory no-scrollbar scroll-smooth relative z-10"
+                    className="h-full overflow-y-auto snap-y snap-mandatory no-scrollbar relative z-10"
                     style={{ scrollbarWidth: 'none' }}
                 >
-                    <div className="py-10"> {/* Padding to allow first and last items to center */}
+                    <div className="py-10">
                         {items.map((i) => (
                             <div
                                 key={i}
-                                className={`h-10 flex items-center justify-center snap-center text-xl font-mono transition-colors duration-200 ${value === i ? "text-blue-400 font-bold scale-110" : "text-white/20"
+                                className={`h-10 flex items-center justify-center snap-center text-xl font-mono transition-all duration-200 select-none ${value === i ? "text-blue-400 font-bold scale-125" : "text-white/20 scale-90"
                                     }`}
                             >
                                 {i.toString().padStart(2, '0')}
@@ -287,8 +350,8 @@ export function Timers() {
                                         key={emoji}
                                         onClick={() => setCustomIcon(emoji)}
                                         className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${customIcon === emoji
-                                                ? "bg-blue-500/20 border border-blue-500/50 scale-110"
-                                                : "bg-white/5 border border-transparent hover:bg-white/10"
+                                            ? "bg-blue-500/20 border border-blue-500/50 scale-110"
+                                            : "bg-white/5 border border-transparent hover:bg-white/10"
                                             }`}
                                     >
                                         <span className="text-base">{emoji}</span>

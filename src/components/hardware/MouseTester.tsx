@@ -129,6 +129,21 @@ export function MouseTester() {
         setTimeout(() => setMouseState(prev => ({ ...prev, doubleClick: false })), 200);
     }, []);
 
+    const testAreaRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const element = testAreaRef.current;
+        if (!element) return;
+
+        const onWheel = (e: WheelEvent) => {
+            e.preventDefault();
+            handleWheel(e);
+        };
+
+        element.addEventListener("wheel", onWheel, { passive: false });
+        return () => element.removeEventListener("wheel", onWheel);
+    }, [handleWheel]);
+
     const resetTests = () => {
         setClickHistory([]);
         setScrollCount(0);
@@ -181,17 +196,25 @@ export function MouseTester() {
             </div>
 
             {/* Main Interactive Area */}
-            <div
-                className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[500px]"
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-                onMouseMove={handleMouseMove}
-                onDoubleClick={handleDoubleClick}
-                onContextMenu={(e) => e.preventDefault()}
-                onWheel={(e) => handleWheel(e.nativeEvent)}
-            >
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[500px]">
                 {/* Visual Mouse Center */}
-                <div className="lg:col-span-8 h-full p-8 md:p-12 rounded-[2.5rem] bg-gradient-to-br from-white/[0.03] to-transparent border border-white/10 shadow-2xl flex items-center justify-center relative overflow-hidden group">
+                <div
+                    ref={testAreaRef}
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={handleMouseUp}
+                    onMouseMove={handleMouseMove}
+                    onDoubleClick={handleDoubleClick}
+                    onContextMenu={(e) => e.preventDefault()}
+                    className="lg:col-span-8 h-full p-8 md:p-12 rounded-[2.5rem] bg-gradient-to-br from-white/[0.03] to-transparent border border-white/10 shadow-2xl flex items-center justify-center relative overflow-hidden group"
+                >
+                    <div className="absolute top-6 left-8 flex flex-col gap-1 select-none pointer-events-none z-20">
+                        <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                            <span className="text-[10px] font-black uppercase tracking-widest text-blue-400">Test Zone</span>
+                        </div>
+                        <span className="text-xs font-bold text-white/40">Perform clicks, scrolls & movements here</span>
+                    </div>
+
                     <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500 via-transparent to-transparent group-hover:opacity-[0.05] transition-opacity duration-1000" />
 
                     <div className="relative w-64 h-[400px] bg-black/40 rounded-[6rem] border-8 border-white/5 shadow-[0_0_100px_rgba(0,0,0,0.5)] flex flex-col items-center pt-1 overflow-hidden shrink-0">
@@ -273,15 +296,15 @@ export function MouseTester() {
 
                 {/* Info & Logs Panel */}
                 <div className="lg:col-span-4 h-[500px]">
-                    <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-600 to-blue-800 border border-white/10 shadow-2xl relative overflow-hidden group h-full">
+                    <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 border border-white/10 shadow-2xl relative overflow-hidden group h-full">
                         <div className="absolute top-0 right-0 p-8 opacity-10 -rotate-12 transform group-hover:rotate-0 transition-transform duration-700 pointer-events-none">
                             <Crosshair size={140} />
                         </div>
 
                         <div className="relative z-10 flex flex-col h-full overflow-hidden">
                             <div className="flex items-center gap-2 mb-8 shrink-0">
-                                <HistoryIcon size={16} className="text-blue-200" />
-                                <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white">Event Log</h3>
+                                <HistoryIcon size={16} className="text-blue-400/50" />
+                                <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Event Log</h3>
                             </div>
 
                             <div className="flex-1 min-h-0 space-y-3 overflow-y-auto custom-scrollbar pr-2">

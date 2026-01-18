@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { BookOpen, Copy, Trash2, Download, Save, AlertCircle } from "lucide-react";
+import { StickyNote, Copy, Trash2, Download, Save, AlertCircle } from "lucide-react";
 import toast from "react-hot-toast";
 import {
     Dialog,
@@ -185,7 +185,7 @@ export const QuickNotepad = () => {
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                     <div className="w-14 h-14 rounded-[1.25rem] bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
-                        <BookOpen size={28} />
+                        <StickyNote size={28} />
                     </div>
                     <div>
                         <h2 className={`text-3xl font-black tracking-tight ${staticTextMain}`}>Quick Notepad</h2>

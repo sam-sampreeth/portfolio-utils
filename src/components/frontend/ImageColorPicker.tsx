@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Palette, Copy, Image as ImageIcon, X } from "lucide-react";
+import { Pipette, Copy, Image as ImageIcon, X } from "lucide-react";
 import { FileUpload } from "@/components/ui/file-upload";
 import toast from "react-hot-toast";
 
@@ -268,9 +268,9 @@ export function ImageColorPicker() {
 
                     {/* Sidebar: Results */}
                     <div className="lg:col-span-4 space-y-6 lg:order-2">
-                        <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-600 to-blue-800 border border-white/10 shadow-2xl relative overflow-hidden h-full min-h-[400px]">
+                        <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 border border-white/20 shadow-2xl relative overflow-hidden h-full min-h-[400px]">
                             <div className="absolute top-0 right-0 p-8 opacity-10 -rotate-12">
-                                <Palette size={140} />
+                                <Pipette size={140} />
                             </div>
 
                             <div className="relative z-10 flex flex-col h-full">
@@ -294,9 +294,9 @@ export function ImageColorPicker() {
                                         <div className="space-y-4">
                                             <div
                                                 onClick={() => copyToClipboard(color, "HEX")}
-                                                className="group relative p-4 rounded-2xl bg-black/40 border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all cursor-pointer select-none active:scale-[0.98]"
+                                                className="group relative p-4 rounded-2xl bg-black/40 border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all cursor-pointer select-none active:scale-[0.98]"
                                             >
-                                                <label className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1 block group-hover:text-white/60 transition-colors">HEX</label>
+                                                <label className="text-[10px] font-black uppercase tracking-widest text-white/60 mb-1 block group-hover:text-white/80 transition-colors">HEX</label>
                                                 <div className="text-white font-mono text-xl font-bold uppercase">{color}</div>
                                                 <div className="absolute top-4 right-4 text-white/20 group-hover:text-white transition-colors">
                                                     <Copy size={16} />
@@ -306,9 +306,9 @@ export function ImageColorPicker() {
                                             {rgb && (
                                                 <div
                                                     onClick={() => copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, "RGB")}
-                                                    className="group relative p-4 rounded-2xl bg-black/40 border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all cursor-pointer select-none active:scale-[0.98]"
+                                                    className="group relative p-4 rounded-2xl bg-black/40 border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all cursor-pointer select-none active:scale-[0.98]"
                                                 >
-                                                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1 block group-hover:text-white/60 transition-colors">RGB</label>
+                                                    <label className="text-[10px] font-black uppercase tracking-widest text-white/60 mb-1 block group-hover:text-white/80 transition-colors">RGB</label>
                                                     <div className="text-white font-mono text-xl font-bold">rgb({rgb.r}, {rgb.g}, {rgb.b})</div>
                                                     <div className="absolute top-4 right-4 text-white/20 group-hover:text-white transition-colors">
                                                         <Copy size={16} />
@@ -319,9 +319,9 @@ export function ImageColorPicker() {
                                             {hsl && (
                                                 <div
                                                     onClick={() => copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, "HSL")}
-                                                    className="group relative p-4 rounded-2xl bg-black/40 border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all cursor-pointer select-none active:scale-[0.98]"
+                                                    className="group relative p-4 rounded-2xl bg-black/40 border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all cursor-pointer select-none active:scale-[0.98]"
                                                 >
-                                                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1 block group-hover:text-white/60 transition-colors">HSL</label>
+                                                    <label className="text-[10px] font-black uppercase tracking-widest text-white/60 mb-1 block group-hover:text-white/80 transition-colors">HSL</label>
                                                     <div className="text-white font-mono text-xl font-bold">hsl({hsl.h}, {hsl.s}%, {hsl.l}%)</div>
                                                     <div className="absolute top-4 right-4 text-white/20 group-hover:text-white transition-colors">
                                                         <Copy size={16} />

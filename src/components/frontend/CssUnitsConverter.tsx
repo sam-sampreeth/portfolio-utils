@@ -1,5 +1,6 @@
+
 import { useState, useEffect } from "react";
-import { RefreshCw, Copy, Check } from "lucide-react";
+import { ArrowLeftRight, Check, Copy, RefreshCw } from "lucide-react";
 import toast from "react-hot-toast";
 
 export function CssUnitsConverter() {
@@ -96,17 +97,17 @@ export function CssUnitsConverter() {
         onCopy: () => void
     }) => (
         <div className="space-y-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-white/30">{label}</label>
+            <label className="text-[10px] font-black uppercase tracking-widest text-white/60">{label}</label>
             <div className="relative group">
                 <input
                     type="text"
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
-                    className="w-full h-12 bg-black/20 border border-white/5 rounded-xl px-4 pr-12 text-sm text-white focus:outline-none focus:ring-1 focus:ring-primary transition-all font-mono"
+                    className="w-full h-12 bg-black/40 border border-white/20 rounded-xl px-4 pr-12 text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all font-mono placeholder-white/20"
                     placeholder="0"
                 />
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-                    <span className="text-white/20 text-xs font-bold pointer-events-none">{unit}</span>
+                    <span className="text-white/40 text-xs font-bold pointer-events-none">{unit}</span>
                     {value && (
                         <button
                             onClick={onCopy}
@@ -125,7 +126,7 @@ export function CssUnitsConverter() {
             <div className="grid grid-cols-1 lg:grid-cols-11 gap-8">
                 {/* Configuration Panel (Sidebar) */}
                 <div className="lg:col-span-4 space-y-6 lg:order-2">
-                    <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-600 to-blue-800 border border-white/10 shadow-2xl relative overflow-hidden group">
+                    <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 border border-white/20 shadow-2xl relative overflow-hidden group">
                         <div className="absolute top-0 right-0 p-8 opacity-10 -rotate-12 transform group-hover:rotate-0 transition-transform duration-700">
                             <RefreshCw size={140} />
                         </div>
@@ -142,10 +143,10 @@ export function CssUnitsConverter() {
                                             type="number"
                                             value={baseSize}
                                             onChange={(e) => setBaseSize(parseFloat(e.target.value) || 16)}
-                                            className="w-full h-12 bg-black/20 border border-white/20 rounded-2xl px-4 text-white font-black text-lg focus:outline-none focus:ring-1 focus:ring-white/50 text-center placeholder-white/40"
+                                            className="w-full h-12 bg-black/40 border border-white/20 rounded-2xl px-4 text-white font-black text-lg focus:outline-none focus:ring-1 focus:ring-blue-500/50 text-center placeholder-white/20"
                                             placeholder="16"
                                         />
-                                        <p className="text-[10px] text-white/80 font-bold leading-tight">
+                                        <p className="text-[10px] text-white/60 font-bold leading-tight">
                                             Normally 16px. Used to calculate REM/EM values.
                                         </p>
                                     </div>
@@ -155,35 +156,35 @@ export function CssUnitsConverter() {
                                             type="number"
                                             value={designWidth}
                                             onChange={(e) => setDesignWidth(parseFloat(e.target.value) || 1920)}
-                                            className="w-full h-12 bg-black/20 border border-white/20 rounded-2xl px-4 text-white font-black text-lg focus:outline-none focus:ring-1 focus:ring-white/50 text-center placeholder-white/40"
+                                            className="w-full h-12 bg-black/40 border border-white/20 rounded-2xl px-4 text-white font-black text-lg focus:outline-none focus:ring-1 focus:ring-blue-500/50 text-center placeholder-white/20"
                                             placeholder="1920"
                                         />
-                                        <p className="text-[10px] text-white/80 font-bold leading-tight">
+                                        <p className="text-[10px] text-white/60 font-bold leading-tight">
                                             Used to calculate Viewport Width (VW).
                                         </p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="pt-8 border-t border-white/20">
+                            <div className="pt-8 border-t border-white/10">
                                 <div className="text-[10px] font-black uppercase tracking-widest text-white/60 mb-3">
                                     Quick Reference
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 text-sm">
-                                    <div className="flex justify-between p-3 rounded-xl bg-white/10 border border-white/10">
-                                        <span className="text-white/90 font-bold">16px</span>
+                                    <div className="flex justify-between p-3 rounded-xl bg-white/5 border border-white/10">
+                                        <span className="text-white/80 font-bold">16px</span>
                                         <span className="font-mono font-black text-white">1rem</span>
                                     </div>
-                                    <div className="flex justify-between p-3 rounded-xl bg-white/10 border border-white/10">
-                                        <span className="text-white/90 font-bold">24px</span>
+                                    <div className="flex justify-between p-3 rounded-xl bg-white/5 border border-white/10">
+                                        <span className="text-white/80 font-bold">24px</span>
                                         <span className="font-mono font-black text-white">1.5rem</span>
                                     </div>
-                                    <div className="flex justify-between p-3 rounded-xl bg-white/10 border border-white/10">
-                                        <span className="text-white/90 font-bold">32px</span>
+                                    <div className="flex justify-between p-3 rounded-xl bg-white/5 border border-white/10">
+                                        <span className="text-white/80 font-bold">32px</span>
                                         <span className="font-mono font-black text-white">2rem</span>
                                     </div>
-                                    <div className="flex justify-between p-3 rounded-xl bg-white/10 border border-white/10">
-                                        <span className="text-white/90 font-bold">8px</span>
+                                    <div className="flex justify-between p-3 rounded-xl bg-white/5 border border-white/10">
+                                        <span className="text-white/80 font-bold">8px</span>
                                         <span className="font-mono font-black text-white">0.5rem</span>
                                     </div>
                                 </div>
@@ -197,7 +198,7 @@ export function CssUnitsConverter() {
                     <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-white/[0.03] to-transparent border border-white/10 shadow-2xl space-y-8">
                         <div className="flex items-center gap-4 mb-2">
                             <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 border border-blue-500/20">
-                                <RefreshCw className="w-6 h-6" />
+                                <ArrowLeftRight className="w-6 h-6" />
                             </div>
                             <div>
                                 <h2 className="text-2xl font-black text-white tracking-tight">Converter</h2>

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import {
     MousePointer2, Square, Circle, Type, Pencil, Image as ImageIcon,
-    Eraser, Undo2, Redo2, Download, Lock, Unlock,
+    PenTool, Eraser, Undo2, Redo2, Download, Lock, Unlock,
     Trash2, Maximize, Minimize, Grid, Hand, ZoomIn, ZoomOut, RotateCcw,
     X
 } from 'lucide-react';
@@ -679,7 +679,7 @@ export const QuickWhiteboard = () => {
                     {!isFullscreen && (
                         <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-[1rem] bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
-                                <Pencil size={24} />
+                                <PenTool size={24} />
                             </div>
                             <div>
                                 <h2 className={`text-2xl font-black tracking-tight ${bgConfig.dark ? 'text-white' : 'text-black'}`}>Quick Whiteboard</h2>

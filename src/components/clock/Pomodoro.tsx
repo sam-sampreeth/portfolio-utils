@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, Pause, RotateCcw, SkipForward, Settings2, Volume2, VolumeX, X, Maximize2, Minimize2, Expand } from "lucide-react";
+import { Play, Pause, RotateCcw, SkipForward, Settings2, Volume2, VolumeX, X, Maximize2, Minimize2, Expand, Clock as ClockIcon, ClockFading } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type SessionType = "work" | "shortBreak" | "longBreak";
@@ -180,19 +180,19 @@ export function Pomodoro() {
                     animate={{
                         scale: [1, 1.2, 1],
                         rotate: [0, 90, 0],
-                        filter: ["hue-rotate(0deg)", "hue-rotate(60deg)", "hue-rotate(0deg)"]
+                        filter: ["hue-rotate(0deg)", "hue-rotate(30deg)", "hue-rotate(0deg)"]
                     }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute -top-[20%] -right-[20%] w-[80%] h-[80%] rounded-full bg-indigo-500/20 blur-[120px]"
+                    className="absolute -top-[20%] -right-[20%] w-[80%] h-[80%] rounded-full bg-blue-600/20 blur-[120px]"
                 />
                 <motion.div
                     animate={{
                         scale: [1.2, 1, 1.2],
                         rotate: [0, -90, 0],
-                        filter: ["hue-rotate(0deg)", "hue-rotate(-60deg)", "hue-rotate(0deg)"]
+                        filter: ["hue-rotate(0deg)", "hue-rotate(-30deg)", "hue-rotate(0deg)"]
                     }}
                     transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                    className="absolute -bottom-[20%] -left-[20%] w-[80%] h-[80%] rounded-full bg-rose-500/20 blur-[120px]"
+                    className="absolute -bottom-[20%] -left-[20%] w-[80%] h-[80%] rounded-full bg-sky-600/20 blur-[120px]"
                 />
             </div>
 
@@ -205,7 +205,7 @@ export function Pomodoro() {
                 {/* Header */}
                 <div className="flex items-center justify-between p-8 z-20 relative">
                     <div className="flex items-center gap-6">
-                        <span className="text-xl font-['Bebas_Neue'] tracking-wider text-white/80 uppercase hidden md:inline-block">
+                        <span className="text-xl font-bold tracking-wider text-white/80 uppercase hidden md:inline-block">
                             Utils / Pomodoro
                         </span>
 
@@ -263,7 +263,7 @@ export function Pomodoro() {
                                     <motion.h1
                                         key={timeLeft}
                                         className={cn(
-                                            "font-['Bebas_Neue'] leading-none text-white text-center tabular-nums tracking-wide drop-shadow-2xl transition-all duration-300",
+                                            "font-bold leading-none text-white text-center tabular-nums tracking-tighter drop-shadow-2xl transition-all duration-300",
                                             isMaximized ? "text-[min(25vw,30vh)]" : "text-[8rem] sm:text-[10rem] md:text-[12rem] lg:text-[14rem]"
                                         )}
                                         initial={{ y: 20 }}
@@ -273,7 +273,7 @@ export function Pomodoro() {
                                     </motion.h1>
 
                                     <motion.p
-                                        className="text-center font-['Bebas_Neue'] text-2xl md:text-4xl text-white/30 tracking-[0.2em] uppercase mt-[-10px] md:mt-[-20px]"
+                                        className="text-center font-bold text-2xl md:text-4xl text-white/30 tracking-[0.2em] uppercase mt-[-10px] md:mt-[-20px]"
                                         animate={{ opacity: isRunning ? [0.3, 0.6, 0.3] : 0.3 }}
                                         transition={{ duration: 2, repeat: Infinity }}
                                     >
@@ -309,7 +309,7 @@ export function Pomodoro() {
                                 transition={{ duration: 0.4 }}
                                 className="w-full max-w-lg bg-black/40 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl"
                             >
-                                <h2 className="text-3xl font-['Bebas_Neue'] tracking-wide text-white mb-8">Configurations</h2>
+                                <h2 className="text-3xl font-bold tracking-wide text-white mb-8">Configurations</h2>
 
                                 <div className="space-y-8">
                                     <div className="space-y-4">
@@ -323,7 +323,7 @@ export function Pomodoro() {
                                                 <div key={key} className="bg-white/5 rounded-2xl p-4 border border-white/5 hover:border-white/10 transition-colors">
                                                     <span className="block text-xs uppercase text-white/40 font-bold tracking-wider mb-2">{label}</span>
                                                     <div className="flex items-center justify-between mb-2">
-                                                        <span className="text-2xl font-['Bebas_Neue'] text-white">{settings[key as keyof PomodoroSettings]}</span>
+                                                        <span className="text-2xl font-bold text-white">{settings[key as keyof PomodoroSettings]}</span>
                                                     </div>
                                                     <input
                                                         type="range" min={min} max={max}
@@ -362,7 +362,7 @@ export function Pomodoro() {
 
                                 <button
                                     onClick={() => setShowSettings(false)}
-                                    className="w-full mt-8 py-4 bg-white text-black font-['Bebas_Neue'] text-xl rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all"
+                                    className="w-full mt-8 py-4 bg-white text-black font-bold text-xl rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all"
                                 >
                                     Save Changes
                                 </button>
@@ -375,12 +375,12 @@ export function Pomodoro() {
                 {!showSettings && (
                     <div className="p-6 flex items-center justify-center gap-12 pb-12">
                         <div className="text-center group">
-                            <h4 className="text-4xl font-['Bebas_Neue'] text-white group-hover:text-rose-400 transition-colors">{completedSessions}</h4>
+                            <h4 className="text-4xl font-bold text-white group-hover:text-blue-400 transition-colors">{completedSessions}</h4>
                             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">Sessions</span>
                         </div>
                         <div className="w-px h-10 bg-white/10" />
                         <div className="text-center group">
-                            <h4 className="text-4xl font-['Bebas_Neue'] text-white group-hover:text-indigo-400 transition-colors">{formatHours(totalFocusTime)}</h4>
+                            <h4 className="text-4xl font-bold text-white group-hover:text-sky-400 transition-colors">{formatHours(totalFocusTime)}</h4>
                             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">Total Focus</span>
                         </div>
                     </div>

@@ -213,6 +213,11 @@ export default function ToolPage() {
                         <p className="text-lg text-white/50 max-w-2xl">
                             {tool.desc}
                         </p>
+                        {tool.id === "clock" && (
+                            <p className="text-xs text-blue-200/50 font-medium pt-2">
+                                Want to compare time live? Visit <Link to="/time/converter" className="text-blue-400 hover:text-blue-300 hover:underline transition-colors">Timezone Converter</Link>
+                            </p>
+                        )}
                     </div>
 
                     <Link

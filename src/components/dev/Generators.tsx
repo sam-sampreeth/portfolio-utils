@@ -24,7 +24,7 @@ export function Generators() {
                 </div>
             </div>
 
-            <div className="p-1 rounded-3xl bg-slate-950/50 border border-blue-500/10 backdrop-blur-xl shadow-2xl shadow-blue-500/5">
+            <div className="p-1 rounded-3xl bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 border border-white/20 backdrop-blur-xl shadow-2xl">
                 <Tabs defaultValue="uuid" className="w-full">
                     <TabsList className="w-full bg-transparent p-1 h-auto flex flex-wrap justify-start gap-1">
                         <TabTrigger value="uuid" icon={Fingerprint} label="UUID" />

@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UNICODE_CATEGORIES } from "@/data/unicodes";
-import { Check, Type, Search, X, Info } from "lucide-react";
+import { Check, Asterisk, Search, X, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 
@@ -30,7 +30,7 @@ export const UnicodeSymbols = () => {
         <div className="max-w-6xl mx-auto space-y-8">
             <div className="flex flex-col items-center text-center space-y-4">
                 <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/20">
-                    <Type className="w-8 h-8 text-white" />
+                    <Asterisk className="w-8 h-8 text-white" />
                 </div>
                 <h2 className="text-3xl font-black tracking-tight text-white">Unicode Symbols</h2>
                 <p className="text-white/60 max-w-lg">
@@ -43,7 +43,7 @@ export const UnicodeSymbols = () => {
             </div>
 
             {/* Main Picker Area */}
-            <div className="bg-[#0a0a0a]/50 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl flex flex-col h-[700px]">
+            <div className="bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-2xl flex flex-col h-[700px]">
 
                 {/* Search Bar */}
                 <div className="relative mb-6 shrink-0">
@@ -52,7 +52,7 @@ export const UnicodeSymbols = () => {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder="Search symbols..."
-                        className="pl-10 pr-10 bg-black/20 border-white/10 text-white placeholder:text-white/20 h-12 rounded-xl focus-visible:ring-offset-0 focus-visible:ring-blue-500/50"
+                        className="pl-10 pr-10 bg-[#0a0a0a] border-white/20 text-white placeholder:text-white/20 h-12 rounded-xl focus-visible:ring-offset-0 focus-visible:ring-blue-500/50 shadow-inner"
                     />
                     {search && (
                         <button

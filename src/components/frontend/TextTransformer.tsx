@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import {
-    Type,
+    CaseUpper,
     ArrowUp,
     ArrowDown,
     ALargeSmall,
@@ -94,14 +94,14 @@ export const TextTransformer = () => {
     const isDark = theme === 'dark';
     // Editor-specific classes (Dynamic)
     const editorBgClass = isDark ? "bg-[#0a0a0a]" : "bg-white";
-    const editorBorderClass = isDark ? "border-white/10" : "border-zinc-200";
+    const editorBorderClass = isDark ? "border-white/20" : "border-zinc-200";
     const editorTextMain = isDark ? "text-white" : "text-zinc-900";
     const editorHoverClass = isDark ? "hover:bg-white/10" : "hover:bg-zinc-100";
     const editorInactiveIconClass = isDark ? "text-white/60" : "text-zinc-500";
 
     // Static classes for Header and Sidebar (Always Dark "Premium")
-    const staticBgClass = "bg-[#0a0a0a]";
-    const staticBorderClass = "border-white/10";
+    const staticBgClass = "bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20";
+    const staticBorderClass = "border-white/20";
     const staticTextMain = "text-white";
     const staticTextMuted = "text-white/50";
 
@@ -113,7 +113,7 @@ export const TextTransformer = () => {
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                     <div className="w-14 h-14 rounded-[1.25rem] bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
-                        <Type size={28} />
+                        <CaseUpper size={28} />
                     </div>
                     <div>
                         <h2 className={`text-3xl font-black tracking-tight ${staticTextMain}`}>Text Transformer</h2>
@@ -258,7 +258,7 @@ export const TextTransformer = () => {
                             </button>
                             <button onClick={() => handleCase('title')} className={`flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group text-left`}>
                                 <span className={`font-medium text-white/80 group-hover:text-white`}>Title Case</span>
-                                <Type size={18} className={`text-white/40 group-hover:text-purple-400`} />
+                                <CaseUpper size={18} className={`text-white/40 group-hover:text-purple-400`} />
                             </button>
                             <button onClick={() => handleCase('sentence')} className={`flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group text-left`}>
                                 <span className="font-medium text-white/80 group-hover:text-white">Sentence case</span>
@@ -270,7 +270,7 @@ export const TextTransformer = () => {
                     <div className="bg-blue-500/10 rounded-[1.5rem] border border-blue-500/20 p-6">
                         <div className="flex gap-3">
                             <div className="p-2 bg-blue-500/20 rounded-lg h-fit text-blue-400">
-                                <Type size={20} />
+                                <CaseUpper size={20} />
                             </div>
                             <div className="space-y-1">
                                 <h4 className="font-bold text-blue-100">Rich Text Mode</h4>

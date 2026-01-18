@@ -45,7 +45,7 @@ export const EmojiPicker = () => {
             </div>
 
             {/* Main Picker Area */}
-            <div className="bg-[#0a0a0a]/50 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl flex flex-col h-[700px]">
+            <div className="bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-2xl flex flex-col h-[700px]">
 
                 {/* Search Bar */}
                 <div className="relative mb-6 shrink-0">
@@ -54,7 +54,7 @@ export const EmojiPicker = () => {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder="Search emojis..."
-                        className="pl-10 pr-10 bg-black/20 border-white/10 text-white placeholder:text-white/20 h-12 rounded-xl focus-visible:ring-offset-0 focus-visible:ring-blue-500/50"
+                        className="pl-10 pr-10 bg-[#0a0a0a] border-white/20 text-white placeholder:text-white/20 h-12 rounded-xl focus-visible:ring-offset-0 focus-visible:ring-blue-500/50 shadow-inner"
                     />
                     {search && (
                         <button

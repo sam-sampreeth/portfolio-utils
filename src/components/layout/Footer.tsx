@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { toolsConfig } from "@/data/tools";
-import { Sparkles, Github, Globe, Mail, ArrowUpRight } from "lucide-react";
+import { Zap, Github, User, Mail, ArrowUpRight } from "lucide-react";
 
 export const Footer = () => {
     return (
@@ -15,7 +15,7 @@ export const Footer = () => {
                     <div className="col-span-1">
                         <Link to="/" className="inline-flex items-center gap-2 mb-6 group">
                             <div className="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center text-white font-bold transform group-hover:rotate-12 transition-transform">
-                                <Sparkles size={18} fill="currentColor" />
+                                <Zap size={18} fill="currentColor" />
                             </div>
                             <span className="text-xl font-black tracking-tight">Utils.</span>
                         </Link>
@@ -38,7 +38,7 @@ export const Footer = () => {
                                 rel="noreferrer"
                                 className="p-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-white/60 hover:text-white"
                             >
-                                <Globe size={20} />
+                                <User size={20} />
                             </a>
                         </div>
                     </div>

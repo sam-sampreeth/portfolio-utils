@@ -9,7 +9,8 @@ import {
     Play,
     RefreshCw,
     ShieldCheck,
-    BarChart3
+    BarChart3,
+    Gauge
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -197,8 +198,8 @@ export function SpeedTest() {
                     <div className="p-4 rounded-2xl bg-white/5 border border-white/5 shadow-sm flex items-center gap-3">
                         <Wifi className="text-blue-400" size={18} />
                         <div className="flex flex-col">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-white/30">Network Engine</span>
-                            <span className="text-sm font-black text-white/60">Sonic Lab 3.0</span>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-white/30">Test Server</span>
+                            <span className="text-sm font-black text-white/60">Cloudflare CDN</span>
                         </div>
                     </div>
                 </div>
@@ -228,18 +229,18 @@ export function SpeedTest() {
                         {status === "idle" ? (
                             <div className="space-y-8">
                                 <div className="p-12 rounded-full bg-blue-600/5 border border-blue-500/10 shadow-[0_0_50px_rgba(59,130,246,0.05)]">
-                                    <Zap size={64} className="text-blue-400/50" />
+                                    <Gauge size={64} className="text-blue-400/50" />
                                 </div>
                                 <div className="space-y-2">
-                                    <h2 className="text-2xl font-black text-white/80 uppercase tracking-tighter">Sonic Speed Test</h2>
-                                    <p className="text-sm text-white/30 font-medium">Measure your real-time network throughput and stability.</p>
+                                    <h2 className="text-2xl font-black text-white/80 uppercase tracking-tighter">Speed Test</h2>
+                                    <p className="text-sm text-white/30 font-medium">Measure your real-time network throughput and latency.</p>
                                 </div>
                                 <Button
                                     onClick={startTest}
                                     className="px-12 py-8 rounded-[2rem] bg-blue-600 hover:bg-blue-500 text-lg font-black uppercase tracking-widest shadow-2xl shadow-blue-600/20 group transition-all active:scale-95"
                                 >
                                     <Play size={20} className="mr-3 fill-current group-hover:scale-110 transition-transform" />
-                                    Initialize Test
+                                    Start Test
                                 </Button>
                             </div>
                         ) : (
@@ -321,7 +322,7 @@ export function SpeedTest() {
 
                 {/* Sidebar Stats */}
                 <div className="lg:col-span-4 space-y-6">
-                    <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-zinc-800 to-black border border-white/10 shadow-2xl h-full flex flex-col">
+                    <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 border border-white/20 shadow-2xl h-full flex flex-col">
                         <div className="flex items-center gap-3 mb-8">
                             <ShieldCheck size={20} className="text-blue-400" />
                             <h3 className="text-sm font-black uppercase tracking-widest text-white/80">Network Intel</h3>
@@ -330,7 +331,7 @@ export function SpeedTest() {
                         <div className="space-y-8 flex-1">
                             {/* Download & Upload Grid */}
                             <div className="space-y-4">
-                                <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Throughput Analysis</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Performance</span>
                                 <div className="grid grid-cols-1 gap-4">
                                     <div className={cn(
                                         "p-6 rounded-3xl border transition-all duration-500",
@@ -370,7 +371,7 @@ export function SpeedTest() {
 
                             {/* Ping & Jitter */}
                             <div className="space-y-4 pt-8 border-t border-white/5">
-                                <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Stability Metrics</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Stability</span>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="bg-white/5 p-4 rounded-2xl border border-white/5 space-y-1">
                                         <div className="flex items-center gap-2 text-amber-400/50">
@@ -393,9 +394,9 @@ export function SpeedTest() {
                                 </div>
                             </div>
 
-                            {/* Lab Diagnostics */}
+                            {/* Connection Details */}
                             <div className="space-y-4 pt-8 border-t border-white/5">
-                                <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Protocol Details</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Connection Details</span>
                                 <div className="space-y-3">
                                     <div className="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5">
                                         <span className="text-[11px] font-black text-white/40">Packet Loss</span>
@@ -412,9 +413,9 @@ export function SpeedTest() {
                         <div className="mt-8 pt-8 border-t border-white/5 flex items-center justify-between text-white/20">
                             <div className="flex items-center gap-2">
                                 <BarChart3 size={14} />
-                                <span className="text-[10px] font-black uppercase tracking-tighter">Diagnostic Analytics</span>
+                                <span className="text-[10px] font-black uppercase tracking-tighter">Analytics</span>
                             </div>
-                            <span className="text-[9px] font-black opacity-50">V3.0.4-STABLE</span>
+                            <span className="text-[9px] font-black opacity-50">v1.0.0</span>
                         </div>
                     </div>
                 </div>

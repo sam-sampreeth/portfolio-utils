@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Copy, Download, ZoomIn, ZoomOut, RotateCcw, FileCode, Sun, Moon, Trash2 } from "lucide-react";
+import { Copy, Download, ZoomIn, ZoomOut, RotateCcw, FileCode, Sun, Moon, Trash2, Code2 } from "lucide-react";
 import { FileUpload } from "@/components/ui/file-upload";
 import toast from "react-hot-toast";
 
@@ -53,7 +53,7 @@ export function SvgViewer() {
             {/* Header */}
             <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-[1.25rem] bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
-                    <FileCode size={28} />
+                    <Code2 size={28} />
                 </div>
                 <div>
                     <h2 className="text-3xl font-black text-white tracking-tight">SVG Viewer</h2>
@@ -112,11 +112,18 @@ export function SvgViewer() {
                                         onChange={handleFileUpload}
                                         accept={{ "image/svg+xml": [".svg"] }}
                                     />
-                                    <div className="mt-4 flex justify-center">
-                                        <button onClick={handlePaste} className="text-xs font-bold text-white/40 hover:text-blue-400 transition-colors uppercase tracking-wider">
-                                            Or Paste SVG Code
-                                        </button>
+                                    <div className="my-6 flex items-center gap-4">
+                                        <div className="h-px bg-white/10 flex-1" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-white/20">OR</span>
+                                        <div className="h-px bg-white/10 flex-1" />
                                     </div>
+                                    <button
+                                        onClick={handlePaste}
+                                        className="w-full py-4 rounded-xl border border-dashed border-white/10 hover:border-blue-500/50 hover:bg-blue-500/10 text-white/40 hover:text-blue-400 transition-all font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 group"
+                                    >
+                                        <Copy size={16} className="group-hover:scale-110 transition-transform" />
+                                        Paste SVG Code from Clipboard
+                                    </button>
                                 </div>
                             </div>
                         ) : (
@@ -132,7 +139,7 @@ export function SvgViewer() {
                 {/* Right Panel: Code */}
                 <div className="flex flex-col gap-4 h-full min-h-[400px] lg:min-h-auto">
                     <div className="flex items-center justify-between p-2">
-                        <span className="text-xs font-bold uppercase tracking-widest text-white/40">Source Code</span>
+                        <span className="text-xs font-bold uppercase tracking-widest text-white/60">Source Code</span>
                         <div className="flex gap-2">
                             <button
                                 onClick={downloadSvg}
@@ -155,7 +162,7 @@ export function SvgViewer() {
                             </button>
                         </div>
                     </div>
-                    <div className="flex-1 bg-black/40 rounded-3xl border border-white/10 overflow-hidden relative group h-full">
+                    <div className="flex-1 bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 rounded-3xl border border-white/20 overflow-hidden relative group h-full shadow-2xl">
                         <textarea
                             value={svgContent}
                             onChange={(e) => setSvgContent(e.target.value)}

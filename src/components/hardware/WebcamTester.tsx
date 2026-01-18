@@ -13,6 +13,13 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 type WebCamStats = {
     fps: number;
@@ -28,10 +35,40 @@ export function WebcamTester() {
     const [isMirrored, setIsMirrored] = useState(true);
     const [showGrid, setShowGrid] = useState(false);
     const [lastSnapshot, setLastSnapshot] = useState<string | null>(null);
+    const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
+    const [selectedDeviceId, setSelectedDeviceId] = useState<string>("");
 
     const videoRef = useRef<HTMLVideoElement>(null);
     const fpsTimerRef = useRef<number>(0);
     const frameCountRef = useRef<number>(0);
+
+    // Enumerate devices
+    const getDevices = useCallback(async () => {
+        try {
+            const deviceInfos = await navigator.mediaDevices.enumerateDevices();
+            const videoInputs = deviceInfos.filter(d => d.kind === 'videoinput');
+            setDevices(videoInputs);
+            // Set default if not set
+            if (!selectedDeviceId && videoInputs.length > 0) {
+                setSelectedDeviceId(videoInputs[0].deviceId);
+            }
+        } catch (err) {
+            console.error("Error enumerating devices:", err);
+        }
+    }, [selectedDeviceId]);
+
+    useEffect(() => {
+        getDevices();
+        navigator.mediaDevices.addEventListener('devicechange', getDevices);
+        return () => navigator.mediaDevices.removeEventListener('devicechange', getDevices);
+    }, [getDevices]);
+
+    // Re-fetch devices on permission grant to get labels
+    useEffect(() => {
+        if (permissionStatus === 'granted') {
+            getDevices();
+        }
+    }, [permissionStatus, getDevices]);
 
     const stopCamera = useCallback(() => {
         if (stream) {
@@ -48,6 +85,7 @@ export function WebcamTester() {
         try {
             const mediaStream = await navigator.mediaDevices.getUserMedia({
                 video: {
+                    deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined,
                     width: { ideal: 1920 },
                     height: { ideal: 1080 },
                     frameRate: { ideal: 60 }
@@ -60,7 +98,7 @@ export function WebcamTester() {
             console.error("Webcam access denied:", err);
             setPermissionStatus("denied");
         }
-    }, []);
+    }, [selectedDeviceId]);
 
     // Load Stream into Video Element
     useEffect(() => {
@@ -119,10 +157,39 @@ export function WebcamTester() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
                     <div className="p-4 rounded-2xl bg-white/5 border border-white/5 shadow-sm flex items-center gap-3">
-                        <Webcam className="text-emerald-400" size={18} />
+                        <Webcam className="text-blue-400" size={18} />
                         <div className="flex flex-col">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-white/30">Optical Engine</span>
-                            <span className="text-sm font-black text-white/60">Lab Vision 2.0</span>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-white/30">Camera Source</span>
+                            <div className="relative">
+                                <Select
+                                    value={selectedDeviceId}
+                                    onValueChange={(value) => {
+                                        setSelectedDeviceId(value);
+                                        // If camera is active, restart it with new device
+                                        if (isActive) {
+                                            stopCamera();
+                                            // Small timeout to allow state clear before restarting
+                                            setTimeout(() => startCamera(), 100);
+                                        }
+                                    }}
+                                    disabled={permissionStatus !== "granted" && devices.length === 0}
+                                >
+                                    <SelectTrigger className="w-full min-w-[200px] h-auto p-0 border-0 bg-transparent text-sm font-black text-white/60 focus:ring-0 focus:ring-offset-0">
+                                        <SelectValue placeholder="Default Webcam" />
+                                    </SelectTrigger>
+                                    <SelectContent className="bg-black/90 border-white/10 text-white backdrop-blur-xl">
+                                        {devices.length === 0 ? (
+                                            <SelectItem value="default" disabled className="text-white/40">Default Webcam</SelectItem>
+                                        ) : (
+                                            devices.map(device => (
+                                                <SelectItem key={device.deviceId} value={device.deviceId} className="focus:bg-white/10 focus:text-white cursor-pointer font-bold">
+                                                    {device.label || `Camera ${device.deviceId.slice(0, 5)}...`}
+                                                </SelectItem>
+                                            ))
+                                        )}
+                                    </SelectContent>
+                                </Select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -133,7 +200,7 @@ export function WebcamTester() {
                         onClick={() => setIsMirrored(!isMirrored)}
                         className={cn(
                             "rounded-xl border border-white/5 text-[10px] font-black uppercase tracking-widest px-6 transition-all",
-                            isMirrored ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : "bg-black/40 text-white/30 hover:text-white/60"
+                            isMirrored ? "bg-blue-600/10 text-blue-400 border-blue-500/20" : "bg-black/40 text-white/30 hover:text-white/60"
                         )}
                     >
                         {isMirrored ? "Mirrored" : "Normal"}
@@ -153,7 +220,7 @@ export function WebcamTester() {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div className="lg:col-span-8 p-4 rounded-[3.5rem] bg-black/40 border border-white/10 shadow-2xl relative overflow-hidden group flex flex-col items-center justify-center min-h-[500px]">
-                    <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-500 via-transparent to-transparent group-hover:opacity-[0.1] transition-opacity duration-1000" />
+                    <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-600 via-transparent to-transparent group-hover:opacity-[0.1] transition-opacity duration-1000" />
 
                     <div className="w-full h-full relative z-10 flex flex-col items-center justify-center aspect-video rounded-[2.5rem] overflow-hidden bg-black/60 shadow-inner">
                         {permissionStatus === "granted" && (
@@ -181,14 +248,14 @@ export function WebcamTester() {
 
                         {permissionStatus === "prompt" && (
                             <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 text-center">
-                                <div className="p-8 rounded-full bg-emerald-600/10 border border-emerald-500/20 animate-pulse">
-                                    <Webcam size={48} className="text-emerald-400" />
+                                <div className="p-8 rounded-full bg-blue-600/10 border border-blue-500/20 animate-pulse">
+                                    <Webcam size={48} className="text-blue-400" />
                                 </div>
                                 <Button
                                     onClick={startCamera}
-                                    className="px-12 py-8 rounded-[2rem] bg-emerald-600 hover:bg-emerald-500 text-lg font-black uppercase tracking-widest shadow-2xl shadow-emerald-600/20"
+                                    className="px-12 py-8 rounded-[2rem] bg-blue-600 hover:bg-blue-500 text-lg font-black uppercase tracking-widest shadow-2xl shadow-blue-600/20"
                                 >
-                                    Initialize Lab
+                                    Start Camera
                                 </Button>
                                 <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.3em]">Hardware Permission Required</p>
                             </div>
@@ -197,12 +264,12 @@ export function WebcamTester() {
                         {permissionStatus === "requesting" && (
                             <div className="absolute inset-0 flex flex-col items-center justify-center gap-8 text-center bg-black/40 backdrop-blur-sm z-50">
                                 <div className="relative">
-                                    <div className="w-32 h-32 rounded-full border-4 border-emerald-500/20 border-t-emerald-500 animate-spin" />
-                                    <Webcam className="absolute inset-0 m-auto text-emerald-400 animate-pulse" size={40} />
+                                    <div className="w-32 h-32 rounded-full border-4 border-blue-500/20 border-t-blue-500 animate-spin" />
+                                    <Webcam className="absolute inset-0 m-auto text-blue-400 animate-pulse" size={40} />
                                 </div>
                                 <div className="space-y-2">
-                                    <h3 className="text-xl font-black uppercase tracking-tighter text-white">Awaiting Optics</h3>
-                                    <p className="text-sm font-bold text-white/40">Please click \"Allow\" in your browser's prompt.</p>
+                                    <h3 className="text-xl font-black uppercase tracking-tighter text-white">Awaiting Permission</h3>
+                                    <p className="text-sm font-bold text-white/40">Please click "Allow" in your browser's prompt.</p>
                                 </div>
                             </div>
                         )}
@@ -213,13 +280,13 @@ export function WebcamTester() {
                                     <AlertCircle size={48} className="text-rose-500" />
                                 </div>
                                 <div className="space-y-3">
-                                    <h3 className="text-2xl font-black uppercase tracking-tighter text-white">Vision Restricted</h3>
+                                    <h3 className="text-2xl font-black uppercase tracking-tighter text-white">Camera Access Blocked</h3>
                                     <p className="text-sm font-bold text-white/40 max-w-sm mx-auto">
-                                        Camera access is blocked. Please grant permission in your browser settings to enter the lab.
+                                        Camera access is blocked. Please grant permission in your browser settings to use the camera.
                                     </p>
                                 </div>
                                 <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
-                                    <Button onClick={startCamera} className="flex-1 px-10 py-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 font-black uppercase tracking-widest shadow-lg shadow-emerald-600/20 text-white">Try Again</Button>
+                                    <Button onClick={startCamera} className="flex-1 px-10 py-6 rounded-2xl bg-blue-600 hover:bg-blue-500 font-black uppercase tracking-widest shadow-lg shadow-blue-600/20 text-white">Try Again</Button>
                                     <Button onClick={() => window.location.reload()} variant="outline" className="flex-1 px-10 py-6 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 font-black uppercase tracking-widest text-white/60">Reload</Button>
                                 </div>
                             </div>
@@ -249,7 +316,7 @@ export function WebcamTester() {
                             <div className="flex items-center gap-8">
                                 <div className="flex flex-col">
                                     <span className="text-[10px] font-black tracking-widest uppercase mb-1">FPS Rate</span>
-                                    <span className="text-xl font-black font-mono text-emerald-400">{stats?.fps || "--"}</span>
+                                    <span className="text-xl font-black font-mono text-blue-400">{stats?.fps || "--"}</span>
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="text-[10px] font-black tracking-widest uppercase mb-1">Resolution</span>
@@ -263,15 +330,15 @@ export function WebcamTester() {
                 </div>
 
                 <div className="lg:col-span-4 space-y-6">
-                    <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-zinc-800 to-black border border-white/10 shadow-2xl h-full flex flex-col">
+                    <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 border border-white/10 shadow-2xl h-full flex flex-col">
                         <div className="flex items-center gap-3 mb-8">
-                            <ShieldCheck size={20} className="text-emerald-400" />
-                            <h3 className="text-sm font-black uppercase tracking-widest text-white/80">Optical Intel</h3>
+                            <ShieldCheck size={20} className="text-blue-400" />
+                            <h3 className="text-sm font-black uppercase tracking-widest text-white/80">Camera Tech</h3>
                         </div>
 
                         <div className="space-y-8 flex-1">
                             <div className="space-y-4">
-                                <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Lensing Stats</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Stream Stats</span>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="bg-white/5 p-4 rounded-2xl border border-white/5 space-y-1">
                                         <span className="text-[9px] font-black text-white/30 uppercase">Aspect</span>
@@ -279,7 +346,7 @@ export function WebcamTester() {
                                     </div>
                                     <div className="bg-white/5 p-4 rounded-2xl border border-white/5 space-y-1">
                                         <span className="text-[9px] font-black text-white/30 uppercase">Latency</span>
-                                        <p className="text-lg font-black text-emerald-400">Low</p>
+                                        <p className="text-lg font-black text-blue-400">Low</p>
                                     </div>
                                 </div>
                             </div>
@@ -287,7 +354,7 @@ export function WebcamTester() {
                             {lastSnapshot && (
                                 <div className="pt-8 border-t border-white/5 space-y-4 animate-in zoom-in-95 duration-500">
                                     <div className="flex justify-between items-center">
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Last Calibration Frame</span>
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Last Snapshot</span>
                                         <button onClick={() => setLastSnapshot(null)} className="text-rose-500 hover:text-rose-400 transition-colors">
                                             <Trash2 size={12} />
                                         </button>
@@ -298,7 +365,7 @@ export function WebcamTester() {
                                             <a
                                                 href={lastSnapshot}
                                                 download="webcam-snapshot.png"
-                                                className="p-4 rounded-full bg-emerald-500 text-white shadow-xl hover:scale-110 active:scale-95 transition-all"
+                                                className="p-4 rounded-full bg-blue-600 text-white shadow-xl hover:scale-110 active:scale-95 transition-all"
                                             >
                                                 <Download size={24} />
                                             </a>
@@ -308,11 +375,11 @@ export function WebcamTester() {
                             )}
 
                             <div className="space-y-4 pt-8 border-t border-white/5">
-                                <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Lab Diagnostics</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Diagnostics</span>
                                 <div className="space-y-3">
                                     <div className="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5">
                                         <span className="text-[11px] font-black text-white/40">Color Fidelity</span>
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">Stable</span>
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-blue-400">Stable</span>
                                     </div>
                                     <div className="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5">
                                         <span className="text-[11px] font-black text-white/40">Focus Mode</span>
@@ -327,7 +394,6 @@ export function WebcamTester() {
                                 <RefreshCcw size={14} className="animate-spin-slow" />
                                 <span className="text-[10px] font-black uppercase tracking-tighter">Real-time Stream</span>
                             </div>
-                            <Maximize size={14} />
                         </div>
                     </div>
                 </div>

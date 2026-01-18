@@ -59,7 +59,7 @@ const TriangleIcon = ({ className }: { className?: string }) => (
 );
 
 export function ControllerTester() {
-    const [layout, setLayout] = useState<Layout>("ps"); // Temporarily forced for review
+    const [layout, setLayout] = useState<Layout>("ps");
     const [gamepad, setGamepad] = useState<GamepadState | null>(null);
     const [isVibrating, setIsVibrating] = useState(false);
     const rafRef = useRef<number>(0);
@@ -88,7 +88,6 @@ export function ControllerTester() {
         };
     }, [updateGamepad]);
 
-    /* Temporarily disabled auto-detection for review
     useEffect(() => {
         if (!gamepad?.id) return;
         const lowerId = gamepad.id.toLowerCase();
@@ -98,7 +97,6 @@ export function ControllerTester() {
             setLayout("ps");
         }
     }, [gamepad?.id]);
-    */
 
     const detectedBrand = (() => {
         if (!gamepad?.id) return null;
@@ -108,7 +106,7 @@ export function ControllerTester() {
         return null;
     })();
 
-    const isBrandMismatch = false; // Temporarily forced false for review
+    const isBrandMismatch = detectedBrand ? detectedBrand !== layout : false;
 
     const testRumble = async () => {
         if (isBrandMismatch) return;
@@ -175,10 +173,10 @@ export function ControllerTester() {
                         style={{ height: `${dValue * 100}%` }}
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-[10px] font-black mix-blend-difference">{(dValue * 100).toFixed(0)}%</span>
+                        <span className="text-[10px] font-black text-white drop-shadow-md">{(dValue * 100).toFixed(0)}%</span>
                     </div>
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-white/30">{label}</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-white/80">{label}</span>
             </div>
         );
     };
@@ -203,7 +201,7 @@ export function ControllerTester() {
                 "rounded-lg border flex items-center justify-center transition-all duration-75 text-[10px] font-black uppercase tracking-tighter",
                 btn?.pressed
                     ? "bg-blue-600 border-blue-400 text-white scale-95 shadow-[0_0_20px_rgba(37,99,235,0.4)] z-20"
-                    : "bg-white/5 border-white/10 text-white/20",
+                    : "bg-white/5 border-white/10 text-white/50",
                 isPSAction && !btn?.pressed && "bg-black/20 border-white/5",
                 className
             )}>
@@ -289,7 +287,7 @@ export function ControllerTester() {
 
                     {/* Hardware Mismatch Warning */}
                     {isBrandMismatch && (
-                        <div className="absolute inset-[-100px] z-[60] flex flex-col items-center justify-center bg-black/60 backdrop-blur-md animate-in fade-in duration-300">
+                        <div className="absolute inset-0 z-[60] flex flex-col items-center justify-center bg-black/80 backdrop-blur-md animate-in fade-in duration-300 rounded-[3.5rem]">
                             <div className="relative mb-4">
                                 <div className="absolute -inset-4 bg-orange-500/20 blur-xl rounded-full animate-pulse" />
                                 <Settings size={48} className="text-orange-400 animate-spin-slow" />
@@ -462,21 +460,21 @@ export function ControllerTester() {
 
                 {/* Info Panel */}
                 <div className="lg:col-span-4 h-full">
-                    <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-600 to-blue-800 border border-white/10 shadow-2xl relative overflow-hidden group h-full text-white">
+                    <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 border border-white/10 shadow-2xl relative overflow-hidden group h-full text-white">
                         <div className="absolute top-0 right-0 p-8 opacity-10 rotate-12 transform group-hover:rotate-0 transition-transform duration-700 pointer-events-none">
                             <Gamepad2 size={120} />
                         </div>
 
                         <div className="relative z-10 flex flex-col h-full">
                             <div className="flex items-center gap-2 mb-8">
-                                <Activity size={16} className="text-blue-200" />
-                                <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white italic">Live Feed</h3>
+                                <Activity size={16} className="text-blue-400/50" />
+                                <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 italic">Live Feed</h3>
                             </div>
 
                             <div className="flex-1 min-h-0 space-y-4">
                                 <div className="p-4 rounded-2xl bg-white/10 border border-white/10 space-y-3">
                                     <div className="flex justify-between items-center">
-                                        <span className="text-[10px] font-black text-blue-200 uppercase tracking-widest">Latency</span>
+                                        <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Latency</span>
                                         <span className="text-xs font-mono font-bold text-white">~4ms</span>
                                     </div>
                                     <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
@@ -486,7 +484,7 @@ export function ControllerTester() {
 
                                 <div className="p-4 rounded-2xl bg-white/10 border border-white/10 space-y-3">
                                     <div className="flex justify-between items-center">
-                                        <span className="text-[10px] font-black text-blue-200 uppercase tracking-widest">Stick Drift</span>
+                                        <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Stick Drift</span>
                                         <span className="text-xs font-mono font-bold text-white">LOW</span>
                                     </div>
                                     <div className="flex gap-1">

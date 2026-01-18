@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Copy, Plus, Trash2, Layers, Sun, Moon } from "lucide-react";
+import { SquareDashedBottom as Box, Copy, Plus, Trash2, Layers, Sun, Moon } from "lucide-react";
 import toast from "react-hot-toast";
 
 type ShadowLayer = {
@@ -155,8 +155,9 @@ export function ShadowGen() {
                 {/* Controls */}
                 <div className="lg:col-span-5 space-y-8">
                     {/* Presets */}
+                    {/* Presets */}
                     <div className="space-y-3">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-white/40 px-1">Presets</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-white/60 px-1">Presets</label>
                         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
                             {PRESETS.map(preset => (
                                 <button
@@ -171,9 +172,9 @@ export function ShadowGen() {
                     </div>
 
                     {/* Layers Control */}
-                    <div className="p-6 rounded-[2rem] bg-black/40 border border-white/10 space-y-6">
+                    <div className="p-6 rounded-[2rem] bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 border border-white/20 space-y-6">
                         <div className="flex items-center justify-between">
-                            <label className="text-[10px] font-black uppercase tracking-widest text-white/40 flex items-center gap-2">
+                            <label className="text-[10px] font-black uppercase tracking-widest text-white/60 flex items-center gap-2">
                                 <Layers size={14} /> Layers
                             </label>
                             <button
@@ -186,8 +187,8 @@ export function ShadowGen() {
 
                         <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
                             {layers.map((layer, index) => (
-                                <div key={layer.id} className="p-4 bg-white/5 rounded-2xl border border-transparent hover:border-white/10 transition-all space-y-4 group">
-                                    <div className="flex items-center justify-between text-xs font-medium text-white/50">
+                                <div key={layer.id} className="p-4 bg-white/5 rounded-2xl border border-white/5 hover:border-white/20 transition-all space-y-4 group">
+                                    <div className="flex items-center justify-between text-xs font-medium text-white/60">
                                         <span>Layer {index + 1}</span>
                                         <div className="flex items-center gap-2">
                                             <label className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors">
@@ -210,9 +211,9 @@ export function ShadowGen() {
                                     {/* Sliders Grid */}
                                     <div className="grid grid-cols-2 gap-x-4 gap-y-6">
                                         <div className="space-y-2">
-                                            <div className="flex justify-between text-[10px] uppercase font-bold text-white/30">
+                                            <div className="flex justify-between text-[10px] uppercase font-bold text-white/40">
                                                 <span>X Offset</span>
-                                                <span className="text-white/60">{layer.x}px</span>
+                                                <span className="text-white/80">{layer.x}px</span>
                                             </div>
                                             <input
                                                 type="range" min="-50" max="50" value={layer.x}
@@ -221,9 +222,9 @@ export function ShadowGen() {
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <div className="flex justify-between text-[10px] uppercase font-bold text-white/30">
+                                            <div className="flex justify-between text-[10px] uppercase font-bold text-white/40">
                                                 <span>Y Offset</span>
-                                                <span className="text-white/60">{layer.y}px</span>
+                                                <span className="text-white/80">{layer.y}px</span>
                                             </div>
                                             <input
                                                 type="range" min="-50" max="50" value={layer.y}
@@ -232,9 +233,9 @@ export function ShadowGen() {
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <div className="flex justify-between text-[10px] uppercase font-bold text-white/30">
+                                            <div className="flex justify-between text-[10px] uppercase font-bold text-white/40">
                                                 <span>Blur</span>
-                                                <span className="text-white/60">{layer.blur}px</span>
+                                                <span className="text-white/80">{layer.blur}px</span>
                                             </div>
                                             <input
                                                 type="range" min="0" max="100" value={layer.blur}
@@ -243,9 +244,9 @@ export function ShadowGen() {
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <div className="flex justify-between text-[10px] uppercase font-bold text-white/30">
+                                            <div className="flex justify-between text-[10px] uppercase font-bold text-white/40">
                                                 <span>Spread</span>
-                                                <span className="text-white/60">{layer.spread}px</span>
+                                                <span className="text-white/80">{layer.spread}px</span>
                                             </div>
                                             <input
                                                 type="range" min="-50" max="50" value={layer.spread}
@@ -256,8 +257,8 @@ export function ShadowGen() {
                                     </div>
 
                                     {/* Color & Opacity */}
-                                    <div className="pt-2 border-t border-white/5 grid grid-cols-[auto_1fr] gap-4 items-center">
-                                        <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/10 shadow-sm shrink-0">
+                                    <div className="pt-2 border-t border-white/10 grid grid-cols-[auto_1fr] gap-4 items-center">
+                                        <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/20 shadow-sm shrink-0">
                                             <input
                                                 type="color"
                                                 value={layer.color}
@@ -266,9 +267,9 @@ export function ShadowGen() {
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <div className="flex justify-between text-[10px] uppercase font-bold text-white/30">
+                                            <div className="flex justify-between text-[10px] uppercase font-bold text-white/40">
                                                 <span>Opacity</span>
-                                                <span className="text-white/60">{Math.round(layer.opacity * 100)}%</span>
+                                                <span className="text-white/80">{Math.round(layer.opacity * 100)}%</span>
                                             </div>
                                             <input
                                                 type="range" min="0" max="1" step="0.01" value={layer.opacity}

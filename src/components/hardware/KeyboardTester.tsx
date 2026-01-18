@@ -28,8 +28,8 @@ interface KeyInfo {
 const KEYBOARD_LAYOUT: KeyInfo[][] = [
     // Row 0
     [
-        { code: "Escape", label: "Esc", width: 1.5 },
-        { code: "Spacer", width: 1 },
+        { code: "Escape", label: "Esc" },
+        { code: "Spacer", width: 0.75 },
         { code: "F1", label: "F1" },
         { code: "F2", label: "F2" },
         { code: "F3", label: "F3" },

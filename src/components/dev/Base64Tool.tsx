@@ -90,24 +90,24 @@ export function Base64Tool() {
             </div>
 
             {/* Controls */}
-            <div className="flex flex-wrap items-center justify-between gap-4 bg-white/5 p-2 rounded-2xl border border-white/10">
+            <div className="flex flex-wrap items-center justify-between gap-4 bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 p-2 rounded-2xl border border-white/20 shadow-lg">
                 <div className="flex items-center gap-2">
                     <button
                         onClick={() => { setMode("text"); setInput(""); setOutput(""); }}
-                        className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${mode === "text" ? "bg-blue-500 text-white shadow-lg shadow-blue-500/25" : "text-white/40 hover:text-white hover:bg-white/5"}`}
+                        className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${mode === "text" ? "bg-blue-600 text-white shadow-lg shadow-blue-500/25" : "text-white/40 hover:text-white hover:bg-white/5"}`}
                     >
                         Text Mode
                     </button>
                     <button
                         onClick={() => { setMode("file"); setInput(""); setOutput(""); setAction("encode"); }}
-                        className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${mode === "file" ? "bg-blue-500 text-white shadow-lg shadow-blue-500/25" : "text-white/40 hover:text-white hover:bg-white/5"}`}
+                        className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${mode === "file" ? "bg-blue-600 text-white shadow-lg shadow-blue-500/25" : "text-white/40 hover:text-white hover:bg-white/5"}`}
                     >
                         File Mode
                     </button>
                 </div>
 
                 {mode === "text" && (
-                    <div className="flex bg-black/20 rounded-xl p-1 border border-white/5">
+                    <div className="flex bg-black/40 rounded-xl p-1 border border-white/10">
                         <button
                             onClick={() => setAction("encode")}
                             className={`px-4 py-1.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all ${action === "encode" ? "bg-white/10 text-white" : "text-white/40 hover:text-white"}`}
@@ -146,11 +146,11 @@ export function Base64Tool() {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder={action === "encode" ? "Type text to encode..." : "Paste Base64 to decode..."}
-                            className="w-full h-[500px] bg-slate-950/50 border border-white/10 rounded-2xl p-6 font-mono text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none transition-all placeholder:text-white/20"
+                            className="w-full h-[500px] bg-black/40 border border-white/20 rounded-2xl p-6 font-mono text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none transition-all placeholder:text-white/20 shadow-inner"
                             spellCheck={false}
                         />
                     ) : (
-                        <div className="w-full h-[500px] bg-slate-950/50 border border-white/10 rounded-2xl flex flex-col justify-center p-6 overflow-hidden">
+                        <div className="w-full h-[500px] bg-black/40 border border-white/20 rounded-2xl flex flex-col justify-center p-6 overflow-hidden shadow-inner">
                             <FileUpload onChange={handleFileUpload} />
                         </div>
                     )}
@@ -184,7 +184,7 @@ export function Base64Tool() {
                         readOnly
                         value={output}
                         placeholder="Result will appear here..."
-                        className="w-full h-[500px] bg-[#0d1117] border border-white/10 rounded-2xl p-6 font-mono text-sm leading-relaxed focus:outline-none resize-none text-white/70 shadow-inner"
+                        className="w-full h-[500px] bg-black/40 border border-white/20 rounded-2xl p-6 font-mono text-sm leading-relaxed focus:outline-none resize-none text-white/70 shadow-inner"
                     />
                 </div>
             </div>

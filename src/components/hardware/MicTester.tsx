@@ -13,6 +13,13 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 type MeterState = {
     peak: number;
@@ -27,6 +34,8 @@ export function MicTester() {
     const [meter, setMeter] = useState<MeterState>({ peak: 0, rms: 0, clipped: false });
     const [noiseFloor, setNoiseFloor] = useState<number>(-100);
     const [visualMode, setVisualMode] = useState<"spectral" | "sculpture">("spectral");
+    const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
+    const [selectedDeviceId, setSelectedDeviceId] = useState<string>("");
 
     // Playback & Monitoring State
     const [isMonitoring, setIsMonitoring] = useState(false);
@@ -43,6 +52,34 @@ export function MicTester() {
     const animationRef = useRef<number | null>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const recordingTimerRef = useRef<any>(null);
+
+    // Enumerate devices
+    const getDevices = useCallback(async () => {
+        try {
+            const deviceInfos = await navigator.mediaDevices.enumerateDevices();
+            const audioInputs = deviceInfos.filter(d => d.kind === 'audioinput');
+            setDevices(audioInputs);
+            // Set default if not set
+            if (!selectedDeviceId && audioInputs.length > 0) {
+                setSelectedDeviceId(audioInputs[0].deviceId);
+            }
+        } catch (err) {
+            console.error("Error enumerating devices:", err);
+        }
+    }, [selectedDeviceId]);
+
+    useEffect(() => {
+        getDevices();
+        navigator.mediaDevices.addEventListener('devicechange', getDevices);
+        return () => navigator.mediaDevices.removeEventListener('devicechange', getDevices);
+    }, [getDevices]);
+
+    // Re-fetch devices on permission grant to get labels
+    useEffect(() => {
+        if (permissionStatus === 'granted') {
+            getDevices();
+        }
+    }, [permissionStatus, getDevices]);
 
     const stopMic = useCallback(() => {
         if (stream) {
@@ -64,7 +101,10 @@ export function MicTester() {
     const startMic = useCallback(async () => {
         setPermissionStatus("requesting");
         try {
-            const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const constraints: MediaStreamConstraints = {
+                audio: selectedDeviceId ? { deviceId: { exact: selectedDeviceId } } : true
+            };
+            const mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
             setStream(mediaStream);
             setPermissionStatus("granted");
 
@@ -91,7 +131,7 @@ export function MicTester() {
             console.error("Microphone access denied:", err);
             setPermissionStatus("denied");
         }
-    }, [isMonitoring, monitorVolume]);
+    }, [isMonitoring, monitorVolume, selectedDeviceId]);
 
     // Live Monitoring Toggle
     useEffect(() => {
@@ -214,8 +254,37 @@ export function MicTester() {
                     <div className="p-4 rounded-2xl bg-white/5 border border-white/5 shadow-sm flex items-center gap-3">
                         <Mic className="text-blue-400" size={18} />
                         <div className="flex flex-col">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-white/30">Capture Engine</span>
-                            <span className="text-sm font-black text-white/60">Voice Studio 1.0</span>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-white/30">Input Source</span>
+                            <div className="relative">
+                                <Select
+                                    value={selectedDeviceId}
+                                    onValueChange={(value) => {
+                                        setSelectedDeviceId(value);
+                                        // If mic is active, restart it with new device
+                                        if (isActive) {
+                                            stopMic();
+                                            // Small timeout to allow state clear before restarting
+                                            setTimeout(() => startMic(), 100);
+                                        }
+                                    }}
+                                    disabled={permissionStatus !== "granted" && devices.length === 0}
+                                >
+                                    <SelectTrigger className="w-full min-w-[200px] h-auto p-0 border-0 bg-transparent text-sm font-black text-white/60 focus:ring-0 focus:ring-offset-0">
+                                        <SelectValue placeholder="Default Microphone" />
+                                    </SelectTrigger>
+                                    <SelectContent className="bg-black/90 border-white/10 text-white backdrop-blur-xl">
+                                        {devices.length === 0 ? (
+                                            <SelectItem value="default" disabled className="text-white/40">Default Microphone</SelectItem>
+                                        ) : (
+                                            devices.map(device => (
+                                                <SelectItem key={device.deviceId} value={device.deviceId} className="focus:bg-white/10 focus:text-white cursor-pointer font-bold">
+                                                    {device.label || `Microphone ${device.deviceId.slice(0, 5)}...`}
+                                                </SelectItem>
+                                            ))
+                                        )}
+                                    </SelectContent>
+                                </Select>
+                            </div>
                         </div>
                     </div>
                 </div>

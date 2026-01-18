@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import { Check, AlertCircle, Key, FileJson, ShieldCheck, Copy, Clock, AlertTriangle } from "lucide-react";
+import { Check, AlertCircle, KeyRound as Key, FileJson, ShieldCheck, Copy, Clock, AlertTriangle } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { format } from "date-fns";
 
@@ -128,7 +128,7 @@ function Decoder() {
                     value={token}
                     onChange={(e) => setToken(e.target.value)}
                     placeholder="Paste encoded JWT..."
-                    className={`w-full h-[600px] bg-slate-950/50 border rounded-2xl p-6 font-mono text-sm leading-relaxed focus:outline-none focus:ring-2 resize-none transition-all ${isValid ? 'border-blue-500/20 focus:ring-blue-500/50' : 'border-red-500/20 focus:ring-red-500/50'}`}
+                    className={`w-full h-[600px] bg-black/40 border rounded-2xl p-6 font-mono text-sm leading-relaxed focus:outline-none focus:ring-2 resize-none transition-all shadow-inner ${isValid ? 'border-white/20 focus:ring-blue-500/50' : 'border-red-500/20 focus:ring-red-500/50'}`}
                     spellCheck={false}
                 />
             </div>
@@ -203,7 +203,7 @@ function Encoder() {
                     <textarea
                         value={headerText}
                         onChange={e => setHeaderText(e.target.value)}
-                        className="w-full h-32 bg-slate-950/50 border border-white/10 rounded-xl p-4 font-mono text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-blue-300 resize-none"
+                        className="w-full h-32 bg-black/40 border border-white/10 rounded-xl p-4 font-mono text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-blue-300 resize-none shadow-inner"
                     />
                 </div>
 
@@ -215,7 +215,7 @@ function Encoder() {
                     <textarea
                         value={payloadText}
                         onChange={e => setPayloadText(e.target.value)}
-                        className="w-full h-48 bg-slate-950/50 border border-white/10 rounded-xl p-4 font-mono text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-purple-300 resize-none"
+                        className="w-full h-48 bg-black/40 border border-white/10 rounded-xl p-4 font-mono text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-purple-300 resize-none shadow-inner"
                     />
                 </div>
 
@@ -229,7 +229,7 @@ function Encoder() {
                         value={secret}
                         onChange={e => setSecret(e.target.value)}
                         placeholder="your-256-bit-secret"
-                        className="w-full bg-blue-500/10 border border-blue-500/20 rounded-xl px-4 py-3 font-mono text-sm text-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                        className="w-full bg-blue-500/10 border border-blue-500/20 rounded-xl px-4 py-3 font-mono text-sm text-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50 shadow-inner"
                     />
                 </div>
             </div>
@@ -256,7 +256,7 @@ function Encoder() {
                 <textarea
                     readOnly
                     value={encodedToken}
-                    className="w-full h-[500px] bg-slate-950/50 border border-white/10 rounded-2xl p-6 font-mono text-sm leading-relaxed focus:outline-none resize-none break-all text-white/80"
+                    className="w-full h-[500px] bg-black/40 border border-white/20 rounded-2xl p-6 font-mono text-sm leading-relaxed focus:outline-none resize-none break-all text-white/80 shadow-inner"
                 />
             </div>
         </div>

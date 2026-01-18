@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { AlignLeft, Type, Hash, GripVertical, FileText, Copy, Trash2 } from "lucide-react";
+import { ListOrdered as AlignLeft, Type, Hash, GripVertical, FileText, Copy, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 export function TextCounter() {
@@ -66,7 +66,7 @@ export function TextCounter() {
             {/* Input Area */}
             <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-[2rem] blur opacity-20 group-hover:opacity-30 transition duration-500"></div>
-                <div className="relative bg-[#0a0a0a] rounded-[1.8rem] border border-white/10 p-1">
+                <div className="relative bg-[#0a0a0a] rounded-[1.8rem] border border-white/20 p-1 shadow-2xl">
                     <div className="flex items-center justify-between px-6 py-3 border-b border-white/5">
                         <span className="text-xs font-bold text-white/40 uppercase tracking-widest">Input Text</span>
                         <div className="flex gap-2">

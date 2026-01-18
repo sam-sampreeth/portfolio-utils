@@ -9,7 +9,7 @@ import {
     CheckCircle2,
     Keyboard,
     MousePointer2,
-    Eye
+    Scan
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -157,7 +157,7 @@ export function DeadPixelTester() {
                                     <Monitor className="text-blue-400" size={18} />
                                     <div className="flex flex-col">
                                         <span className="text-[10px] font-black uppercase tracking-widest text-white/30">Display Engine</span>
-                                        <span className="text-sm font-black text-white/60">Shield V1</span>
+                                        <span className="text-sm font-black text-white/60">Display Diagnostics</span>
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +169,7 @@ export function DeadPixelTester() {
 
                                 <div className="relative z-10 flex flex-col items-center text-center max-w-md gap-8">
                                     <div className="p-8 rounded-full bg-blue-500/10 border border-blue-500/20">
-                                        <Eye size={48} className="text-blue-400" />
+                                        <Scan size={48} className="text-blue-400" />
                                     </div>
                                     <div className="space-y-4">
                                         <h2 className="text-3xl font-black uppercase tracking-tighter text-white">Enter Diagnostic</h2>
@@ -197,7 +197,7 @@ export function DeadPixelTester() {
                             </div>
 
                             <div className="lg:col-span-4 space-y-6">
-                                <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-zinc-800 to-black border border-white/10 shadow-2xl h-full flex flex-col">
+                                <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 border border-white/10 shadow-2xl h-full flex flex-col">
                                     <div className="flex items-center gap-3 mb-8">
                                         <ShieldAlert size={20} className="text-blue-400" />
                                         <h3 className="text-sm font-black uppercase tracking-widest text-white/80">Diagnostic Intel</h3>
@@ -239,7 +239,6 @@ export function DeadPixelTester() {
                                             <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
                                             <span className="text-[10px] font-black uppercase tracking-tighter">Ready for Scan</span>
                                         </div>
-                                        <Maximize size={14} />
                                     </div>
                                 </div>
                             </div>

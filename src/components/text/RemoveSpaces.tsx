@@ -12,8 +12,8 @@ export const RemoveSpaces = () => {
     });
 
     // Static classes for Premium UI
-    const staticBgClass = "bg-[#0a0a0a]";
-    const staticBorderClass = "border-white/10";
+    const staticBgClass = "bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20";
+    const staticBorderClass = "border-white/20";
     const staticTextMain = "text-white";
     const staticTextMuted = "text-white/50";
 
@@ -76,9 +76,9 @@ export const RemoveSpaces = () => {
                 <div className="lg:col-span-2 space-y-4">
                     <div className="relative group min-h-[500px] h-full">
                         <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-[2rem] blur opacity-20 group-hover:opacity-30 transition duration-500"></div>
-                        <div className={`relative bg-[#0a0a0a] border-white/10 rounded-[1.8rem] border p-1 h-full flex flex-col transition-colors duration-300`}>
+                        <div className={`relative bg-[#0a0a0a] border-white/20 rounded-[1.8rem] border p-1 h-full flex flex-col transition-colors duration-300 shadow-2xl`}>
                             {/* Toolbar */}
-                            <div className={`flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#0a0a0a] rounded-t-[1.5rem] z-10 sticky top-0 transition-colors`}>
+                            <div className={`flex items-center justify-between px-6 py-4 border-b border-white/10 bg-black/20 rounded-t-[1.5rem] z-10 sticky top-0 transition-colors`}>
                                 <div className="text-sm font-medium opacity-50">
                                     {text.length} chars • {text.split(/\s+/).filter(Boolean).length} words
                                 </div>

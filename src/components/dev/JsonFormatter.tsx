@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Code2, Copy, Download } from "lucide-react";
+import { FileCode, Copy, Download } from "lucide-react";
 import Editor from "@monaco-editor/react";
 import toast from "react-hot-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
@@ -45,11 +45,11 @@ export function JsonFormatter() {
     };
 
     return (
-        <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 col-span-1 lg:col-span-2">
+        <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-900/20 via-black/40 to-blue-900/20 border border-white/20 col-span-1 lg:col-span-2 shadow-2xl">
             <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400">
-                        <Code2 className="w-5 h-5" />
+                        <FileCode className="w-5 h-5" />
                     </div>
                     <h3 className="font-bold">JSON Formatter</h3>
                 </div>
@@ -108,7 +108,7 @@ export function JsonFormatter() {
                 </div>
             </div>
 
-            <div className="h-[600px] border border-white/10 rounded-2xl overflow-hidden">
+            <div className="h-[600px] border border-white/20 rounded-2xl overflow-hidden shadow-inner">
                 <Editor
                     height="100%"
                     defaultLanguage="json"

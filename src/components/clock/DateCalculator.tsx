@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import {
-    Calendar as CalendarIcon,
+    CalendarDays as CalendarIcon,
     Plus,
     Minus,
     ArrowRightLeft,
@@ -280,7 +280,7 @@ export function DateCalculator() {
 
                 {/* Results Area */}
                 <div className="lg:col-span-4 space-y-6">
-                    <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-600 to-blue-800 border border-white/10 shadow-2xl relative overflow-hidden group">
+                    <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-blue-600/20 to-blue-900/40 border border-blue-500/20 shadow-2xl relative overflow-hidden group">
                         <div className="absolute top-0 right-0 p-8 opacity-10 -rotate-12 transform group-hover:rotate-0 transition-transform duration-700">
                             <Calculator size={140} />
                         </div>
