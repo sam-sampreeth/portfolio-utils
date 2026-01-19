@@ -22,7 +22,8 @@ import {
     Hourglass,
     Brain,
     Sun,
-    Moon
+    Moon,
+    Command
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -78,10 +79,27 @@ export function OsHomepage() {
     const [obName, setObName] = useState('');
     const [obLocation, setObLocation] = useState('');
 
+    const [isMac, setIsMac] = useState(false);
+
     const idleTimerRef = useRef<number | null>(null);
     const searchInputRef = useRef<HTMLInputElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
+
+    // Detect OS and Handle Search Shortcut
+    useEffect(() => {
+        setIsMac(navigator.platform.toUpperCase().indexOf('MAC') >= 0);
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                searchInputRef.current?.focus();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
 
     // Update clock
     useEffect(() => {
@@ -179,34 +197,34 @@ export function OsHomepage() {
 
     const themeConfigs = {
         dark: {
-            container: "bg-[#020408]",
-            bgBase: "bg-[#020202]",
+            container: "bg-[#0f172a]",
+            bgBase: "bg-[#020617]",
             bgGlowPrimary: "bg-blue-600/[0.05]",
             bgGlowSecondary: "bg-blue-400/10",
             bgGradient: "from-blue-500/10 via-transparent to-transparent",
-            card: "bg-white/[0.03] backdrop-blur-3xl border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)]",
-            subCard: "bg-white/[0.02] backdrop-blur-sm border-white/10",
-            btn: "bg-white/[0.02] border-white/5 hover:bg-white hover:text-black",
-            textMain: "text-white",
-            accent: "text-white/60",
-            muted: "text-white/30",
-            input: "bg-white/[0.03] border-white/10 text-white placeholder:text-white/10",
-            searchBg: "bg-white/[0.02]"
+            card: "bg-slate-900/50 backdrop-blur-xl border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.4)]",
+            subCard: "bg-slate-800/40 backdrop-blur-sm border-white/10",
+            btn: "bg-white/5 border-white/10 hover:bg-white/10 hover:text-white hover:border-white/20",
+            textMain: "text-slate-200",
+            accent: "text-slate-400",
+            muted: "text-slate-500",
+            input: "bg-black/20 border-white/10 text-slate-200 placeholder:text-slate-500",
+            searchBg: "bg-white/5"
         },
         light: {
-            container: "bg-[#f3f4f6]",
-            bgBase: "bg-[#f3f4f6]",
-            bgGlowPrimary: "bg-blue-400/[0.04]",
-            bgGlowSecondary: "bg-indigo-400/[0.03]",
-            bgGradient: "from-blue-200/40 via-transparent to-transparent",
-            card: "bg-white border-black/[0.05] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)]",
-            subCard: "bg-black/[0.02] border-black/[0.03]",
-            btn: "bg-white border-black/[0.08] hover:bg-black hover:text-white text-black/70",
-            textMain: "text-gray-950",
-            accent: "text-gray-600",
-            muted: "text-gray-400",
-            input: "bg-black/[0.02] border-black/[0.05] text-black placeholder:text-black/20",
-            searchBg: "bg-black/[0.01]"
+            container: "bg-[#dbe4ef]",
+            bgBase: "bg-gradient-to-br from-slate-300/50 via-blue-200/30 to-purple-200/30",
+            bgGlowPrimary: "bg-blue-400/[0.1]",
+            bgGlowSecondary: "bg-indigo-500/[0.08]",
+            bgGradient: "from-blue-300/20 via-transparent to-transparent",
+            card: "bg-white/40 backdrop-blur-xl border-white/30 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.1)]",
+            subCard: "bg-white/30 border-white/20 backdrop-blur-md",
+            btn: "bg-white/40 border-white/30 hover:bg-white/80 hover:text-slate-900 text-slate-700 shadow-sm",
+            textMain: "text-slate-900",
+            accent: "text-slate-600",
+            muted: "text-slate-500",
+            input: "bg-white/40 border-black/[0.05] text-slate-900 placeholder:text-slate-500 font-medium",
+            searchBg: "bg-white/30"
         }
     };
 
@@ -244,34 +262,8 @@ export function OsHomepage() {
         { t: "Semiconductor industry projects major shift toward specialized AI accelerators.", s: "Tech-Intel", u: "https://news.google.com" }
     ];
 
-    // Onboarding View
-    if (!state.settings?.onboarded) {
-        return (
-            <div className="fixed inset-0 z-[1000] bg-[#020202] flex items-center justify-center p-6 overflow-hidden select-none">
-                <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-blue-600/5 blur-[250px] rounded-full" />
-                    <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-purple-600/5 blur-[250px] rounded-full" />
-                </div>
-                <div className="relative z-10 w-full max-w-md animate-in fade-in zoom-in duration-1000">
-                    <div className="text-center mb-10 space-y-4">
-                        <h1 className="text-4xl font-light tracking-[0.2em] text-white uppercase">Initialize</h1>
-                        <p className="text-white/20 text-xs font-medium tracking-widest uppercase">System Core Configuration</p>
-                    </div>
-                    <div className="bg-white/[0.02] border border-white/5 p-8 rounded-[2rem] backdrop-blur-3xl space-y-6 shadow-2xl">
-                        <div className="space-y-2">
-                            <label className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40 ml-1">Identity</label>
-                            <input type="text" placeholder="Username" value={obName} onChange={(e) => setObName(e.target.value)} className="w-full bg-white/[0.03] border border-white/5 rounded-xl py-4 px-5 text-sm font-medium focus:outline-none focus:ring-1 ring-white/20 text-white placeholder:text-white/10" />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40 ml-1">Node</label>
-                            <input type="text" placeholder="City, Country" value={obLocation} onChange={(e) => setObLocation(e.target.value)} className="w-full bg-white/[0.03] border border-white/5 rounded-xl py-4 px-5 text-sm font-medium focus:outline-none focus:ring-1 ring-white/20 text-white placeholder:text-white/10" />
-                        </div>
-                        <Button onClick={() => completeOnboarding(obName || 'User', obLocation || 'Earth', true)} disabled={!obName} className="w-full py-7 rounded-xl bg-white text-black font-bold uppercase tracking-widest text-[10px] hover:bg-zinc-200 transition-all">Begin Session</Button>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+    // Onboarding View - MOVED TO DIALOG BELOW
+    // if (!state.settings?.onboarded) { ... }
 
     // Screensaver View
     if (isIdle) {
@@ -339,7 +331,11 @@ export function OsHomepage() {
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className={cn("flex-1 bg-transparent border-none py-4 px-5 text-sm font-bold outline-none ring-0 placeholder:text-current/40", theme.textMain)}
                         />
-                        <div className="pr-3">
+                        <div className="pr-3 flex items-center gap-3">
+                            <div className={cn("hidden md:flex items-center justify-center gap-1.5 px-2 py-1 rounded-md border text-[9px] font-black uppercase tracking-widest opacity-50 select-none pointer-events-none h-6", currentTheme === 'dark' ? "bg-white/5 border-white/5" : "bg-black/5 border-black/5", theme.textMain)}>
+                                {isMac ? <Command size={10} /> : <span className="text-[9px] leading-none pt-0.5">CTRL</span>}
+                                <span className="text-[9px] leading-none pt-0.5">K</span>
+                            </div>
                             <Select value={state.settings?.searchEngine} onValueChange={(val) => updateSettings({ searchEngine: val as any })}>
                                 <SelectTrigger className={cn("h-8 border-none text-[9px] font-black uppercase tracking-widest px-4 rounded-lg transition-all", theme.accent, "hover:text-current", currentTheme === 'dark' ? "hover:bg-white/10" : "hover:bg-black/5")}>
                                     <SelectValue />
@@ -617,9 +613,13 @@ export function OsHomepage() {
 
                         <div className="w-px h-6 bg-white/5 mx-2" />
 
-                        <button onClick={() => setIsAddBookmarkOpen(true)} className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-white/[0.05] border border-white/10 text-white/40 hover:bg-white hover:text-black transition-all flex items-center justify-center group shadow-lg active:scale-95">
-                            <Plus size={18} className="group-hover:rotate-90 transition-transform duration-500" />
-                        </button>
+                        <div className="group flex flex-col items-center gap-2 relative">
+                            <button onClick={() => setIsAddBookmarkOpen(true)} className={cn("w-11 h-11 md:w-12 md:h-12 rounded-xl border border-dashed transition-all flex items-center justify-center group shadow-lg active:scale-95", currentTheme === 'dark' ? "bg-white/5 border-white/10 hover:bg-emerald-500/20 hover:border-emerald-500/50 hover:text-emerald-500 text-white/40" : "bg-white/40 border-slate-300 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-500 text-slate-400")}>
+                                <Plus size={18} className="group-hover:rotate-90 transition-transform duration-500" />
+                            </button>
+                            {/* Floating spacer to ensure vertical alignment matches icons with text */}
+                            <span className="text-[8px] font-black uppercase tracking-widest opacity-0 select-none">Add</span>
+                        </div>
                     </div>
                 </div>
 
@@ -774,6 +774,45 @@ export function OsHomepage() {
                         </div>
                         <Button type="submit" className="w-full py-6 rounded-xl bg-white text-black font-black uppercase tracking-widest text-[10px]">Create</Button>
                     </form>
+                </DialogContent>
+            </Dialog>
+
+            {/* NEW: Onboarding Dialog */}
+            <Dialog open={!state.settings?.onboarded}>
+                <DialogContent className="max-w-md bg-[#080808]/90 backdrop-blur-3xl border-white/10 text-white rounded-[2.5rem] p-10 shadow-3xl [&>button]:hidden">
+                    <DialogHeader className="mb-8 text-center space-y-4">
+                        <DialogTitle className="text-3xl font-light tracking-widest text-white">Welcome</DialogTitle>
+                        <p className="text-white/40 text-xs font-medium tracking-widest uppercase">Let's set up your personal dashboard</p>
+                    </DialogHeader>
+                    <div className="space-y-6">
+                        <div className="space-y-2">
+                            <label className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40 ml-1">Your Name</label>
+                            <input
+                                type="text"
+                                placeholder="Enter your name"
+                                value={obName}
+                                onChange={(e) => setObName(e.target.value)}
+                                className="w-full bg-white/[0.03] border border-white/5 rounded-xl py-4 px-5 text-sm font-medium focus:outline-none focus:ring-1 ring-white/20 text-white placeholder:text-white/10"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40 ml-1">Location</label>
+                            <input
+                                type="text"
+                                placeholder="City, Country"
+                                value={obLocation}
+                                onChange={(e) => setObLocation(e.target.value)}
+                                className="w-full bg-white/[0.03] border border-white/5 rounded-xl py-4 px-5 text-sm font-medium focus:outline-none focus:ring-1 ring-white/20 text-white placeholder:text-white/10"
+                            />
+                        </div>
+                        <Button
+                            onClick={() => completeOnboarding(obName || 'User', obLocation || 'Earth', true)}
+                            disabled={!obName}
+                            className="w-full py-7 rounded-xl bg-white text-black font-bold uppercase tracking-widest text-[10px] hover:bg-zinc-200 transition-all"
+                        >
+                            Get Started
+                        </Button>
+                    </div>
                 </DialogContent>
             </Dialog>
         </div >
