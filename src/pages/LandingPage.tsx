@@ -30,9 +30,15 @@ export default function LandingPage() {
     const [searchQuery, setSearchQuery] = useState("");
     const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [isMac, setIsMac] = useState(false);
     const resultsContainerRef = useRef<HTMLDivElement>(null);
     const { favorites } = useFavorites();
     const navigate = useNavigate();
+
+    // Detect OS
+    useEffect(() => {
+        setIsMac(navigator.platform.toUpperCase().indexOf('MAC') >= 0);
+    }, []);
 
     const allTools = useMemo(() => {
         return toolsConfig.flatMap(cat =>
@@ -161,7 +167,7 @@ export default function LandingPage() {
                         <Search className="w-5 h-5 group-hover:text-primary transition-colors" />
                         <span className="text-lg">Type a command or search...</span>
                         <div className="ml-auto flex items-center gap-1.5 font-sans text-[10px] font-black text-white/20 border border-white/10 px-2 py-1 rounded-lg">
-                            <span className="text-xs">⌘</span> K
+                            <span className="text-xs">{isMac ? "⌘" : "CTRL"}</span><span className="text-xs"> + K</span>
                         </div>
                     </button>
                 </motion.div>
@@ -444,7 +450,7 @@ export default function LandingPage() {
                             </div>
                             <h3 className="text-xl font-bold mb-3">Command Palette</h3>
                             <p className="text-muted-foreground leading-relaxed">
-                                Jump to any tool instantly. Just hit <kbd className="px-2 py-0.5 rounded bg-white/10 text-xs font-mono border border-white/10">Cmd + K</kbd> to search, navigate, or run commands.
+                                Jump to any tool instantly. Just hit <kbd className="px-2 py-0.5 rounded bg-white/10 text-xs font-mono border border-white/10">{isMac ? "Cmd + K" : "Ctrl + K"}</kbd> to search, navigate, or run commands.
                             </p>
                         </div>
 
