@@ -42,6 +42,7 @@ export function MouseTester() {
         y: 0,
         doubleClick: false
     });
+    const [testedButtons, setTestedButtons] = useState<Set<string>>(new Set());
     const [clickHistory, setClickHistory] = useState<ClickEvent[]>([]);
     const [scrollCount, setScrollCount] = useState(0);
     const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -63,6 +64,7 @@ export function MouseTester() {
         const buttonKey = buttonMap[e.button];
         if (buttonKey) {
             setMouseState(prev => ({ ...prev, [buttonKey]: true }));
+            setTestedButtons(prev => new Set(prev).add(buttonKey));
             setClickHistory(prev => [
                 { id: Date.now() + Math.random(), button: buttonKey.toUpperCase(), timestamp: Date.now() },
                 ...prev.slice(0, 9)
@@ -112,9 +114,12 @@ export function MouseTester() {
         setMouseState(prev => ({ ...prev, scrollDelta: e.deltaY }));
         setScrollCount(prev => prev + 1);
 
-        const direction = e.deltaY < 0 ? "SCROLL UP" : "SCROLL DOWN";
+        const directionKey = e.deltaY < 0 ? "scroll-up" : "scroll-down";
+        setTestedButtons(prev => new Set(prev).add(directionKey));
+
+        const directionLabel = e.deltaY < 0 ? "SCROLL UP" : "SCROLL DOWN";
         setClickHistory(prev => [
-            { id: Date.now() + Math.random(), button: direction, timestamp: Date.now() },
+            { id: Date.now() + Math.random(), button: directionLabel, timestamp: Date.now() },
             ...prev.slice(0, 9)
         ]);
 
@@ -147,6 +152,7 @@ export function MouseTester() {
     const resetTests = () => {
         setClickHistory([]);
         setScrollCount(0);
+        setTestedButtons(new Set());
         setMouseState({
             left: false, right: false, middle: false, back: false, forward: false,
             scrollDelta: 0, x: 0, y: 0, doubleClick: false
@@ -222,18 +228,30 @@ export function MouseTester() {
                         <div className="w-full flex h-48 border-b-4 border-white/5">
                             <div className={cn(
                                 "flex-1 transition-all duration-75 flex items-center justify-center font-black text-xs tracking-widest border-r-2 border-white/5",
-                                mouseState.left ? "bg-blue-600 text-white shadow-inner" : "text-white/10"
+                                mouseState.left
+                                    ? "bg-blue-600 text-white shadow-inner"
+                                    : testedButtons.has("left")
+                                        ? "bg-blue-500/10 text-blue-400 shadow-[inset_0_0_20px_rgba(37,99,235,0.2)]"
+                                        : "text-white/10"
                             )}>
                                 LEFT
                             </div>
                             <div className="w-16 flex flex-col items-center justify-center gap-4 bg-white/[0.02]">
                                 <div className={cn(
                                     "w-5 h-14 rounded-full border-2 transition-all duration-75 flex flex-col items-center justify-center p-1 relative",
-                                    mouseState.middle ? "bg-blue-500 border-blue-400" : "border-white/10"
+                                    mouseState.middle
+                                        ? "bg-blue-500 border-blue-400"
+                                        : testedButtons.has("middle")
+                                            ? "bg-blue-500/10 border-blue-400/50"
+                                            : "border-white/10"
                                 )}>
                                     <div className={cn(
                                         "absolute top-1 text-[10px] transition-all duration-200",
-                                        mouseState.scrollDelta < 0 ? "text-blue-400 opacity-100 -translate-y-1 scale-125" : "text-white/5 opacity-0"
+                                        mouseState.scrollDelta < 0
+                                            ? "text-blue-400 opacity-100 -translate-y-1 scale-125"
+                                            : testedButtons.has("scroll-up")
+                                                ? "text-blue-400/40 opacity-100"
+                                                : "text-white/5 opacity-0"
                                     )}>↑</div>
 
                                     <div className={cn(
@@ -244,14 +262,22 @@ export function MouseTester() {
 
                                     <div className={cn(
                                         "absolute bottom-1 text-[10px] transition-all duration-200",
-                                        mouseState.scrollDelta > 0 ? "text-blue-400 opacity-100 translate-y-1 scale-125" : "text-white/5 opacity-0"
+                                        mouseState.scrollDelta > 0
+                                            ? "text-blue-400 opacity-100 translate-y-1 scale-125"
+                                            : testedButtons.has("scroll-down")
+                                                ? "text-blue-400/40 opacity-100"
+                                                : "text-white/5 opacity-0"
                                     )}>↓</div>
                                 </div>
-                                <span className={cn("text-[8px] font-black tracking-widest", mouseState.middle ? "text-blue-400" : "text-white/10")}>MID</span>
+                                <span className={cn("text-[8px] font-black tracking-widest", (mouseState.middle || testedButtons.has("middle")) ? "text-blue-400" : "text-white/10")}>MID</span>
                             </div>
                             <div className={cn(
                                 "flex-1 transition-all duration-75 flex items-center justify-center font-black text-xs tracking-widest border-l-2 border-white/5",
-                                mouseState.right ? "bg-blue-600 text-white shadow-inner" : "text-white/10"
+                                mouseState.right
+                                    ? "bg-blue-600 text-white shadow-inner"
+                                    : testedButtons.has("right")
+                                        ? "bg-blue-500/10 text-blue-400 shadow-[inset_0_0_20px_rgba(37,99,235,0.2)]"
+                                        : "text-white/10"
                             )}>
                                 RIGHT
                             </div>
@@ -261,11 +287,19 @@ export function MouseTester() {
                         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-4 flex flex-col gap-2">
                             <div className={cn(
                                 "h-14 w-full rounded-r-lg border-y border-r border-white/10 transition-all",
-                                mouseState.forward ? "bg-blue-600 border-blue-400 w-6" : "bg-white/5"
+                                mouseState.forward
+                                    ? "bg-blue-600 border-blue-400 w-6"
+                                    : testedButtons.has("forward")
+                                        ? "bg-blue-500/20 border-blue-400/50 w-6"
+                                        : "bg-white/5"
                             )} />
                             <div className={cn(
                                 "h-14 w-full rounded-r-lg border-y border-r border-white/10 transition-all",
-                                mouseState.back ? "bg-blue-600 border-blue-400 w-6" : "bg-white/5"
+                                mouseState.back
+                                    ? "bg-blue-600 border-blue-400 w-6"
+                                    : testedButtons.has("back")
+                                        ? "bg-blue-500/20 border-blue-400/50 w-6"
+                                        : "bg-white/5"
                             )} />
                         </div>
 
