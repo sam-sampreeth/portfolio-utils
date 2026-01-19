@@ -121,7 +121,7 @@ const KEYBOARD_LAYOUT: KeyInfo[][] = [
         { code: "Period", label: ". >" },
         { code: "Slash", label: "/ ?" },
         { code: "ShiftRight", label: "Shift", width: 2.75 },
-        { code: "Spacer", width: 1.25 },
+        { code: "Spacer", width: 1.43 }, // Adjusted to align ArrowUp with ArrowDown (accounting for gap)
         { code: "ArrowUp", label: "↑" },
     ],
     // Row 5
@@ -179,7 +179,7 @@ export function KeyboardTester() {
 
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
         // Prevent default browser behavior for some keys (F-keys, Backspace, etc.)
-        if (e.code.startsWith("F") || e.code === "Backspace" || e.code === "Tab" || e.code === "AltLeft" || e.code === "AltRight" || e.metaKey) {
+        if (e.code.startsWith("F") || e.code === "Backspace" || e.code === "Tab" || e.code === "AltLeft" || e.code === "AltRight" || e.metaKey || e.code === "PageUp" || e.code === "PageDown" || e.code === "Enter" || e.code === "NumpadEnter") {
             e.preventDefault();
         }
 
@@ -193,6 +193,11 @@ export function KeyboardTester() {
     }, []);
 
     const handleKeyUp = useCallback((e: KeyboardEvent) => {
+        // Also register history on key up to catch keys intercepted by OS (like PrtSc)
+        setHistory(prev => ({ ...prev, [e.code]: true }));
+        // Optional: Update last key on up if it wasn't caught on down
+        setLastKey(prev => prev?.code === e.code ? prev : { code: e.code, key: e.key });
+
         setActiveKeys(prev => {
             const next = new Set(prev);
             next.delete(e.code);
@@ -201,11 +206,17 @@ export function KeyboardTester() {
     }, []);
 
     useEffect(() => {
+        const handleBlur = () => {
+            setActiveKeys(new Set());
+        };
+
         window.addEventListener("keydown", handleKeyDown);
         window.addEventListener("keyup", handleKeyUp);
+        window.addEventListener("blur", handleBlur);
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
             window.removeEventListener("keyup", handleKeyUp);
+            window.removeEventListener("blur", handleBlur);
         };
     }, [handleKeyDown, handleKeyUp]);
 
